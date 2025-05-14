@@ -36,20 +36,10 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => 
           if (!mermaidRef.current) return;
           mermaidRef.current.innerHTML = '';
 
-          // Logs de depuração avançados
-          console.log('[MermaidDiagram] Rendering chart:', chart);
-          console.log('[MermaidDiagram] Chart raw (primeiros 100 chars):', chart.substring(0, 100));
-          console.log('[MermaidDiagram] Chart length:', chart.length);
-          console.log('[MermaidDiagram] Chart charCodeAt (0-20):', [...chart].slice(0, 20).map(c => c.charCodeAt(0)));
-          
-          // Experimento: forçar a remoção de caracteres especiais no início da string
+          // Remover logs de depuração excessivos, mantendo apenas a limpeza de caracteres especiais
           const cleanedChart = chart.replace(/^[\x00-\x1F\x7F-\x9F\u200B-\u200D\uFEFF]+/, '');
-          if (cleanedChart !== chart) {
-            console.log('[MermaidDiagram] Caracteres especiais encontrados no início e removidos');
-            console.log('[MermaidDiagram] Novo chart:', cleanedChart);
-          }
-
-          // Tentar renderizar a versão limpa
+          
+          // Renderizar a versão limpa
           const { svg, bindFunctions } = await mermaid.render(diagramId, cleanedChart);
           
           if (mermaidRef.current) {

@@ -137,6 +137,36 @@ const Navbar: React.FC = () => {
                 >
                   Comandos Básicos do Git
                 </Link>
+                <Link
+                  to="/game/intermediate-commands"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                  onClick={() => {
+                    setIsGameMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
+                  Comandos Intermediários do Git
+                </Link>
+                <Link
+                  to="/game/advanced-commands"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                  onClick={() => {
+                    setIsGameMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
+                  Comandos Avançados do Git
+                </Link>
+                <Link
+                  to="/game/github-commands"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                  onClick={() => {
+                    setIsGameMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
+                  Comandos GitHub CLI
+                </Link>
               </div>
             )}
           </div>
@@ -233,6 +263,36 @@ const Navbar: React.FC = () => {
               }}
             >
               Comandos Básicos do Git
+            </Link>
+            <Link
+              to="/game/intermediate-commands"
+              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              Comandos Intermediários do Git
+            </Link>
+            <Link
+              to="/game/advanced-commands"
+              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              Comandos Avançados do Git
+            </Link>
+            <Link
+              to="/game/github-commands"
+              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              Comandos GitHub CLI
             </Link>
           </div>
           <Link 

@@ -1,79 +1,8 @@
 import React, { useState } from 'react';
-import { Github, Linkedin, Globe } from 'lucide-react';
+import { Terminal, GitBranch, GitMerge, File, Github, Linkedin, Globe } from 'lucide-react';
+import { gitCommandsData } from '../../../features/game/data/commandsData';
+import MermaidDiagram from '../../../components/common/MermaidDiagram';
 import PracticeChallengeSection from './practiceChallenge/PracticeChallengeSection';
-import BasicCommands from './BasicCommands';
-
-// New author data for the intro section
-const basicCommandsIntroAuthors: AuthorProfileData[] = [
-  {
-    src: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?w=128&h=128&fit=crop&auto=compress,format",
-    alt: "Tatiana Barros - Autora do Projeto",
-    miniBio: "Tatiana é a idealizadora do GitSheet, apaixonada por simplificar o aprendizado de Git e GitHub para todos.",
-    socialLinks: { github: "https://github.com/example", linkedin: "https://linkedin.com/in/example", website: "#" },
-    dialogue: [
-      { type: 'text', content: "Olá! Sou Tatiana Barros, criadora deste projeto. Fico feliz em ver você por aqui!" },
-      { type: 'text', content: "Minha missão com o GitSheet é tornar o aprendizado de Git e GitHub uma jornada mais clara e objetiva para desenvolvedores de todos os níveis." },
-      { type: 'text', content: "Navegue pelos perfis dos nossos especialistas ou explore os comandos básicos abaixo para começar. Se tiver alguma dúvida, nosso e-book e o jogo interativo estão aqui para ajudar!" },
-    ],
-  },
-  {
-    src: "https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?w=128&h=128&fit=crop&auto=compress,format",
-    alt: "Carlos Silva - Especialista Git",
-    miniBio: "Carlos é um entusiasta de Git com mais de 10 anos de experiência ajudando equipes a otimizar seus fluxos de trabalho de desenvolvimento.",
-    socialLinks: { github: "#", linkedin: "#" },
-    dialogue: [
-      { type: 'text', content: "Olá! Git pode parecer intimidador no início, mas dominar o básico é transformador. Vamos começar?" },
-      { type: 'text', content: "O comando 'git init' é o seu ponto de partida para qualquer novo projeto. Ele cria um novo repositório local." },
-      { type: 'text', content: "Em seguida, 'git add' e 'git commit' se tornarão seus melhores amigos para salvar seu progresso. Explore mais na tabela abaixo!" },
-    ],
-  },
-  {
-    src: "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?w=128&h=128&fit=crop&auto=compress,format",
-    alt: "Beatriz Costa - Instrutora de Coding",
-    miniBio: "Beatriz adora desmistificar conceitos complexos de programação e capacitar novos desenvolvedores com ferramentas como Git.",
-    socialLinks: { linkedin: "#", website: "#" },
-    dialogue: [
-      { type: 'text', content: "Bem-vindo(a) ao mundo do Git! Estou aqui para mostrar que qualquer um pode aprender versionamento." },
-      { type: 'text', content: "Pense no Git como uma máquina do tempo para o seu código. Cometer erros faz parte, e o Git te ajuda a gerenciá-los!" },
-    ],
-  },
-  {
-    src: "https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?w=128&h=128&fit=crop&auto=compress,format",
-    alt: "André Souza - Eng. de Software Sênior",
-    miniBio: "André foca em construir software robusto e escalável, utilizando Git diariamente para colaboração e manutenção de código limpo.",
-    socialLinks: { github: "#", linkedin: "#" },
-    dialogue: [
-      { type: 'text', content: "Git é fundamental não apenas para projetos solo, mas essencial para trabalho em equipe. A colaboração é a chave!" },
-    ],
-  },
-  {
-    src: "https://images.pexels.com/photos/415263/pexels-photo-415263.jpeg?w=128&h=128&fit=crop&auto=compress,format",
-    alt: "Mariana Lima - Educadora Tech",
-    miniBio: "Mariana é apaixonada por criar conteúdo educacional acessível que capacita estudantes a terem sucesso na indústria de tecnologia.",
-    socialLinks: { website: "#" },
-    dialogue: [
-      { type: 'text', content: "Aprender Git abre portas! É uma habilidade valorizada em quase todas as vagas de desenvolvimento." },
-    ],
-  },
-  {
-    src: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?w=128&h=128&fit=crop&auto=compress,format",
-    alt: "Ricardo Alves - Especialista DevOps",
-    miniBio: "Ricardo vive e respira automação e infraestrutura como código, onde Git desempenha um papel central.",
-    socialLinks: { github: "#" },
-    dialogue: [
-      { type: 'text', content: "No mundo DevOps, Git é mais que versionamento de código; é usado para gerenciar configurações, infraestrutura e muito mais!" },
-    ],
-  },
-  // {
-  //   src: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?w=128&h=128&fit=crop&auto=compress,format",
-  //   alt: "Sofia Ferreira - Criadora de Conteúdo Tech",
-  //   miniBio: "Sofia foca em traduzir jargões técnicos em explicações claras e envolventes para a comunidade de desenvolvedores.",
-  //   socialLinks: { linkedin: "#", website: "#" },
-  //   dialogue: [
-  //     { type: 'text', content: "Documentar seus commits e usar branches de forma eficaz são dicas de ouro para um bom trabalho com Git." },
-  //   ],
-  // },
-];
 
 // Define a type for our author objects for better type safety
 interface AuthorProfileData {
@@ -88,9 +17,57 @@ interface AuthorProfileData {
   dialogue?: Array<{ type: 'text' | 'image'; content?: string; src?: string; alt?: string }>;
 }
 
-const GitBasicCommands: React.FC = () => {
+// Author data for the intro section
+const advancedCommandsIntroAuthors: AuthorProfileData[] = [
+  {
+    src: "https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?w=128&h=128&fit=crop&auto=compress,format",
+    alt: "André Souza - Eng. de Software Sênior",
+    miniBio: "André foca em construir software robusto e escalável, utilizando Git diariamente para colaboração e manutenção de código limpo.",
+    socialLinks: { github: "#", linkedin: "#" },
+    dialogue: [
+      { type: 'text', content: "Os comandos avançados de Git podem ser intimidadores, mas são extremamente poderosos para situações complexas." },
+      { type: 'text', content: "Rebase, cherry-pick e reflog são ferramentas que todo desenvolvedor sênior deve dominar para resolver crises no código." },
+      { type: 'text', content: "Quando você entende o modelo de objetos interno do Git, consegue fazer 'mágica' com esses comandos avançados." },
+    ],
+  },
+  {
+    src: "https://images.pexels.com/photos/415263/pexels-photo-415263.jpeg?w=128&h=128&fit=crop&auto=compress,format",
+    alt: "Mariana Lima - Educadora Tech",
+    miniBio: "Mariana é apaixonada por criar conteúdo educacional acessível que capacita estudantes a terem sucesso na indústria de tecnologia.",
+    socialLinks: { website: "#" },
+    dialogue: [
+      { type: 'text', content: "Comandos avançados são como superpoderes do Git. Use-os com cuidado, mas não tenha medo de experimentar!" },
+      { type: 'text', content: "Mesmo em projetos pessoais, praticar comandos avançados te prepara para resolução de problemas em projetos profissionais." },
+    ],
+  },
+  {
+    src: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?w=128&h=128&fit=crop&auto=compress,format",
+    alt: "Ricardo Alves - Especialista DevOps",
+    miniBio: "Ricardo vive e respira automação e infraestrutura como código, onde Git desempenha um papel central.",
+    socialLinks: { github: "#" },
+    dialogue: [
+      { type: 'text', content: "Em ambientes DevOps, comandos avançados de Git são usados diariamente para automatizar fluxos de trabalho e manter a integridade dos pipelines." },
+      { type: 'text', content: "Saber como 'consertar o histórico' com rebase interativo ou como recuperar commits perdidos com reflog pode salvar seu projeto em momentos críticos." },
+    ],
+  },
+  {
+    src: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?w=128&h=128&fit=crop&auto=compress,format",
+    alt: "Tatiana Barros - Autora do Projeto",
+    miniBio: "Tatiana é a idealizadora do GitSheet, apaixonada por simplificar o aprendizado de Git e GitHub para todos.",
+    socialLinks: { github: "https://github.com/example", linkedin: "https://linkedin.com/in/example", website: "#" },
+    dialogue: [
+      { type: 'text', content: "Não tenha medo dos comandos avançados! Estão aqui para ajudar quando você mais precisar deles." },
+      { type: 'text', content: "É como ter um kit de ferramentas especializadas - você não usa todo dia, mas quando precisa, fica feliz por conhecê-las." },
+    ],
+  },
+];
+
+const AdvancedCommands: React.FC = () => {
+  // Obter apenas os comandos avançados do gitCommandsData
+  const advancedCommands = gitCommandsData.find(category => category.title === "Comandos Avançados")?.commands || [];
+  
   const [selectedAuthor, setSelectedAuthor] = useState<AuthorProfileData | null>(
-    basicCommandsIntroAuthors.find(author => author.alt.includes("Tatiana Barros")) || basicCommandsIntroAuthors[0] || null
+    advancedCommandsIntroAuthors.find(author => author.alt.includes("André Souza")) || advancedCommandsIntroAuthors[0] || null
   );
   const [currentDialogStep, setCurrentDialogStep] = useState(0);
 
@@ -110,58 +87,112 @@ const GitBasicCommands: React.FC = () => {
       setCurrentDialogStep(prev => prev - 1);
     }
   };
-
+  
   return (
     <div className="space-y-24">
-      {/* Hero Section */}
+      {/* Seção Introdutória */}
       <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?w=1920&auto=compress,format"
-            alt="Banner ilustrativo para a seção de comandos básicos do Git, com ícones e elementos visuais relacionados a código e Git"
+            src="https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg?w=1920&auto=compress,format"
+            alt="Banner ilustrativo para a seção de comandos avançados do Git"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-github-accent-emphasis/90 to-github-done-emphasis/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-red-700/90 to-red-900/90" />
         </div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <span className="inline-block bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wide backdrop-blur-sm">
-            Git Comandos
+            Git Avançado
           </span>
           <h1 className="mt-6 text-4xl md:text-5xl font-bold leading-tight">
-            Referência de Comandos Git
+            Comandos Avançados do Git
           </h1>
           <p className="mt-6 text-xl text-white/80">
-            Domine todos os níveis de comandos Git com nossa documentação completa
+            Domine técnicas avançadas de Git para resolução de problemas complexos e maior eficiência em projetos
           </p>
         </div>
       </section>
 
-      {/* New Section: Git e GitHub Básico */}
+      {/* Seção de Descrição */}
       <section className="pt-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold text-github-fg-default">Git e GitHub</h2>
+            <h2 className="text-3xl font-bold text-github-fg-default">Domine os Recursos Avançados do Git</h2>
             <p className="mt-4 text-lg text-gray-700">
-              Dominar os comandos Git e GitHub é o primeiro grande passo para quem está ingressando ou migrando para a carreira tecnológica.
-              Eles são a base para o versionamento de projetos, colaboração em equipe e para construir um portfólio sólido.
-              Nosso e-book 'Git & GitHub: Sua Jornada Profissional' e os desafios práticos do nosso Game foram desenhados para
-              solidificar seu aprendizado e te preparar para o mercado, começando por estes fundamentos cruciais.
+              Os comandos avançados do Git permitem gerenciar situações complexas e fornecem ferramentas poderosas para 
+              casos específicos. Estas operações avançadas são especialmente úteis para resolver conflitos difíceis, 
+              ajustar o histórico de um projeto e resolver problemas em repositórios. Dominar estes comandos fará 
+              de você um especialista em Git, capaz de resolver quase qualquer situação no controle de versão.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Comandos Básicos - exibição direta */}
+      {/* Lista de Comandos */}
       <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-github-fg-default">Comandos Básicos do Git</h2>
-            <p className="mt-2 text-lg text-gray-600">Conheça os comandos fundamentais para iniciar sua jornada com Git</p>
+            <h2 className="text-3xl font-bold text-github-fg-default">Comandos Avançados do Git</h2>
+            <p className="mt-2 text-lg text-gray-600">Domine ferramentas poderosas para situações complexas e emergências</p>
           </div>
           
-          {/* Conteúdo dos comandos básicos */}
-          <BasicCommands />
+          <div className="space-y-6">
+            <div className="gh-card">
+              <div className="gh-card-header">
+                <Terminal className="h-5 w-5 text-github-fg-default mr-2" />
+                <span className="text-sm font-medium">Comandos Avançados do Git</span>
+              </div>
+              <div className="gh-card-body space-y-6">
+                {advancedCommands.map((command, index) => {
+                  // Gerar um ID único para cada diagrama
+                  const diagramId = `advanced-command-${index}-${command.name.replace(/[\s\[\]]/g, '-')}`;
+                  
+                  return (
+                    <div key={index} className="border-b border-gray-200 pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
+                      <div className="flex flex-col md:flex-row md:items-start gap-4">
+                        {/* Coluna do comando */}
+                        <div className="flex items-start space-x-4 md:w-1/3">
+                          <GitBranch className="h-5 w-5 text-github-fg-default mt-1 flex-shrink-0" />
+                          <div>
+                            <h3 className="font-medium text-github-fg-default">{command.name}</h3>
+                            <p className="text-sm text-github-fg-muted">{command.description}</p>
+                            <div className="mt-2">
+                              <span className="inline-block px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">
+                                {command.difficultyText}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Coluna do diagrama */}
+                        <div className="md:w-2/3 bg-gray-50 p-2 rounded-lg">
+                          {command.mermaidChart ? (
+                            <MermaidDiagram chart={command.mermaidChart} diagramId={diagramId} />
+                          ) : (
+                            <div className="flex justify-center items-center h-24 text-gray-400">
+                              <File className="mr-2" /> Visualização não disponível
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      {/* Link para detalhes */}
+                      <div className="mt-3 text-right">
+                        <a 
+                          href={command.chapterLink} 
+                          className="text-xs text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                        >
+                          <GitMerge className="h-3 w-3 mr-1" />
+                          {command.chapterText}
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -176,7 +207,7 @@ const GitBasicCommands: React.FC = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 max-w-5xl mx-auto">
-              {basicCommandsIntroAuthors.map(author => {
+              {advancedCommandsIntroAuthors.map(author => {
                 const [name, role] = author.alt.split(' - ');
                 const isSelected = selectedAuthor?.src === author.src;
 
@@ -278,12 +309,11 @@ const GitBasicCommands: React.FC = () => {
           </section>
         )}
 
-        {/* Game Section: Prática do Desafio - Agora usa o componente dedicado */}
+        {/* Game Section: Prática do Desafio */}
         <PracticeChallengeSection />
       </div>
-
     </div>
   );
 };
 
-export default GitBasicCommands; 
+export default AdvancedCommands; 

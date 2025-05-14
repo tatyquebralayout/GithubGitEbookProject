@@ -5,6 +5,9 @@ import GamePage from '../features/game/GamePage';
 import AboutAuthorPage from '../features/author/AboutAuthorPage';
 import EbookPage from '../features/ebook/EbookPage';
 import GitBasicCommandsPage from '../features/gitCommands/GitBasicCommandsPage';
+import GitIntermediateCommandsPage from '../features/gitCommands/GitIntermediateCommandsPage';
+import GitAdvancedCommandsPage from '../features/gitCommands/GitAdvancedCommandsPage';
+import GitHubCommandsPage from '../features/gitCommands/GitHubCommandsPage';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,18 @@ const router = createBrowserRouter([
   {
     path: '/game/basic-commands',
     element: <GitBasicCommandsPage />,
+  },
+  {
+    path: '/game/intermediate-commands',
+    element: <GitIntermediateCommandsPage />,
+  },
+  {
+    path: '/game/advanced-commands',
+    element: <GitAdvancedCommandsPage />,
+  },
+  {
+    path: '/game/github-commands',
+    element: <GitHubCommandsPage />,
   },
   {
     path: '/about-author',

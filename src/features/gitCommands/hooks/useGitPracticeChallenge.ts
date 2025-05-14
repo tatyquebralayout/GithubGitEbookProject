@@ -493,6 +493,56 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     return successMessage;
   }, [isRepoInitialized, allBranches, remoteOrigin, getBranchHeadCommit, isAncestor, setRemoteOrigin]);
 
+  const executeGitMerge = useCallback((args: string[]): string => {
+    if (!isRepoInitialized) return 'fatal: not a git repository (or any of the parent directories): .git';
+    
+    const branchToMerge = args[0];
+    if (!branchToMerge) return 'error: branch name required';
+    
+    if (!allBranches.includes(branchToMerge)) {
+      return `fatal: branch '${branchToMerge}' not found`;
+    }
+    
+    if (branchToMerge === currentBranch) {
+      return `Already up to date. (Cannot merge a branch into itself)`;
+    }
+    
+    // Verificar se o branch atual tem commits
+    const currentHeadCommit = getBranchHeadCommit(currentBranch);
+    if (!currentHeadCommit) {
+      return `fatal: branch '${currentBranch}' does not have any commits yet`;
+    }
+    
+    // Verificar se o branch a ser mesclado tem commits
+    const mergeBranchHeadCommit = getBranchHeadCommit(branchToMerge);
+    if (!mergeBranchHeadCommit) {
+      return `fatal: branch '${branchToMerge}' does not have any commits yet`;
+    }
+    
+    // Se o commit do branch a ser mesclado já é um ancestral do branch atual, não há nada a mesclar
+    if (isAncestor(mergeBranchHeadCommit.id, currentHeadCommit.id)) {
+      return `Already up to date. '${branchToMerge}' is already incorporated in '${currentBranch}'`;
+    }
+    
+    // Criar o commit de merge
+    const mergeCommit: Commit = {
+      id: Math.random().toString(36).substring(2, 7),
+      parentId: currentHeadCommit.id, 
+      secondParentId: mergeBranchHeadCommit.id, // Adicionando referência ao branch mesclado
+      message: `Merge branch '${branchToMerge}' into ${currentBranch}`,
+      author: 'User <user@gitsheet.com>',
+      date: new Date().toUTCString(),
+      branch: currentBranch,
+    };
+    
+    setCommits(prev => [mergeCommit, ...prev]);
+    
+    return `Merge made by the 'recursive' strategy.\n ${branchToMerge} -> ${currentBranch}`;
+  }, [
+    isRepoInitialized, currentBranch, allBranches, 
+    getBranchHeadCommit, isAncestor, setCommits
+  ]);
+
   // --- Orquestração de Comandos ---
   const handleGitCommand = useCallback((gitSubCommand: string | undefined, commandParts: string[]): string => {
     const remainingArgs = commandParts.slice(2);
@@ -519,6 +569,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
       case 'branch': return executeGitBranch(remainingArgs);
       case 'checkout': return executeGitCheckout(remainingArgs);
       case 'push': return executeGitPush(remainingArgs);
+      case 'merge': return executeGitMerge(remainingArgs);
       default:
         if (gitSubCommand) return `git: '${gitSubCommand}' is not a git command. See 'git --help'.`;
         return "Usage: git <command> [<args>]";
@@ -526,7 +577,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   }, [
     isRepoInitialized, gitRepoPath, currentPath, 
     executeGitInit, executeGitStatus, executeGitAdd, executeGitCommit, 
-    executeGitLog, executeGitBranch, executeGitCheckout, executeGitPush
+    executeGitLog, executeGitBranch, executeGitCheckout, executeGitPush, executeGitMerge
   ]);
   
   const processCommand = useCallback((command: string): string => {
@@ -547,23 +598,14 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
 
   // --- Geração do Diagrama --- 
   const generateMermaidDiagramDefinition = useCallback((): string => {
-    // Adiciona log para depuração
-    console.log("[useGitPracticeChallenge] Gerando definição de diagrama");
-    
-    // TESTE: Versão simplificada para diagnóstico do problema
-    const testDiagram = 'gitGraph LR:\n  commit id: "Test"\n';
-    console.log("[useGitPracticeChallenge] Diagrama simplificado gerado:", testDiagram);
-    console.log("[useGitPracticeChallenge] Códigos dos caracteres:", [...testDiagram].slice(0, 20).map(c => c.charCodeAt(0)));
-    
-    // Retornar apenas o diagrama de teste enquanto resolvemos o problema
-    return testDiagram;
-    
-    /* Código original comentado temporariamente para testes
+    // Remover código de teste e restaurar o código original
     if (!isRepoInitialized || !gitRepoPath) {
-      // return 'gitGraph LR;'; // Simplificado ao máximo para estado não inicializado
-       return 'gitGraph LR;\n  commit id: "Initial" tag: "No commits yet";'; // Adiciona um commit inicial para o Mermaid
+      // Atualizar a sintaxe para Mermaid 11.6.0
+      return 'gitGraph LR:\n  commit id: "Initial" tag: "No commits yet"\n';
     }
-    let mermaidString = 'gitGraph LR;\n';
+    
+    // Atualizar a sintaxe para Mermaid 11.6.0
+    let mermaidString = 'gitGraph LR:\n';
     const actualCommits = commits.filter(c => c.id !== 'Initial');
     const chronologicalCommits = [...(actualCommits.length > 0 ? actualCommits : commits)].reverse();
 
@@ -571,22 +613,23 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     const escapeMermaidString = (str: string): string => str.replace(/"/g, '#quot;'); // Usando #quot; como um placeholder que Mermaid pode entender ou que não quebra a sintaxe. &quot; seria o ideal.
 
     if (chronologicalCommits.length === 0 || (chronologicalCommits.length === 1 && chronologicalCommits[0].id === 'Initial')) {
-      // mermaidString += `  checkout "${escapeMermaidString(currentBranch)}";\n`;
-      // return mermaidString;
-       // Se não houver commits reais, ainda garantir que há um commit inicial no diagrama
-        mermaidString += `  commit id: "Initial" tag: "No commits yet";\n`;
-         mermaidString += `  checkout "${escapeMermaidString(currentBranch)}";\n`;
-       return mermaidString;
+      // Se não houver commits reais, ainda garantir que há um commit inicial no diagrama
+      mermaidString += `  commit id: "Initial" tag: "No commits yet"\n`;
+      mermaidString += `  checkout "${escapeMermaidString(currentBranch)}"\n`;
+      return mermaidString;
     }
     
     let mermaidCheckoutBranch = ''; 
     const declaredMermaidBranches = new Set<string>();
     const initialCheckout = allBranches.includes('main') ? 'main' : currentBranch;
 
-    mermaidString += `  checkout "${escapeMermaidString(initialCheckout)}";\n`;
+    mermaidString += `  checkout "${escapeMermaidString(initialCheckout)}"\n`;
     mermaidCheckoutBranch = initialCheckout;
     declaredMermaidBranches.add(initialCheckout);
 
+    // Mapa para rastrear commits já processados e evitar duplicações
+    const processedCommits = new Set<string>();
+    
     chronologicalCommits.forEach(commit => {
       if(commit.id === 'Initial') return;
 
@@ -597,49 +640,65 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
          const safeParentBranchName = commitBranchMeta.parentBranch ? escapeMermaidString(commitBranchMeta.parentBranch) : null;
          if (safeParentBranchName && safeParentBranchName !== mermaidCheckoutBranch) {
             if(declaredMermaidBranches.has(safeParentBranchName)){
-                 mermaidString += `  checkout "${safeParentBranchName}";\n`;
+                 mermaidString += `  checkout "${safeParentBranchName}"\n`;
                  mermaidCheckoutBranch = safeParentBranchName;
             } else {
-                 mermaidString += `  branch "${safeParentBranchName}";\n`;
+                 mermaidString += `  branch "${safeParentBranchName}"\n`;
                  declaredMermaidBranches.add(safeParentBranchName);
-                 mermaidString += `  checkout "${safeParentBranchName}";\n`;
+                 mermaidString += `  checkout "${safeParentBranchName}"\n`;
                  mermaidCheckoutBranch = safeParentBranchName;
             }
         }
         if(!declaredMermaidBranches.has(safeCommitBranchName)){
-            mermaidString += `  branch "${safeCommitBranchName}";\n`;
+            mermaidString += `  branch "${safeCommitBranchName}"\n`;
             declaredMermaidBranches.add(safeCommitBranchName);
         }
       }
 
       if (commit.branch !== mermaidCheckoutBranch) {
-        mermaidString += `  checkout "${safeCommitBranchName}";\n`;
+        mermaidString += `  checkout "${safeCommitBranchName}"\n`;
         mermaidCheckoutBranch = safeCommitBranchName;
       }
       
-      const sanitizedMessage = escapeMermaidString(commit.message.replace(/;/g, ',')); // Também remover ponto e vírgula da mensagem
-      const tag = `${commit.id.substring(0,5)}: ${sanitizedMessage.substring(0,20)}${sanitizedMessage.length > 20 ? '...' : ''}`;
-      // Assegurar que o ID do commit (se contiver caracteres especiais) também seja seguro ou não precise de aspas se for um token simples.
-      // IDs de commit gerados por nós (Math.random) são seguros.
-      mermaidString += `  commit id: "${commit.id}" tag: "${tag}";\n`;
+      // Se este commit é um merge (tem secondParentId), vamos adicionar o comando merge
+      if (commit.secondParentId) {
+        // Verificar de qual branch está vindo o segundo pai
+        const secondParentCommit = commits.find(c => c.id === commit.secondParentId);
+        if (secondParentCommit) {
+          const secondParentBranch = secondParentCommit.branch;
+          const safeSecondParentBranch = escapeMermaidString(secondParentBranch);
+          
+          // Se ainda não processamos este comando merge
+          if (!processedCommits.has(`merge_${commit.id}`)) {
+            mermaidString += `  merge "${safeSecondParentBranch}"\n`;
+            processedCommits.add(`merge_${commit.id}`);
+          }
+        }
+      } else {
+        // Commit normal (não é merge)
+        const sanitizedMessage = escapeMermaidString(commit.message.replace(/;/g, ',')); // Também remover ponto e vírgula da mensagem
+        const tag = `${commit.id.substring(0,5)}: ${sanitizedMessage.substring(0,20)}${sanitizedMessage.length > 20 ? '...' : ''}`;
+        
+        // Adicionar commit normal
+        mermaidString += `  commit id: "${commit.id}" tag: "${tag}"\n`;
+      }
     });
 
     if (currentBranch !== mermaidCheckoutBranch) {
         const safeCurrentBranch = escapeMermaidString(currentBranch);
         if (declaredMermaidBranches.has(safeCurrentBranch)){
-            mermaidString += `  checkout "${safeCurrentBranch}";\n`;
+            mermaidString += `  checkout "${safeCurrentBranch}"\n`;
         } else if (allBranches.includes(currentBranch)){
             const meta = branchDetails.get(currentBranch);
             const safeParentBranch = meta?.parentBranch ? escapeMermaidString(meta.parentBranch) : null;
             if(safeParentBranch && declaredMermaidBranches.has(safeParentBranch)){
-                mermaidString += `  checkout "${safeParentBranch}";\n`;
+                mermaidString += `  checkout "${safeParentBranch}"\n`;
             }
-            mermaidString += `  branch "${safeCurrentBranch}";\n`;
-            mermaidString += `  checkout "${safeCurrentBranch}";\n`;
+            mermaidString += `  branch "${safeCurrentBranch}"\n`;
+            mermaidString += `  checkout "${safeCurrentBranch}"\n`;
         }
     }
     return mermaidString;
-    */
   }, [isRepoInitialized, gitRepoPath, commits, currentBranch, branchDetails, allBranches]);
 
   const diagramDefinition = generateMermaidDiagramDefinition();

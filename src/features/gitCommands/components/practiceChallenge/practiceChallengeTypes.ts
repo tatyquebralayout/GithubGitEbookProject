@@ -1,6 +1,7 @@
 export interface Commit {
   id: string;
   parentId?: string | null; // ID do commit pai
+  secondParentId?: string | null; // ID do segundo commit pai (para commits de merge)
   message: string;
   author: string;
   date: string;
@@ -20,4 +21,4 @@ export interface FileSystemStructure {
 export interface BranchMeta {
   parentBranch: string | null; // null for the initial branch (e.g., main)
   parentCommitId: string | null; // null if branched before any commits on parent
-} 
+}
