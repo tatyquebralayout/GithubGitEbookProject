@@ -4,9 +4,9 @@ import AuthorProfiles from '../../../components/common/AuthorProfiles';
 
 // Define author data for this component's context
 const basicCommandsAuthors = [
-  { src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg", alt: "Autor 1" },
-  { src: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg", alt: "Autor 2" },
-  { src: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg", alt: "Autor 3" },
+  { src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 1" },
+  { src: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 2" },
+  { src: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 3" },
 ];
 
 const ChallengeBadge: React.FC<{ type: string; text: string }> = ({ type, text }) => {
@@ -32,7 +32,7 @@ const GitBasicCommands: React.FC = () => {
       <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
+            src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?w=1920&auto=compress,format"
             alt="Comandos Git"
             className="w-full h-full object-cover"
           />

@@ -24,9 +24,10 @@ const Ebook: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg transform rotate-3"></div>
               <div className="relative bg-white shadow-xl rounded-lg p-8 transform -rotate-3 transition-transform hover:rotate-0">
                 <img
-                  src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
+                  src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?w=800&auto=compress,format"
                   alt="Capa do Livro Git & GitHub"
                   className="w-full h-auto rounded-lg shadow-lg mb-6"
+                  loading="lazy"
                 />
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">

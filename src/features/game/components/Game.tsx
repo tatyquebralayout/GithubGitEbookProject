@@ -55,12 +55,12 @@ const challenges: Challenge[] = [
 
 // Define author data for this component's context
 const gameAuthors = [
-  { src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg", alt: "Autor 1" },
-  { src: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg", alt: "Autor 2" },
-  { src: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg", alt: "Autor 3" },
-  { src: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg", alt: "Autor 4" },
-  { src: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg", alt: "Autor 5" },
-  { src: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg", alt: "Autor 6" },
+  { src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 1" },
+  { src: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 2" },
+  { src: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 3" },
+  { src: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 4" },
+  { src: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 5" },
+  { src: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 6" },
 ];
 
 const ChallengeBadge: React.FC<{ type: string; text: string }> = ({ type, text }) => {
@@ -130,7 +130,7 @@ const Game: React.FC = () => {
       <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg"
+            src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?w=1920&auto=compress,format"
             alt="Coding Challenge"
             className="w-full h-full object-cover"
           />

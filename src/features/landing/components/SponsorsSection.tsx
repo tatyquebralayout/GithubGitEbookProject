@@ -21,9 +21,10 @@ const SponsorsSection: React.FC = () => {
           {/* Sponsor 1 */}
           <div className="flex flex-col items-center">
             <img 
-              src="https://images.pexels.com/photos/2977565/pexels-photo-2977565.jpeg" 
+              src="https://images.pexels.com/photos/2977565/pexels-photo-2977565.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
               alt="Tech Solutions" 
               className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+              loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Tech Solutions</h3>
             <p className="text-sm text-gray-600 text-center">Soluções em Tecnologia</p>
@@ -32,9 +33,10 @@ const SponsorsSection: React.FC = () => {
           {/* Sponsor 2 */}
           <div className="flex flex-col items-center">
             <img 
-              src="https://images.pexels.com/photos/1337380/pexels-photo-1337380.jpeg" 
+              src="https://images.pexels.com/photos/1337380/pexels-photo-1337380.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
               alt="Dev Academy" 
               className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+              loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Dev Academy</h3>
             <p className="text-sm text-gray-600 text-center">Educação em Tecnologia</p>
@@ -43,9 +45,10 @@ const SponsorsSection: React.FC = () => {
           {/* Sponsor 3 */}
           <div className="flex flex-col items-center">
             <img 
-              src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg" 
+              src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
               alt="Cloud Systems" 
               className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+              loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Cloud Systems</h3>
             <p className="text-sm text-gray-600 text-center">Infraestrutura Cloud</p>
@@ -54,9 +57,10 @@ const SponsorsSection: React.FC = () => {
           {/* Sponsor 4 */}
           <div className="flex flex-col items-center">
             <img 
-              src="https://images.pexels.com/photos/3182833/pexels-photo-3182833.jpeg" 
+              src="https://images.pexels.com/photos/3182833/pexels-photo-3182833.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
               alt="Code Labs" 
               className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+              loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Code Labs</h3>
             <p className="text-sm text-gray-600 text-center">Laboratório de Inovação</p>

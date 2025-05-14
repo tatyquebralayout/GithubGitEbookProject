@@ -15,7 +15,7 @@ const GuestAuthor: React.FC = () => {
       <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
+            src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?w=1920&auto=compress,format"
             alt="Pessoas colaborando em um projeto"
             className="w-full h-full object-cover"
           />

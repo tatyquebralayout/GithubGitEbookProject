@@ -31,9 +31,10 @@ const Footer: React.FC = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
             <img
-              src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+              src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=256&h=256&fit=crop&auto=compress,format"
               alt="Julia Santos"
               className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
+              loading="lazy"
             />
             <div className="text-center md:text-left">
               <h3 className="text-2xl font-bold mb-2">Julia Santos</h3>

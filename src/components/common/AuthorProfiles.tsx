@@ -23,6 +23,7 @@ const AuthorProfiles: React.FC<AuthorProfilesProps> = ({ authors }) => {
           src={author.src} 
           alt={author.alt} 
           className="w-8 h-8 rounded-full border-2 border-white" 
+          loading="lazy"
         />
       ))}
     </div>

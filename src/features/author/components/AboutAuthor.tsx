@@ -8,7 +8,7 @@ const AboutAuthor: React.FC = () => {
       <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg"
+            src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?w=1920&auto=compress,format"
             alt="Plano de Fundo da Autora"
             className="w-full h-full object-cover"
           />
@@ -17,7 +17,7 @@ const AboutAuthor: React.FC = () => {
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <img
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=256&h=256&fit=crop&auto=compress,format"
             alt="Tatiana Barros"
             className="w-32 h-32 rounded-full border-4 border-white mx-auto mb-6"
           />
