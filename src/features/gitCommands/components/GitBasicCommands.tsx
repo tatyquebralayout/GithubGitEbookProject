@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Terminal, GitBranch, GitCommit, Github, Linkedin, Globe } from 'lucide-react';
 import AuthorProfiles from '../../../components/common/AuthorProfiles';
+import PracticeChallengeSection from './practiceChallenge/PracticeChallengeSection';
 
 // Define author data for this component's context
 const basicCommandsAuthors = [
@@ -287,66 +288,8 @@ const GitBasicCommands: React.FC = () => {
           </section>
         )}
 
-        {/* Game Section: Prática do Desafio */}
-        <section id="game-section" className="pb-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl font-bold text-github-fg-default">Prática do Desafio</h2>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Coluna 1: Terminal Interativo */}
-              <div className="lg:col-span-1 bg-slate-900 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
-                <h3 className="text-xl font-semibold mb-3 text-white">Terminal Git Simulado</h3>
-                <div className="bg-black text-sm text-green-400 font-mono p-3 rounded-md flex-grow overflow-y-auto">
-                  <p><span className="text-blue-400">user@gitsheet</span>:<span className="text-purple-400">~</span>$ git init</p>
-                  <p>Initialized empty Git repository in ./.git/</p>
-                  <p><span className="text-blue-400">user@gitsheet</span>:<span className="text-purple-400">~</span>$ <span className="animate-pulse">_</span></p>
-                  {/* Conteúdo do terminal virá aqui */}
-                </div>
-              </div>
-
-              {/* Coluna 2: Visualização de Grafo (Mermaid.js) */}
-              <div className="lg:col-span-1 bg-gray-50 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
-                <h3 className="text-xl font-semibold mb-3 text-github-fg-default">Visualização do Repositório</h3>
-                <div className="flex-grow flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md bg-white">
-                  {/* Placeholder para o diagrama Mermaid.js */}
-                  {/* Poderíamos usar o componente <MermaidDiagram chart={`graph TD; A-->B;`} /> aqui no futuro */}
-                  <p className="text-gray-400 text-center">O grafo do repositório aparecerá aqui<br/>(Mermaid.js)</p>
-                </div>
-              </div>
-
-              {/* Coluna 3: Progresso do Usuário */}
-              <div className="lg:col-span-1 bg-gray-50 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
-                <h3 className="text-xl font-semibold mb-3 text-github-fg-default">Progresso do Desafio</h3>
-                <div className="space-y-2 mb-4 flex-grow">
-                  {/* Exemplo de linhas de progresso */}
-                  <p className="text-sm text-gray-700">1. Inicialize o repositório: <span className="font-semibold text-green-600">Concluído</span></p>
-                  <p className="text-sm text-gray-700">2. Adicione arquivos ao stage: <span className="font-semibold text-orange-500">Pendente</span></p>
-                  <p className="text-sm text-gray-700">3. Faça seu primeiro commit: <span className="font-semibold text-orange-500">Pendente</span></p>
-                  {/* Mais passos do desafio aqui */}
-                </div>
-
-                {/* Mensagem de Parabéns Condicional (Exemplo Comentado) */}
-                {/* 
-                <div className="my-4 p-3 bg-green-100 text-green-700 rounded-lg text-center">
-                  <p className="font-semibold">Parabéns, você concluiu!</p>
-                  <button className="mt-1 text-sm text-green-600 hover:underline focus:outline-none">Ver recompensa!</button>
-                </div>
-                */}
-                
-                <div className="mt-auto space-y-3">
-                  <button className="w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
-                    Recomeçar Desafio
-                  </button>
-                  <button className="w-full px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
-                    Concluir Missão
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Game Section: Prática do Desafio - Agora usa o componente dedicado */}
+        <PracticeChallengeSection />
       </div>
 
       {/* Commands Section */}
