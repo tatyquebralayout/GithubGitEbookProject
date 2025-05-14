@@ -9,6 +9,16 @@ const basicCommandsAuthors = [
   { src: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 3" },
 ];
 
+// New author data for the intro section
+const basicCommandsIntroAuthors = [
+  { src: "https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?w=128&h=128&fit=crop&auto=compress,format", alt: "Carlos Silva - Especialista Git" },
+  { src: "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?w=128&h=128&fit=crop&auto=compress,format", alt: "Beatriz Costa - Instrutora de Coding" },
+  { src: "https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?w=128&h=128&fit=crop&auto=compress,format", alt: "André Souza - Eng. de Software Sênior" },
+  { src: "https://images.pexels.com/photos/415263/pexels-photo-415263.jpeg?w=128&h=128&fit=crop&auto=compress,format", alt: "Mariana Lima - Educadora Tech" },
+  { src: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?w=128&h=128&fit=crop&auto=compress,format", alt: "Ricardo Alves - Especialista DevOps" },
+  { src: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?w=128&h=128&fit=crop&auto=compress,format", alt: "Sofia Ferreira - Criadora de Conteúdo Tech" },
+];
+
 const ChallengeBadge: React.FC<{ type: string; text: string }> = ({ type, text }) => {
   const baseClasses = "gh-badge transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer";
   const colorClasses = {
@@ -49,6 +59,49 @@ const GitBasicCommands: React.FC = () => {
           <p className="mt-6 text-xl text-white/80">
             Domine os fundamentos do Git com nossos exercícios práticos
           </p>
+        </div>
+      </section>
+
+      {/* New Section: Git e GitHub Básico */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl font-bold text-github-fg-default">Git e GitHub Básico</h2>
+            <p className="mt-4 text-lg text-gray-700">
+              Dominar os comandos básicos de Git e GitHub é o primeiro grande passo para quem está ingressando ou migrando para a carreira tecnológica.
+              Eles são a base para o versionamento de projetos, colaboração em equipe e para construir um portfólio sólido.
+              Nosso e-book 'Git & GitHub: Sua Jornada Profissional' e os desafios práticos do nosso Game foram desenhados para
+              solidificar seu aprendizado e te preparar para o mercado, começando por estes fundamentos cruciais.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Author Profiles Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-github-fg-default">Conheça Nossos Especialistas</h2>
+            <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">Nossa equipe dedicada a fornecer o melhor conteúdo sobre Git e GitHub para sua jornada.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-5xl mx-auto">
+            {basicCommandsIntroAuthors.map(author => {
+              const [name, role] = author.alt.split(' - ');
+              return (
+                <div key={author.src} className="flex flex-col items-center text-center">
+                  <img 
+                    src={author.src} 
+                    alt={name}
+                    className="w-32 h-32 rounded-full object-cover mb-4 shadow-lg" 
+                    loading="lazy" 
+                  />
+                  <h3 className="text-xl font-semibold text-gray-800 mb-1">{name}</h3>
+                  <p className="text-md text-gray-600">{role}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 

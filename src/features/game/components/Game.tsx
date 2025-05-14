@@ -209,13 +209,9 @@ const Game: React.FC = () => {
       </section>
 
       {/* Interactive Challenge Section */}
-      {challenge && (
+      {/* {challenge && (
         <section className="py-16 bg-github-canvas">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-github-fg-default">Desafio Atual</h2>
-              <p className="text-github-fg-muted">Complete o comando Git abaixo.</p>
-            </div>
             <div className="gh-card max-w-2xl mx-auto p-6 md:p-8">
               <h3 className="text-xl font-semibold text-github-fg-default mb-2">{challenge.title}</h3>
               <p className="text-github-fg-muted mb-4">{challenge.description}</p>
@@ -282,7 +278,7 @@ const Game: React.FC = () => {
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* Video Section */}
       <section className="py-16 bg-github-canvas-subtle">
