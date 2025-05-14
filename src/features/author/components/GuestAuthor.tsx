@@ -24,13 +24,16 @@ const GuestAuthor: React.FC = () => {
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <span className="inline-block bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wide backdrop-blur-sm">
-            Programa de Autores
+            Autores
           </span>
           <h1 className="mt-6 text-4xl md:text-5xl font-bold leading-tight">
-            Compartilhe Seu Conhecimento com a Comunidade Git
+          Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+             
           </h1>
           <p className="mt-6 text-xl text-white/80">
-            Junte-se a nós como autor convidado e ajude outros desenvolvedores a dominarem o Git
+          Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+          Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+          Suco de cevadiss deixa as pessoas mais interessantis.
           </p>
         </div>
       </section>
@@ -40,9 +43,11 @@ const GuestAuthor: React.FC = () => {
         <div className="gh-container">
           <div className="gh-header">
             <span className="gh-badge-primary">O Projeto</span>
-            <h2 className="gh-title">Sobre o Programa de Autores</h2>
+            <h2 className="gh-title">Sobre  Autores</h2>
             <p className="gh-description">
-              Uma iniciativa para reunir e compartilhar conhecimento especializado sobre Git
+            Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
             </p>
           </div>
 
@@ -53,7 +58,9 @@ const GuestAuthor: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-github-fg-default mb-2">Compartilhe Conhecimento</h3>
               <p className="text-github-fg-muted">
-                Escreva artigos, tutoriais e dicas sobre Git que ajudarão desenvolvedores em sua jornada.
+              Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
               </p>
             </div>
 
@@ -63,7 +70,9 @@ const GuestAuthor: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-github-fg-default mb-2">Alcance Global</h3>
               <p className="text-github-fg-muted">
-                Seus artigos alcançarão uma audiência global de desenvolvedores interessados em Git.
+              Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
               </p>
             </div>
 
@@ -73,7 +82,9 @@ const GuestAuthor: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-github-fg-default mb-2">Reconhecimento</h3>
               <p className="text-github-fg-muted">
-                Ganhe visibilidade na comunidade e estabeleça-se como referência em Git.
+              Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
               </p>
             </div>
           </div>
@@ -87,7 +98,9 @@ const GuestAuthor: React.FC = () => {
             <span className="gh-badge-primary">Proposta de Valor</span>
             <h2 className="gh-title">O Que Oferecemos</h2>
             <p className="gh-description">
-              Benefícios exclusivos para nossos autores convidados
+            Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
             </p>
           </div>
 
@@ -102,7 +115,9 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">Exposição para uma audiência qualificada</span>
+                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -110,7 +125,9 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">Perfil destacado na plataforma</span>
+                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -118,13 +135,17 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">Networking com outros especialistas</span>
+                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-github-fg-default mb-4">Suporte Editorial</h3>
+                <h3 className="text-xl font-semibold text-github-fg-default mb-4">   Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -132,7 +153,9 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">Revisão técnica profissional</span>
+                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -140,7 +163,9 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">Auxílio na criação de conteúdo</span>
+                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -178,8 +203,9 @@ const GuestAuthor: React.FC = () => {
                   <div className="ml-4">
                     <h3 className="text-xl font-semibold text-github-fg-default">Do Problema à Solução</h3>
                     <p className="mt-2 text-github-fg-muted">
-                      Tudo começou quando percebemos que muitos desenvolvedores lutavam para dominar o Git. 
-                      Decidimos criar uma plataforma que reunisse conhecimento especializado de forma acessível e prática.
+                      Tudo começou quando  Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.
                     </p>
                   </div>
                 </div>
@@ -191,8 +217,9 @@ const GuestAuthor: React.FC = () => {
                   <div className="ml-4">
                     <h3 className="text-xl font-semibold text-github-fg-default">Nossa Missão</h3>
                     <p className="mt-2 text-github-fg-muted">
-                      Democratizar o conhecimento sobre Git, tornando-o acessível a todos os desenvolvedores, 
-                      independentemente de seu nível de experiência.
+                      Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
                     </p>
                   </div>
                 </div>
@@ -204,8 +231,8 @@ const GuestAuthor: React.FC = () => {
                   <div className="ml-4">
                     <h3 className="text-xl font-semibold text-github-fg-default">Nosso Impacto</h3>
                     <p className="mt-2 text-github-fg-muted">
-                      Hoje, nossa plataforma ajuda milhares de desenvolvedores a aprimorarem suas habilidades com Git, 
-                      graças à contribuição de especialistas apaixonados por compartilhar conhecimento.
+                      Vide electram sadipscing et per. 
+                      Suco de cevadiss deixa as pessoas mais interessantis.
                     </p>
                   </div>
                 </div>
@@ -222,7 +249,7 @@ const GuestAuthor: React.FC = () => {
             <span className="gh-badge-primary">O Desafio</span>
             <h2 className="gh-title">Faça Parte da Nossa Missão</h2>
             <p className="gh-description">
-              Ajude-nos a tornar o Git mais acessível para todos
+              Ajude-nos a tornar o Git E Github mais acessível para todos
             </p>
           </div>
 
@@ -237,7 +264,9 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">Experiência prática com Git</span>
+                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-accent-subtle rounded-full p-1 mt-1">

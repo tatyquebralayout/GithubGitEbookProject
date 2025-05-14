@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Star, Users, Award, BookOpen } from 'lucide-react';
+import { Book, Users, Award, BookOpen } from 'lucide-react';
 
 const Ebook: React.FC = () => {
   return (
@@ -30,26 +30,22 @@ const Ebook: React.FC = () => {
                 />
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
-                    <Star className="h-5 w-5 text-yellow-400" />
-                    <Star className="h-5 w-5 text-yellow-400" />
-                    <Star className="h-5 w-5 text-yellow-400" />
-                    <Star className="h-5 w-5 text-yellow-400" />
-                    <Star className="h-5 w-5 text-yellow-400" />
+                    <span className="text-yellow-400" aria-label="5 de 5 estrelas">★★★★★</span>
                   </div>
-                  <span className="text-gray-600 text-sm">+1000 leitores</span>
+                  <span className="text-gray-600 text-sm">+1000 leitores litro abertis</span>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center text-sm text-gray-600">
                     <Book className="h-4 w-4 mr-2 text-blue-600" />
-                    <span>300 páginas de conteúdo prático</span>
+                    <span>litro abertis páginas de conteúdo prático</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <Users className="h-4 w-4 mr-2 text-blue-600" />
-                    <span>Comunidade exclusiva de suporte</span>
+                    <span>litro abertis</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <Award className="h-4 w-4 mr-2 text-blue-600" />
-                    <span>Certificado de conclusão</span>
+                    <span>litro abertis</span>
                   </div>
                 </div>
               </div>
@@ -59,7 +55,7 @@ const Ebook: React.FC = () => {
           {/* Right Column - Content */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">O que você vai aprender</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">litro abertis</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                   <div className="flex items-center mb-2">
@@ -97,7 +93,7 @@ const Ebook: React.FC = () => {
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <div className="flex-shrink-0 bg-blue-100 rounded-full p-1">
-                    <Star className="h-4 w-4 text-blue-600" />
+                    <Award className="h-4 w-4 text-blue-600" />
                   </div>
                   <div className="ml-3">
                     <h4 className="font-semibold">Templates Prontos</h4>
@@ -106,20 +102,20 @@ const Ebook: React.FC = () => {
                 </li>
                 <li className="flex items-start">
                   <div className="flex-shrink-0 bg-blue-100 rounded-full p-1">
-                    <Star className="h-4 w-4 text-blue-600" />
+                    <Award className="h-4 w-4 text-blue-600" />
                   </div>
                   <div className="ml-3">
-                    <h4 className="font-semibold">Mentorias em Grupo</h4>
-                    <p className="text-gray-600 text-sm">Sessões quinzenais para tirar dúvidas e networking</p>
+                    <h4 className="font-semibold">litro abertis</h4>
+                    <p className="text-gray-600 text-sm">Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. </p>
                   </div>
                 </li>
                 <li className="flex items-start">
                   <div className="flex-shrink-0 bg-blue-100 rounded-full p-1">
-                    <Star className="h-4 w-4 text-blue-600" />
+                    <Award className="h-4 w-4 text-blue-600" />
                   </div>
                   <div className="ml-3">
-                    <h4 className="font-semibold">Projetos Práticos</h4>
-                    <p className="text-gray-600 text-sm">5 projetos completos para seu portfólio</p>
+                    <h4 className="font-semibold">cacilds vidis</h4>
+                    <p className="text-gray-600 text-sm">Nam vulputate dapibus</p>
                   </div>
                 </li>
               </ul>
@@ -128,10 +124,10 @@ const Ebook: React.FC = () => {
             <div className="pt-6">
               <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors flex items-center justify-center">
                 <Book className="mr-2 h-5 w-5" />
-                Garantir Minha Cópia por R$ 97,00
+                Garantir Nam vulputate dapibus por R$ 7,00
               </button>
               <p className="text-center text-sm text-gray-500 mt-3">
-                7 dias de garantia incondicional
+              Nam vulputate dapibus
               </p>
             </div>
           </div>

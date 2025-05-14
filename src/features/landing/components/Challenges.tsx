@@ -10,10 +10,10 @@ const Challenges: React.FC = () => {
             Desafios
           </span>
           <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
-            Conheça Nossos Participantes
+            Conheça Nossos Autores Parceiros
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Desenvolvedores que estão aprimorando suas habilidades com Git através dos nossos desafios.
+            Nam vulputate dapibus suas habilidades com Git e GitHub através Nam vulputate dapibus
           </p>
         </div>
 

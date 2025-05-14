@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Twitter, Linkedin, Mail, Globe, BookOpen, Users, Award, Heart, GitBranch, Code, Target, Calendar } from 'lucide-react';
+import { Github, Twitter, Linkedin, Mail, Globe, BookOpen, Users, Award, Heart, GitBranch, Code, Target } from 'lucide-react';
 
 const AboutAuthor: React.FC = () => {
   return (
@@ -22,10 +22,10 @@ const AboutAuthor: React.FC = () => {
             className="w-32 h-32 rounded-full border-4 border-white mx-auto mb-6"
           />
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-            Julia Santos
+            Tatiana Barros
           </h1>
           <p className="mt-4 text-xl text-white/80">
-            Desenvolvedora Full Stack & Educadora Tech
+          Mais vale um bebadis conhecidiss, que um alcoolatra anonimis. 
           </p>
           <div className="mt-8 flex justify-center space-x-4">
             <a href="#" aria-label="Github" className="text-white/80 hover:text-white transition-colors">
@@ -62,21 +62,21 @@ const AboutAuthor: React.FC = () => {
 
             <div className="prose prose-lg mx-auto">
               <p>
-                Com mais de 10 anos de experiência em desenvolvimento de software, 
-                tenho dedicado minha carreira a criar soluções inovadoras e compartilhar 
-                conhecimento com a comunidade tech.
+              Mé faiz elementum girarzis, nisi eros vermeio. Bota 1 metro de cachacis aí pra viagem! 
+              Diuretics paradis num copo é motivis de denguis. 
+              Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo!
               </p>
               
               <p>
-                Minha paixão por ensinar me levou a criar conteúdo educacional 
-                que já impactou mais de 50.000 desenvolvedores em todo o Brasil. 
-                Acredito que o conhecimento deve ser acessível e prático.
+              Mé faiz elementum girarzis, nisi eros vermeio. Bota 1 metro de cachacis aí pra viagem! 
+              Diuretics paradis num copo é motivis de denguis. 
+              Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo!
               </p>
 
               <p>
-                Além do desenvolvimento de software, sou palestrante em eventos 
-                de tecnologia e mentora de desenvolvedores iniciantes, ajudando-os 
-                a construir carreiras sólidas na área.
+              Mé faiz elementum girarzis, nisi eros vermeio. Bota 1 metro de cachacis aí pra viagem! 
+              Diuretics paradis num copo é motivis de denguis. 
+              Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo!
               </p>
             </div>
 
@@ -86,7 +86,7 @@ const AboutAuthor: React.FC = () => {
                   <BookOpen className="h-8 w-8 text-purple-600" />
                 </div>
                 <div className="text-2xl font-bold text-gray-900">50k+</div>
-                <div className="text-gray-600">Alunos</div>
+                <div className="text-gray-600">cachacis aí pra viagem!</div>
               </div>
 
               <div className="text-center">
@@ -94,7 +94,7 @@ const AboutAuthor: React.FC = () => {
                   <Users className="h-8 w-8 text-blue-600" />
                 </div>
                 <div className="text-2xl font-bold text-gray-900">100+</div>
-                <div className="text-gray-600">Mentorias</div>
+                <div className="text-gray-600">cachacis aí pra viagem!</div>
               </div>
 
               <div className="text-center">
@@ -102,7 +102,7 @@ const AboutAuthor: React.FC = () => {
                   <Award className="h-8 w-8 text-green-600" />
                 </div>
                 <div className="text-2xl font-bold text-gray-900">30+</div>
-                <div className="text-gray-600">Palestras</div>
+                <div className="text-gray-600">cachacis aí pra viagem!</div>
               </div>
 
               <div className="text-center">
@@ -110,7 +110,7 @@ const AboutAuthor: React.FC = () => {
                   <Heart className="h-8 w-8 text-red-600" />
                 </div>
                 <div className="text-2xl font-bold text-gray-900">15k+</div>
-                <div className="text-gray-600">Seguidores</div>
+                <div className="text-gray-600">cachacis aí pra viagem!</div>
               </div>
             </div>
           </div>
@@ -125,11 +125,12 @@ const AboutAuthor: React.FC = () => {
               O Projeto
             </span>
             <h2 className="mt-4 text-3xl font-bold text-gray-900">
-              GitSheet: Sua Referência Interativa de Git
+            cachacis aí pra viagem!
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-              Uma plataforma educacional completa para ajudar desenvolvedores a dominarem Git e GitHub 
-              através de recursos interativos e conteúdo prático.
+            apien in monti palavris qui num significa nadis i pareci latim. 
+            Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. 
+            Sed non consequat odio.
             </p>
           </div>
 
@@ -138,9 +139,9 @@ const AboutAuthor: React.FC = () => {
               <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
                 <GitBranch className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Referência Completa</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">cachacis aí pra viagem!</h3>
               <p className="text-gray-600">
-                Mais de 50 comandos Git organizados por categoria, com exemplos práticos e explicações detalhadas.
+              apien in monti palavris qui num significa nadis i pareci latim.
               </p>
             </div>
 
@@ -150,7 +151,7 @@ const AboutAuthor: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Desafios Práticos</h3>
               <p className="text-gray-600">
-                Aprenda através de desafios reais, com feedback instantâneo e progressão gradual de dificuldade.
+              apien in monti palavris qui num significa nadis i pareci latim.
               </p>
             </div>
 
@@ -158,32 +159,36 @@ const AboutAuthor: React.FC = () => {
               <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mb-6">
                 <Target className="h-8 w-8 text-purple-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Comunidade Ativa</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">cachacis aí pra viagem!</h3>
               <p className="text-gray-600">
-                Conecte-se com outros desenvolvedores, compartilhe experiências e aprenda colaborativamente.
+              apien in monti palavris qui num significa nadis i pareci latim.
               </p>
             </div>
           </div>
 
           <div className="mt-16 max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-sm">
             <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-              Por Que Criar o GitSheet?
+            cachacis aí pra viagem!?
             </h3>
             <div className="space-y-6 text-gray-600">
               <p>
-                O GitSheet nasceu da minha experiência como educadora e da observação das dificuldades 
-                que muitos desenvolvedores enfrentam ao aprender Git. Percebi que faltava uma ferramenta 
-                que combinasse teoria e prática de forma interativa e engajadora.
+              Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+              Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.
               </p>
               <p>
-                Nossa missão é democratizar o conhecimento sobre controle de versão, tornando o 
-                aprendizado de Git mais acessível, prático e divertido. Acreditamos que dominar 
-                estas ferramentas é fundamental para qualquer desenvolvedor moderno.
+                Nossa missão é Manduma pindureta quium dia nois paga. 
+              Pellentesque nec nulla ligula. 
+              Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.
               </p>
               <p>
-                Através do GitSheet, oferecemos não apenas uma referência de comandos, mas um 
-                ecossistema completo de aprendizado que inclui desafios práticos, projetos reais 
-                e uma comunidade ativa de desenvolvedores.
+                Através do Manduma pindureta quium dia nois paga. 
+              Donec gravida turpis a vulputate ultricies.
+              Vide electram sadipscing et per. 
+              Suco de cevadiss deixa as pessoas mais interessantis.
               </p>
             </div>
           </div>
@@ -199,7 +204,7 @@ const AboutAuthor: React.FC = () => {
                 Experiência
               </span>
               <h2 className="mt-4 text-3xl font-bold text-gray-900">
-                Trajetória Profissional
+              cachacis aí pra viagem!
               </h2>
             </div>
 
@@ -207,42 +212,48 @@ const AboutAuthor: React.FC = () => {
               <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">Tech Lead</h3>
-                    <p className="text-blue-600">Empresa Inovadora Tech</p>
+                    <h3 className="text-xl font-bold text-gray-900">cachacis aí pra viagem!</h3>
+                    <p className="text-blue-600"> Cachacis aí pra viagem!</p>
                   </div>
-                  <span className="text-gray-500">2020 - Presente</span>
+                  <span className="text-gray-500">2024 - Presente</span>
                 </div>
                 <p className="text-gray-600">
-                  Liderança técnica de equipe full stack, desenvolvimento de 
-                  arquitetura de microsserviços e mentoria de desenvolvedores júnior.
+                Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+                Donec gravida turpis a vulputate ultricies.
+                Vide electram sadipscing et per. 
+                Suco de cevadiss deixa as pessoas mais interessantis.
                 </p>
               </div>
 
               <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">Desenvolvedora Senior</h3>
-                    <p className="text-blue-600">StartupXYZ</p>
+                    <h3 className="text-xl font-bold text-gray-900">cachacis aí pra viagem!</h3>
+                    <p className="text-blue-600"> Cachacis aí pra viagem!</p>
                   </div>
-                  <span className="text-gray-500">2017 - 2020</span>
+                  <span className="text-gray-500">2024 - Presente</span>
                 </div>
                 <p className="text-gray-600">
-                  Desenvolvimento de aplicações web escaláveis, implementação de 
-                  CI/CD e otimização de performance.
+                  Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+                Donec gravida turpis a vulputate ultricies.
+                Vide electram sadipscing et per. 
+                Suco de cevadiss deixa as pessoas mais interessantis.
                 </p>
               </div>
 
               <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">Desenvolvedora Full Stack</h3>
-                    <p className="text-blue-600">Empresa Tech Solutions</p>
+                    <h3 className="text-xl font-bold text-gray-900">cachacis aí pra viagem!</h3>
+                    <p className="text-blue-600"> Cachacis aí pra viagem!</p>
                   </div>
-                  <span className="text-gray-500">2015 - 2017</span>
+                  <span className="text-gray-500">2024 - Presente</span>
                 </div>
                 <p className="text-gray-600">
-                  Desenvolvimento full stack com foco em aplicações React e Node.js, 
-                  integração com APIs e implementação de features.
+                  Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+                Donec gravida turpis a vulputate ultricies.
+                Vide electram sadipscing et per. 
+                Suco de cevadiss deixa as pessoas mais interessantis.
                 </p>
               </div>
             </div>

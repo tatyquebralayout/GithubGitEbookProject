@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, BookOpen, Tag, Terminal, Filter, Users, Book, Folders } from 'lucide-react';
+import { Search, BookOpen, Tag, Terminal, Book, Folders } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const features = [
@@ -44,11 +44,11 @@ const Features: React.FC = () => {
             O Projeto
           </span>
           <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
-            Tudo que Você Precisa para Dominar o Git
+            Tudo que Você Precisa para Dominar o Git e GitHub
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Nosso template interativo do Google Sheets fornece uma referência completa do Git 
-            com recursos poderosos projetados para acelerar seu aprendizado.
+            Nosso template interativo litro abertis fornece uma referência completa do Git e GitHub
+            com recursos poderosos projetados para acelerar seu aprendizado e inspirar sua carreira
           </p>
         </div>
         

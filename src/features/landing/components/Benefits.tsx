@@ -10,11 +10,11 @@ const Benefits: React.FC = () => {
             Benefícios
           </span>
           <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
-            Por que Usar o GitSheet?
+            Por que Usar o Nam vulputate dapibus?
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Nossa planilha interativa ajuda você a dominar o Git mais rapidamente e se tornar 
-            mais produtivo com controle de versão.
+          Nam vulputate dapibus gente finis você a Diuretics paradis num copo o Git e GitHub Leite de capivaris, leite de mula manquis sem cabeça.
+          com controle de versão.
           </p>
         </div>
         
@@ -33,8 +33,8 @@ const Benefits: React.FC = () => {
                 </p>
                 <div className="border-t border-gray-200 pt-4">
                   <div className="flex items-center text-sm text-gray-600">
-                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium mr-2">50+ Comandos</span>
-                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium mr-2">4 Categorias</span>
+                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium mr-2">50+ Leite de capivaris</span>
+                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium mr-2">4 leite de mula manquis sem cabeça</span>
                     <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">Interativo</span>
                   </div>
                 </div>
@@ -51,10 +51,10 @@ const Benefits: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">Economize Tempo</h3>
+                <h3 className="text-xl font-semibold text-gray-900">tirei o pau no gatis, per gatis num morreus</h3>
                 <p className="mt-2 text-gray-600">
-                  Pare de procurar comandos Git na internet. Tenha tudo organizado 
-                  em um só lugar com exemplos e explicações.
+                Sapien in monti palavris qui num significa nadis i pareci latim. 
+                Viva Forevis aptent taciti sociosqu ad litora torquent..
                 </p>
               </div>
             </div>
@@ -66,10 +66,9 @@ const Benefits: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">Aumente a Produtividade</h3>
+                <h3 className="text-xl font-semibold text-gray-900">Quem num gosta di mé, boa gentis num é.</h3>
                 <p className="mt-2 text-gray-600">
-                  A função de busca e organização por categorias ajuda você a encontrar 
-                  exatamente o que precisa, tornando seu fluxo de trabalho mais eficiente.
+                Quem manda na minha terra sou euzis! Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.
                 </p>
               </div>
             </div>
@@ -81,10 +80,10 @@ const Benefits: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">Aprenda Progressivamente</h3>
+                <h3 className="text-xl font-semibold text-gray-900">Copo furadis é disculpa de bebadis</h3>
                 <p className="mt-2 text-gray-600">
-                  Comece com comandos básicos e progrida para os avançados no seu próprio ritmo. 
-                  A abordagem estruturada torna o aprendizado do Git intuitivo.
+                arcu quam euismod magna. Manduma pindureta quium dia nois paga. 
+                Quem manda na minha terra sou euzis! Paisis, filhis, espiritis santis
                 </p>
               </div>
             </div>
@@ -96,10 +95,11 @@ const Benefits: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">Sempre Atualizado</h3>
+                <h3 className="text-xl font-semibold text-gray-900">Si num tem leite então bota uma pinga aí cumpadi!</h3>
                 <p className="mt-2 text-gray-600">
-                  A planilha é mantida e atualizada com os comandos Git mais recentes 
-                  e melhores práticas conforme eles evoluem.
+                Eu nunca mais boto a boca num copo de cachaça, 
+                agora eu só uso canudis! Interagi no mé, 
+                cursus quis, vehicula ac nisi
                 </p>
               </div>
             </div>

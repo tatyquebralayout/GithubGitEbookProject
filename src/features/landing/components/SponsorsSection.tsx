@@ -9,7 +9,7 @@ const SponsorsSection: React.FC = () => {
             Patrocinadores
           </span>
           <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
-            Quem Apoia o GitSheet
+            Quem Apoia o litro abertis
           </h2>
           <p className="mt-4 text-lg text-gray-600">
             Empresas que acreditam no poder da educação em tecnologia e apoiam nossa missão.
@@ -65,11 +65,11 @@ const SponsorsSection: React.FC = () => {
 
         {/* Become a Sponsor CTA */}
         <div className="mt-16 text-center">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors">
+          <button type="button" className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors">
             Seja um Patrocinador
           </button>
           <p className="mt-4 text-sm text-gray-600">
-            Junte-se a nós na missão de democratizar o conhecimento em Git
+            Junte-se a nós na missão de democratizar o conhecimento em Git e GitHub
           </p>
         </div>
       </div>

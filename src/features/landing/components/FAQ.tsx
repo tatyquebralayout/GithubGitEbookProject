@@ -20,7 +20,7 @@ const FAQ: React.FC = () => {
             Perguntas Frequentes
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Obtenha respostas para as dúvidas comuns sobre a Planilha de Referência Git.
+            Obtenha respostas para as dúvidas comuns sobre a litro abertis.
           </p>
         </div>
         
