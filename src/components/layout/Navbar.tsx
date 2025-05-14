@@ -8,25 +8,26 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const isHome = location.pathname === '/';
-  const gameMenuRef = useRef<HTMLDivElement>(null);
+  const isHome = location.pathname === '/'; // Checks if the current path is the homepage
+  const gameMenuRef = useRef<HTMLDivElement>(null); // Ref for the game dropdown menu
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 10); // Set scrolled state based on scroll position
     };
-    handleScroll();
+    handleScroll(); // Call handler on mount
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll); // Cleanup listener
   }, []);
 
   useEffect(() => {
     if (!isHome) {
-      setIsScrolled(true);
+      setIsScrolled(true); // Force scrolled state if not on homepage
     }
   }, [isHome]);
 
   useEffect(() => {
+    // Closes the game dropdown if a click occurs outside of it
     const handleClickOutside = (event: MouseEvent) => {
       if (gameMenuRef.current && !gameMenuRef.current.contains(event.target as Node)) {
         setIsGameMenuOpen(false);
@@ -34,13 +35,14 @@ const Navbar: React.FC = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside); // Cleanup listener
   }, []);
 
+  // Scrolls to a specific section on the page
   const scrollToSection = (sectionId: string) => {
     if (!isHome) {
-      navigate('/');
-      setTimeout(() => {
+      navigate('/'); // Navigate to home if not already there
+      setTimeout(() => { // Wait for navigation then scroll
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
@@ -53,9 +55,10 @@ const Navbar: React.FC = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false);
+    setIsMenuOpen(false); // Close mobile menu after scroll
   };
 
+  // Dynamically sets link class based on scroll and homepage status
   const linkClass = isScrolled || !isHome
     ? 'text-gray-700 hover:text-blue-600' 
     : 'text-white hover:text-blue-200';
@@ -71,6 +74,7 @@ const Navbar: React.FC = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <GitBranch className={`h-8 w-8 ${isScrolled || !isHome ? 'text-blue-600' : 'text-white'}`} />
+          {/* Brand name - kept in English */}
           <span className={`ml-2 text-xl font-bold ${isScrolled || !isHome ? 'text-gray-900' : 'text-white'}`}>GitSheet</span>
         </Link>
         
@@ -81,7 +85,7 @@ const Navbar: React.FC = () => {
             className={`${linkClass} transition-colors`}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            Home
+            Início
           </Link>
           <button onClick={() => scrollToSection('features')} className={`${linkClass} transition-colors`}>
             O Projeto
@@ -107,7 +111,7 @@ const Navbar: React.FC = () => {
                 setIsGameMenuOpen(prev => !prev);
               }}
             >
-              Game
+              Jogo
             </Link>
             {isGameMenuOpen && (
               <div 
@@ -131,7 +135,7 @@ const Navbar: React.FC = () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
-                  Git Comandos Básicos
+                  Comandos Básicos do Git
                 </Link>
               </div>
             )}
@@ -151,7 +155,7 @@ const Navbar: React.FC = () => {
             Autores Convidados
           </Link>
           <button onClick={() => scrollToSection('faq')} className={`${linkClass} transition-colors`}>
-            Dúvidas
+            Dúvidas Frequentes
           </button>
         </div>
         
@@ -182,7 +186,7 @@ const Navbar: React.FC = () => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            Home
+            Início
           </Link>
           <button 
             onClick={() => scrollToSection('features')}
@@ -217,7 +221,7 @@ const Navbar: React.FC = () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              Game
+              Jogo
             </Link>
             <Link
               to="/game/basic-commands"
@@ -227,7 +231,7 @@ const Navbar: React.FC = () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              Git Comandos Básicos
+              Comandos Básicos do Git
             </Link>
           </div>
           <Link 
@@ -254,15 +258,12 @@ const Navbar: React.FC = () => {
             onClick={() => scrollToSection('faq')}
             className="text-gray-700 hover:text-blue-600 transition-colors text-left"
           >
-            Dúvidas
+            Dúvidas Frequentes
           </button>
-          <Link
+          <Link 
             to="/game"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-md transition-colors w-full text-center"
-            onClick={() => {
-              setIsMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            className="bg-blue-600 text-white font-medium px-5 py-2 rounded-md text-center transition-colors hover:bg-blue-700"
+            onClick={() => setIsMenuOpen(false)}
           >
             Começar Agora
           </Link>

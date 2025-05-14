@@ -9,7 +9,7 @@ const EbookContent: React.FC = () => {
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-            alt="Git & GitHub Book Cover"
+            alt="Capa do E-book Git & GitHub"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-purple-900/90" />
@@ -17,26 +17,26 @@ const EbookContent: React.FC = () => {
 
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <span className="inline-block bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wide backdrop-blur-sm">
-            Ebook Exclusivo
+            E-book Exclusivo
           </span>
           <h1 className="mt-6 text-4xl md:text-5xl font-bold leading-tight">
-            Git & GitHub: Sua Jornada Profissional
+            Git & GitHub: Do Iniciante ao Profissional Avançado
           </h1>
           <p className="mt-6 text-xl text-white/80">
-            Um guia completo para dominar Git e GitHub, impulsionar sua carreira e se destacar no mercado tech
+            Um guia completo para dominar Git e GitHub, impulsionar sua carreira e se destacar no mercado de tecnologia.
           </p>
           <div className="mt-8 flex justify-center gap-8">
             <div className="text-center">
               <div className="text-3xl font-bold">300+</div>
-              <div className="text-sm opacity-80">Páginas</div>
+              <div className="text-sm opacity-80">Páginas de Conteúdo</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold">50+</div>
-              <div className="text-sm opacity-80">Exercícios</div>
+              <div className="text-sm opacity-80">Exercícios Práticos</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold">1000+</div>
-              <div className="text-sm opacity-80">Alunos</div>
+              <div className="text-sm opacity-80">Alunos Satisfeitos</div>
             </div>
           </div>
           <button className="mt-12 bg-white text-blue-900 font-bold px-8 py-4 rounded-full hover:bg-blue-50 transition-colors">
@@ -50,13 +50,13 @@ const EbookContent: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-              O Projeto
+              Projetos Práticos
             </span>
             <h2 className="mt-4 text-3xl font-bold text-gray-900">
-              Desenvolva Projetos Reais
+              Desenvolva Projetos Reais e Relevantes
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Aprenda na prática construindo projetos do mundo real que irão te preparar para desafios profissionais
+              Aprenda na prática construindo projetos do mundo real que irão te preparar para os desafios do mercado de trabalho.
             </p>
           </div>
 
@@ -68,10 +68,10 @@ const EbookContent: React.FC = () => {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  Portfolio Dev
+                  Portfólio de Desenvolvedor Web
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Crie seu portfólio profissional usando Git para versionamento e GitHub Pages para hospedagem
+                  Crie seu portfólio profissional usando Git para versionamento e GitHub Pages para hospedagem gratuita.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <span className="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded">HTML</span>
@@ -89,10 +89,10 @@ const EbookContent: React.FC = () => {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  Task Manager
+                  Gerenciador de Tarefas Colaborativo
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Desenvolva um gerenciador de tarefas colaborativo usando branches e pull requests
+                  Desenvolva um gerenciador de tarefas completo, utilizando branches e pull requests para colaboração.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <span className="text-xs font-medium bg-purple-100 text-purple-800 px-2 py-1 rounded">React</span>
@@ -110,10 +110,10 @@ const EbookContent: React.FC = () => {
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  E-commerce API
+                  API RESTful para E-commerce
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Construa uma API RESTful com versionamento semântico e integração contínua
+                  Construa uma API robusta com versionamento semântico (SemVer) e integração contínua (CI/CD).
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <span className="text-xs font-medium bg-green-100 text-green-800 px-2 py-1 rounded">Express</span>
@@ -127,10 +127,10 @@ const EbookContent: React.FC = () => {
 
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-6">
-              Cada projeto inclui código fonte completo, documentação detalhada e desafios extras
+              Cada projeto inclui código-fonte completo, documentação detalhada e desafios extras para aprofundamento.
             </p>
             <button className="bg-blue-600 text-white font-bold px-8 py-4 rounded-full hover:bg-blue-700 transition-colors">
-              Ver Todos os Projetos
+              Ver Todos os Projetos Incluídos
             </button>
           </div>
         </div>
@@ -141,10 +141,10 @@ const EbookContent: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-              Conteúdo
+              Conteúdo do E-book
             </span>
             <h2 className="mt-4 text-3xl font-bold text-gray-900">
-              O Que Você Vai Aprender
+              O Que Você Vai Aprender Detalhadamente
             </h2>
           </div>
 
@@ -153,9 +153,9 @@ const EbookContent: React.FC = () => {
               <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <GitBranch className="h-6 w-6 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Fundamentos Git</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Fundamentos Sólidos de Git</h3>
               <p className="text-gray-600">
-                Domine os conceitos essenciais de versionamento e controle de código
+                Domine os conceitos essenciais de versionamento, controle de código e os principais comandos.
               </p>
             </div>
 
@@ -163,9 +163,9 @@ const EbookContent: React.FC = () => {
               <div className="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <GitCommit className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Fluxos de Trabalho</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Fluxos de Trabalho Profissionais</h3>
               <p className="text-gray-600">
-                Aprenda Git Flow e estratégias profissionais de branching
+                Aprenda Git Flow, estratégias de branching eficazes e como colaborar em equipe.
               </p>
             </div>
 
@@ -173,9 +173,9 @@ const EbookContent: React.FC = () => {
               <div className="bg-purple-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <Terminal className="h-6 w-6 text-purple-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Comandos Avançados</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Comandos Avançados e GitHub</h3>
               <p className="text-gray-600">
-                Explore recursos avançados para resolver problemas complexos
+                Explore recursos avançados do Git e domine a plataforma GitHub para colaboração e hospedagem.
               </p>
             </div>
           </div>
@@ -187,46 +187,46 @@ const EbookContent: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-              Capítulos
+              Estrutura dos Capítulos
             </span>
             <h2 className="mt-4 text-3xl font-bold text-gray-900">
-              Conteúdo do Ebook
+              Navegue pelo Conteúdo do E-book
             </h2>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-4">
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">1. Introdução ao Git</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Capítulo 1: Introdução ao Controle de Versão e Git</h3>
               <p className="text-gray-600">
-                História, instalação e configuração inicial do ambiente
+                O que é controle de versão, história do Git, instalação e configuração inicial do ambiente de desenvolvimento.
               </p>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">2. Comandos Básicos</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Capítulo 2: Comandos Fundamentais do Git</h3>
               <p className="text-gray-600">
-                Init, add, commit, status e log - os fundamentos do Git
+                `git init`, `add`, `commit`, `status`, `log` – os pilares para o seu dia a dia com Git.
               </p>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">3. Branches e Merging</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Capítulo 3: Ramificações (Branches) e Mesclagem (Merging)</h3>
               <p className="text-gray-600">
-                Trabalho com branches, merge strategies e resolução de conflitos
+                Trabalhando com branches, estratégias de merge (fast-forward, three-way) e como resolver conflitos.
               </p>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">4. GitHub e Colaboração</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Capítulo 4: GitHub – Colaboração e Hospedagem</h3>
               <p className="text-gray-600">
-                Pull requests, code review e boas práticas de colaboração
+                Repositórios remotos, `push`, `pull`, `fetch`, `forks`, `pull requests`, `code review` e boas práticas de colaboração em equipe.
               </p>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">5. Git Avançado</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Capítulo 5: Tópicos Avançados em Git</h3>
               <p className="text-gray-600">
-                Rebase, cherry-pick, bisect e outras ferramentas avançadas
+                `rebase` (interativo), `cherry-pick`, `bisect`, `stash`, `tags`, `reflog` e outras ferramentas para otimizar seu fluxo.
               </p>
             </div>
           </div>

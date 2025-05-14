@@ -2,27 +2,27 @@ import React, { useEffect, useRef, memo } from 'react';
 import mermaid from 'mermaid';
 
 interface MermaidDiagramProps {
-  chart: string; // A definição do diagrama Mermaid
-  diagramId: string; // ID único para cada diagrama
+  chart: string; // The Mermaid diagram definition
+  diagramId: string; // Unique ID for each diagram
 }
 
-// Configuração global inicial do Mermaid
-// Movido para fora do componente para ser chamado apenas uma vez
+// Initial global Mermaid configuration
+// Moved outside the component to be called only once
 try {
   mermaid.initialize({
-    startOnLoad: false, // Vamos controlar a renderização manualmente
-    theme: 'base', // Temas: base, default, dark, forest, neutral
-    // Considerar securityLevel: 'loose' se houver problemas com scripts externos, mas avaliar riscos.
-    fontFamily: '\'Mona Sans\', \'Inter\', sans-serif', // Usar fontes do projeto, se disponíveis
-    // Você pode adicionar themeVariables aqui para customizar cores, por exemplo:
+    startOnLoad: false, // We will control rendering manually
+    theme: 'base', // Themes: base, default, dark, forest, neutral
+    // Consider securityLevel: 'loose' if there are issues with external scripts, but assess risks.
+    fontFamily: '\'Mona Sans\', \'Inter\', sans-serif', // Use project fonts, if available
+    // You can add themeVariables here to customize colors, for example:
     // themeVariables: {
-    //   primaryColor: '#f0f6fc', // Exemplo: Cor de fundo dos nós
-    //   primaryTextColor: '#1f2328', // Exemplo: Cor do texto
-    //   lineColor: '#d0d7de', // Exemplo: Cor das linhas
+    //   primaryColor: '#f0f6fc', // Example: Node background color
+    //   primaryTextColor: '#1f2328', // Example: Text color
+    //   lineColor: '#d0d7de', // Example: Line color
     // }
   });
 } catch (e) {
-  console.error("Erro ao inicializar Mermaid (já pode ter sido inicializado):", e);
+  console.error("Error initializing Mermaid (it may have already been initialized):", e);
 }
 
 const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => {
@@ -31,24 +31,24 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => 
   useEffect(() => {
     if (mermaidRef.current && chart) {
       try {
-        // Limpa o conteúdo anterior para evitar duplicação e erros de ID
+        // Clear previous content to avoid duplication and ID errors
         mermaidRef.current.innerHTML = '';
-        // O Mermaid insere o SVG diretamente no elemento fornecido
-        // Nota: a API mermaid.render pode variar. Se esta não funcionar,
-        // podemos voltar a usar o callback e inserir o svgCode manualmente.
+        // Mermaid inserts the SVG directly into the provided element
+        // Note: the mermaid.render API may vary. If this doesn't work,
+        // we can revert to using the callback and inserting the svgCode manually.
         mermaid.render(diagramId, chart, mermaidRef.current);
       } catch (error) {
-        console.error(`Erro ao renderizar Mermaid para o ID ${diagramId}:`, error);
+        console.error(`Error rendering Mermaid for ID ${diagramId}:`, error);
         if (mermaidRef.current) {
-          mermaidRef.current.innerHTML = `<p style="color: red; font-size: 0.8rem;">Erro ao renderizar diagrama. ID: ${diagramId}</p>`;
+          mermaidRef.current.innerHTML = `<p style="color: red; font-size: 0.8rem;">Error rendering diagram. ID: ${diagramId}</p>`;
         }
       }
     }
-  }, [chart, diagramId]); // Re-renderizar quando o 'chart' ou 'diagramId' mudar
+  }, [chart, diagramId]); // Re-render when 'chart' or 'diagramId' changes
 
-  // Adicionamos uma classe para possível estilização do contêiner se necessário
+  // We add a class for possible container styling if needed
   return <div ref={mermaidRef} className="mermaid-diagram-container flex justify-center items-center" />;
 };
 
-// Usar memo para evitar re-renderizações desnecessárias se as props não mudarem
+// Use memo to avoid unnecessary re-renders if props don't change
 export default memo(MermaidDiagram); 

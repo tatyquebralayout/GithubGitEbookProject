@@ -25,7 +25,7 @@ const Ebook: React.FC = () => {
               <div className="relative bg-white shadow-xl rounded-lg p-8 transform -rotate-3 transition-transform hover:rotate-0">
                 <img
                   src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-                  alt="Git & GitHub Book Cover"
+                  alt="Capa do Livro Git & GitHub"
                   className="w-full h-auto rounded-lg shadow-lg mb-6"
                 />
                 <div className="flex items-center justify-between mb-4">

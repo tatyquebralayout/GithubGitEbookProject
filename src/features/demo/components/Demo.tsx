@@ -8,12 +8,12 @@ import DemoGitTips from './DemoGitTips';
 
 const tabs = ['Comandos Básicos', 'Comandos Intermediários', 'Comandos GitHub', 'Dicas e Truques'];
 
-// AuthorProfiles foi movido para ./AuthorProfilesDemo.tsx
-// ChallengeBadge foi movido para ./ChallengeBadgeDemo.tsx
-// BasicCommands foi movido para ./DemoBasicCommands.tsx
-// IntermediateCommands foi movido para ./DemoIntermediateCommands.tsx
-// GitHubCommands foi movido para ./DemoGitHubCommands.tsx
-// GitTips foi movido para ./DemoGitTips.tsx
+// AuthorProfiles was moved to ./AuthorProfilesDemo.tsx
+// ChallengeBadge was moved to ./ChallengeBadgeDemo.tsx
+// BasicCommands was moved to ./DemoBasicCommands.tsx
+// IntermediateCommands was moved to ./DemoIntermediateCommands.tsx
+// GitHubCommands was moved to ./DemoGitHubCommands.tsx
+// GitTips was moved to ./DemoGitTips.tsx
 
 const Demo: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);

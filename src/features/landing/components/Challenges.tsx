@@ -21,7 +21,7 @@ const Challenges: React.FC = () => {
           {/* Profile 1 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Julia Santos</h3>
-            <p className="text-gray-600 mb-4">Senior Frontend Developer</p>
+            <p className="text-gray-600 mb-4">Desenvolvedora Frontend Sênior</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Julia Santos" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -47,7 +47,7 @@ const Challenges: React.FC = () => {
           {/* Profile 2 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Pedro Alves</h3>
-            <p className="text-gray-600 mb-4">Backend Developer</p>
+            <p className="text-gray-600 mb-4">Desenvolvedor Backend</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Pedro Alves" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -70,7 +70,7 @@ const Challenges: React.FC = () => {
           {/* Profile 3 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Ana Silva</h3>
-            <p className="text-gray-600 mb-4">DevOps Engineer</p>
+            <p className="text-gray-600 mb-4">Engenheira DevOps</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Ana Silva" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -93,7 +93,7 @@ const Challenges: React.FC = () => {
           {/* Profile 4 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Lucas Oliveira</h3>
-            <p className="text-gray-600 mb-4">Full Stack Developer</p>
+            <p className="text-gray-600 mb-4">Desenvolvedor Full Stack</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Lucas Oliveira" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -113,7 +113,7 @@ const Challenges: React.FC = () => {
           {/* Profile 5 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Mariana Costa</h3>
-            <p className="text-gray-600 mb-4">UI/UX Developer</p>
+            <p className="text-gray-600 mb-4">Desenvolvedora UI/UX</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Mariana Costa" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -136,7 +136,7 @@ const Challenges: React.FC = () => {
           {/* Profile 6 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Rafael Santos</h3>
-            <p className="text-gray-600 mb-4">Mobile Developer</p>
+            <p className="text-gray-600 mb-4">Desenvolvedor Mobile</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Rafael Santos" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -156,7 +156,7 @@ const Challenges: React.FC = () => {
           {/* Profile 7 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Isabela Lima</h3>
-            <p className="text-gray-600 mb-4">Cloud Architect</p>
+            <p className="text-gray-600 mb-4">Arquiteta Cloud</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Isabela Lima" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -176,7 +176,7 @@ const Challenges: React.FC = () => {
           {/* Profile 8 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Gabriel Ferreira</h3>
-            <p className="text-gray-600 mb-4">Security Engineer</p>
+            <p className="text-gray-600 mb-4">Engenheiro de Segurança</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Gabriel Ferreira" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -196,7 +196,7 @@ const Challenges: React.FC = () => {
           {/* Profile 9 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Carolina Mendes</h3>
-            <p className="text-gray-600 mb-4">Data Engineer</p>
+            <p className="text-gray-600 mb-4">Engenheira de Dados</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Carolina Mendes" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
@@ -216,7 +216,7 @@ const Challenges: React.FC = () => {
           {/* Profile 10 */}
           <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all hover:-translate-y-1">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Thiago Martins</h3>
-            <p className="text-gray-600 mb-4">Software Architect</p>
+            <p className="text-gray-600 mb-4">Arquiteto de Software</p>
             <div className="flex space-x-4">
               <a href="#" aria-label="GitHub de Thiago Martins" className="text-gray-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />

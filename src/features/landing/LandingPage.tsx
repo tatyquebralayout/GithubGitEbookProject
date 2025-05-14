@@ -1,4 +1,4 @@
-// import React from 'react'; // Removido pois não é explicitamente usado com a nova transformação JSX
+// import React from 'react'; // Removed as it's not explicitly used with the new JSX transform
 import Navbar from '../../components/layout/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';

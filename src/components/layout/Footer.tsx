@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
                 <a href="#" aria-label="GitHub de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
                   <Github className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="X de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="X (anteriormente Twitter) de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
                   <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
                 </a>
                 <a href="#" aria-label="LinkedIn de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
@@ -57,10 +57,10 @@ const Footer: React.FC = () => {
                 <a href="#" aria-label="Instagram de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
                   <Instagram className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="Email de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="E-mail de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
                   <Mail className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="Site de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="Website de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
                   <Globe className="h-5 w-5" />
                 </a>
               </div>
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
             </p>
           </div>
           
-          {/* Links Rápidos */}
+          {/* Quick Links */}
           <div>
             <h3 className="text-lg font-medium mb-4">Links Rápidos</h3>
             <ul className="space-y-2">
@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
                   className="text-gray-400 hover:text-white transition-colors"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
-                  Home
+                  Início
                 </Link>
               </li>
               <li>
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <button onClick={() => scrollToSection('faq')} className="text-gray-400 hover:text-white transition-colors">
-                  Dúvidas
+                  Dúvidas Frequentes
                 </button>
               </li>
               <li>
@@ -148,18 +148,18 @@ const Footer: React.FC = () => {
                   className="text-gray-400 hover:text-white transition-colors"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
-                  Game
+                  Jogo
                 </Link>
               </li>
             </ul>
           </div>
           
-          {/* Recursos */}
+          {/* Resources */}
           <div>
             <h3 className="text-lg font-medium mb-4">Recursos</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Documentação Git</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">Documentação do Git</a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Guias de Aprendizado</a>
@@ -183,14 +183,14 @@ const Footer: React.FC = () => {
               <div className="flex">
                 <input 
                   type="email" 
-                  placeholder="Digite seu email" 
+                  placeholder="Digite seu e-mail" 
                   className="px-4 py-2 w-full bg-gray-800 text-white rounded-l-md focus:outline-none"
                 />
                 <button 
                   type="submit" 
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md transition-colors"
                 >
-                  Inscrever
+                  Inscrever-se
                 </button>
               </div>
             </form>

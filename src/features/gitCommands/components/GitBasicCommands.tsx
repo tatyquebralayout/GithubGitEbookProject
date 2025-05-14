@@ -3,9 +3,9 @@ import { Terminal, GitBranch, GitCommit } from 'lucide-react';
 
 const AuthorProfiles: React.FC = () => (
   <div className="flex -space-x-2">
-    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Author 1" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Author 2" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg" alt="Author 3" className="w-8 h-8 rounded-full border-2 border-white" />
+    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Autor 1" className="w-8 h-8 rounded-full border-2 border-white" />
+    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Autor 2" className="w-8 h-8 rounded-full border-2 border-white" />
+    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg" alt="Autor 3" className="w-8 h-8 rounded-full border-2 border-white" />
   </div>
 );
 
@@ -33,7 +33,7 @@ const GitBasicCommands: React.FC = () => {
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-            alt="Git Commands"
+            alt="Comandos Git"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-github-accent-emphasis/90 to-github-done-emphasis/90" />

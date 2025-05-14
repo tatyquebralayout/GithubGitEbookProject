@@ -16,7 +16,7 @@ const GuestAuthor: React.FC = () => {
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
-            alt="Colaboração"
+            alt="Pessoas colaborando em um projeto"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-purple-900/90" />
@@ -24,26 +24,24 @@ const GuestAuthor: React.FC = () => {
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <span className="inline-block bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wide backdrop-blur-sm">
-            Autores
+            Autores Convidados
           </span>
           <h1 className="mt-6 text-4xl md:text-5xl font-bold leading-tight">
-          Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
-             
+            Compartilhe Sua Expertise em Git e GitHub
           </h1>
           <p className="mt-6 text-xl text-white/80">
-          Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
-          Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
-          Suco de cevadiss deixa as pessoas mais interessantis.
+            Junte-se à nossa comunidade de autores e ajude a moldar o futuro do aprendizado em Git, 
+            contribuindo com conteúdo valioso para o GitSheet.
           </p>
         </div>
       </section>
 
-      {/* O Projeto Section */}
+      {/* Project Section: Guest Authors */}
       <section className="gh-section">
         <div className="gh-container">
           <div className="gh-header">
             <span className="gh-badge-primary">O Projeto</span>
-            <h2 className="gh-title">Sobre  Autores</h2>
+            <h2 className="gh-title">Por Que Ser um Autor Convidado no GitSheet?</h2>
             <p className="gh-description">
             Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
             Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
@@ -68,7 +66,7 @@ const GuestAuthor: React.FC = () => {
               <div className="bg-github-success-subtle rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <Crosshair className="h-6 w-6 text-github-success-fg" />
               </div>
-              <h3 className="text-xl font-semibold text-github-fg-default mb-2">Alcance Global</h3>
+              <h3 className="text-xl font-semibold text-github-fg-default mb-2">Alcance um Público Amplo</h3>
               <p className="text-github-fg-muted">
               Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
             Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
@@ -80,7 +78,7 @@ const GuestAuthor: React.FC = () => {
               <div className="bg-github-attention-subtle rounded-full w-12 h-12 flex items-center justify-center mb-4">
                 <Award className="h-6 w-6 text-github-attention-fg" />
               </div>
-              <h3 className="text-xl font-semibold text-github-fg-default mb-2">Reconhecimento</h3>
+              <h3 className="text-xl font-semibold text-github-fg-default mb-2">Ganhe Reconhecimento</h3>
               <p className="text-github-fg-muted">
               Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
             Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
@@ -91,12 +89,12 @@ const GuestAuthor: React.FC = () => {
         </div>
       </section>
 
-      {/* Proposta de Valor Section */}
+      {/* Value Proposition Section */}
       <section className="gh-section bg-white">
         <div className="gh-container">
           <div className="gh-header">
             <span className="gh-badge-primary">Proposta de Valor</span>
-            <h2 className="gh-title">O Que Oferecemos</h2>
+            <h2 className="gh-title">O Que Oferecemos aos Nossos Autores</h2>
             <p className="gh-description">
             Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
             Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
@@ -107,7 +105,7 @@ const GuestAuthor: React.FC = () => {
           <div className="max-w-4xl mx-auto gh-card p-8">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-semibold text-github-fg-default mb-4">Para Você</h3>
+                <h3 className="text-xl font-semibold text-github-fg-default mb-4">Benefícios para Você</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -115,9 +113,7 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
-              Vide electram sadipscing et per. 
-              Suco de cevadiss deixa as pessoas mais interessantis.</span>
+                    <span className="ml-3 text-github-fg-muted">Plataforma para publicar seu conteúdo especializado.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -125,9 +121,7 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
-              Vide electram sadipscing et per. 
-              Suco de cevadiss deixa as pessoas mais interessantis.</span>
+                    <span className="ml-3 text-github-fg-muted">Visibilidade para seu perfil profissional e projetos.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -135,17 +129,13 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
-              Vide electram sadipscing et per. 
-              Suco de cevadiss deixa as pessoas mais interessantis.</span>
+                    <span className="ml-3 text-github-fg-muted">Oportunidade de colaborar com uma comunidade engajada.</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-github-fg-default mb-4">   Donec gravida turpis a vulputate ultricies.
-              Vide electram sadipscing et per. 
-              Suco de cevadiss deixa as pessoas mais interessantis.</h3>
+                <h3 className="text-xl font-semibold text-github-fg-default mb-4">O Que Esperamos</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -153,9 +143,7 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
-              Vide electram sadipscing et per. 
-              Suco de cevadiss deixa as pessoas mais interessantis.</span>
+                    <span className="ml-3 text-github-fg-muted">Artigos originais e de alta qualidade sobre Git e GitHub.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -163,9 +151,7 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
-              Vide electram sadipscing et per. 
-              Suco de cevadiss deixa as pessoas mais interessantis.</span>
+                    <span className="ml-3 text-github-fg-muted">Conteúdo prático, tutoriais, dicas ou estudos de caso.</span>
                   </li>
                   <li className="flex items-start">
                     <div className="bg-github-success-subtle rounded-full p-1 mt-1">
@@ -173,7 +159,7 @@ const GuestAuthor: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="ml-3 text-github-fg-muted">Divulgação nas redes sociais</span>
+                    <span className="ml-3 text-github-fg-muted">Paixão por compartilhar conhecimento e ajudar a comunidade.</span>
                   </li>
                 </ul>
               </div>
@@ -182,14 +168,14 @@ const GuestAuthor: React.FC = () => {
         </div>
       </section>
 
-      {/* História Section */}
+      {/* Story Section */}
       <section className="gh-section">
         <div className="gh-container">
           <div className="gh-header">
             <span className="gh-badge-primary">Nossa História</span>
             <h2 className="gh-title">Como Tudo Começou</h2>
             <p className="gh-description">
-              A jornada que nos trouxe até aqui
+              A jornada que nos trouxe até aqui, buscando colaboradores como você.
             </p>
           </div>
 
@@ -201,9 +187,9 @@ const GuestAuthor: React.FC = () => {
                     <Clock className="h-6 w-6 text-github-accent-fg" />
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-xl font-semibold text-github-fg-default">Do Problema à Solução</h3>
+                    <h3 className="text-xl font-semibold text-github-fg-default">Do Problema à Solução Comunitária</h3>
                     <p className="mt-2 text-github-fg-muted">
-                      Tudo começou quando  Donec gravida turpis a vulputate ultricies.
+                      Tudo começou quando Donec gravida turpis a vulputate ultricies.
               Vide electram sadipscing et per. 
               Suco de cevadiss deixa as pessoas mais interessantis.
                     </p>
@@ -215,7 +201,7 @@ const GuestAuthor: React.FC = () => {
                     <Crosshair className="h-6 w-6 text-github-success-fg" />
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-xl font-semibold text-github-fg-default">Nossa Missão</h3>
+                    <h3 className="text-xl font-semibold text-github-fg-default">Nossa Missão Colaborativa</h3>
                     <p className="mt-2 text-github-fg-muted">
                       Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
             Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
@@ -229,7 +215,7 @@ const GuestAuthor: React.FC = () => {
                     <Award className="h-6 w-6 text-github-attention-fg" />
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-xl font-semibold text-github-fg-default">Nosso Impacto</h3>
+                    <h3 className="text-xl font-semibold text-github-fg-default">O Impacto da Sua Contribuição</h3>
                     <p className="mt-2 text-github-fg-muted">
                       Vide electram sadipscing et per. 
                       Suco de cevadiss deixa as pessoas mais interessantis.
@@ -242,78 +228,52 @@ const GuestAuthor: React.FC = () => {
         </div>
       </section>
 
-      {/* Desafio Section */}
+      {/* Challenge Section */}
       <section className="gh-section bg-white">
         <div className="gh-container">
           <div className="gh-header">
             <span className="gh-badge-primary">O Desafio</span>
-            <h2 className="gh-title">Faça Parte da Nossa Missão</h2>
+            <h2 className="gh-title">Faça Parte da Nossa Missão de Educar</h2>
             <p className="gh-description">
-              Ajude-nos a tornar o Git E Github mais acessível para todos
+            Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto gh-card p-8">
-            <div className="grid md:grid-cols-2 gap-12">
+          <div className="max-w-3xl mx-auto gh-card p-8">
+            <h3 className="text-2xl font-semibold text-github-fg-default mb-6 text-center">
+              Pronto para Compartilhar Seu Conhecimento?
+            </h3>
+            <p className="text-github-fg-muted mb-6">
+            Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. 
+            Donec gravida turpis a vulputate ultricies. Vide electram sadipscing et per. 
+            Suco de cevadiss deixa as pessoas mais interessantis.
+            </p>
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold text-github-fg-default mb-4">O Que Procuramos</h3>
-                <ul className="space-y-4">
-                  <li className="flex items-start">
-                    <div className="bg-github-accent-subtle rounded-full p-1 mt-1">
-                      <svg className="w-4 h-4 text-github-accent-fg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="ml-3 text-github-fg-muted">   Donec gravida turpis a vulputate ultricies.
-              Vide electram sadipscing et per. 
-              Suco de cevadiss deixa as pessoas mais interessantis.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-github-accent-subtle rounded-full p-1 mt-1">
-                      <svg className="w-4 h-4 text-github-accent-fg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="ml-3 text-github-fg-muted">Paixão por compartilhar conhecimento</span>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-github-accent-subtle rounded-full p-1 mt-1">
-                      <svg className="w-4 h-4 text-github-accent-fg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="ml-3 text-github-fg-muted">Compromisso com a qualidade</span>
-                  </li>
-                </ul>
+                <label htmlFor="email" className="block text-sm font-medium text-github-fg-default mb-1">
+                  Seu Melhor E-mail para Contato
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="seu.email@exemplo.com"
+                  required
+                  className="w-full px-4 py-2 border border-github-border-default rounded-md focus:ring-blue-500 focus:border-blue-500 bg-github-canvas-inset text-github-fg-default"
+                />
               </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-github-fg-default mb-4">Como Participar</h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-github-fg-default mb-1">
-                      Seu Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="seuemail@exemplo.com"
-                      required
-                      className="w-full px-4 py-2 border border-github-border-default rounded-md focus:outline-none focus:ring-2 focus:ring-github-accent-emphasis focus:border-github-accent-emphasis bg-github-canvas-inset text-github-fg-default"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-github-accent-emphasis hover:bg-github-accent-muted text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center"
-                  >
-                    <Send className="mr-2 h-5 w-5" />
-                    Quero Participar
-                  </button>
-                </form>
-              </div>
-            </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-md transition-colors flex items-center justify-center"
+              >
+                <Send className="h-5 w-5 mr-2" />
+                Quero Participar como Autor Convidado
+              </button>
+            </form>
           </div>
         </div>
       </section>

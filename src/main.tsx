@@ -1,19 +1,19 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
-import { ThemeProvider } from '@primer/react-brand'; // Importar ThemeProvider
-// import App from './App.tsx'; // App foi movido para features/landing/LandingPage.tsx e é gerenciado pelo router
-// import GuestAuthorPage from './pages/GuestAuthorPage.tsx'; // Gerenciado pelo router
-// import GamePage from './pages/GamePage.tsx'; // Gerenciado pelo router
-// import AboutAuthorPage from './pages/AboutAuthorPage.tsx'; // Gerenciado pelo router
-// import EbookPage from './pages/EbookPage.tsx'; // Gerenciado pelo router
-// import GitBasicCommandsPage from './pages/GitBasicCommandsPage.tsx'; // Gerenciado pelo router
-import router from './router/index.tsx'; // Importar o router configurado
+import { ThemeProvider } from '@primer/react-brand'; // Import ThemeProvider
+// import App from './App.tsx'; // App was moved to features/landing/LandingPage.tsx and is managed by the router
+// import GuestAuthorPage from './pages/GuestAuthorPage.tsx'; // Managed by the router
+// import GamePage from './pages/GamePage.tsx'; // Managed by the router
+// import AboutAuthorPage from './pages/AboutAuthorPage.tsx'; // Managed by the router
+// import EbookPage from './pages/EbookPage.tsx'; // Managed by the router
+// import GitBasicCommandsPage from './pages/GitBasicCommandsPage.tsx'; // Managed by the router
+import router from './router/index.tsx'; // Import the configured router
 import './index.css';
-import '@primer/react-brand/lib/css/main.css'; // Importar estilos principais do Primer Brand
-import '@primer/react-brand/fonts/fonts.css'; // Importar fontes do Primer Brand (Mona Sans)
+import '@primer/react-brand/lib/css/main.css'; // Import Primer Brand main styles
+import '@primer/react-brand/fonts/fonts.css'; // Import Primer Brand fonts (Mona Sans)
 
-// A definição do router foi movida para src/router/index.tsx
+// The router definition was moved to src/router/index.tsx
 // const router = createBrowserRouter([
 //   {
 //     path: '/',

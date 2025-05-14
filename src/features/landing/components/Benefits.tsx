@@ -19,7 +19,7 @@ const Benefits: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Coluna Esquerda - Imagem */}
+          {/* Left Column - Image */}
           <div className="flex items-center justify-center">
             <div className="relative w-full max-w-md">
               <div className="absolute inset-0 bg-blue-600 rounded-lg transform rotate-3"></div>
@@ -42,7 +42,7 @@ const Benefits: React.FC = () => {
             </div>
           </div>
           
-          {/* Coluna Direita - Benefícios */}
+          {/* Right Column - Benefits */}
           <div className="space-y-8">
             <div className="flex">
               <div className="flex-shrink-0 mr-4">
