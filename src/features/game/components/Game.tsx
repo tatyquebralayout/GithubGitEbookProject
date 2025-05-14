@@ -5,6 +5,7 @@ import {
   CodeIcon,
   GoalIcon
 } from '@primer/octicons-react';
+import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom'; // Link não é mais usado diretamente aqui, CommandCategorySection cuida disso
 // import MermaidDiagram from '../../../components/common/MermaidDiagram'; // Não é mais usado diretamente
 // import AuthorProfiles from '../../../components/common/AuthorProfiles'; // Não é mais usado diretamente
@@ -133,6 +134,34 @@ const Game: React.FC = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-github-fg-default">Comandos Git</h2>
             <p className="mt-4 text-github-fg-muted">Explore todos os comandos organizados por categoria</p>
+          </div>
+
+          {/* Botões de navegação para as páginas de comandos */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <Link 
+              to="/game/basic-commands"
+              className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors"
+            >
+              Comandos Básicos
+            </Link>
+            <Link 
+              to="/game/intermediate-commands"
+              className="px-6 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors"
+            >
+              Comandos Intermediários
+            </Link>
+            <Link 
+              to="/game/advanced-commands"
+              className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors"
+            >
+              Comandos Avançados
+            </Link>
+            <Link 
+              to="/game/github-commands"
+              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+            >
+              Comandos GitHub
+            </Link>
           </div>
 
           {gitCommandsData.map((category) => (

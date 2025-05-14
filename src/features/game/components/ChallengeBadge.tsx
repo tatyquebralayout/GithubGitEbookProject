@@ -13,11 +13,11 @@ const ChallengeBadge: React.FC<ChallengeBadgeProps> = ({ type, text, targetPath 
   
   // Mapeamento mais robusto de tipos para classes de cor e caminhos padrão
   const typeStyles: Record<string, {colors: string, defaultPath?: string}> = {
-    beginner:     { colors: "bg-github-success-emphasis text-white", defaultPath: '/git-comandos-basicos' }, // Atualizado para rota real
+    beginner:     { colors: "bg-github-success-emphasis text-white", defaultPath: '/game/basic-commands' },
     intermediate: { colors: "bg-github-attention-fg text-white", defaultPath: '/game/intermediate-commands' },
     advanced:     { colors: "bg-github-severe-fg text-white", defaultPath: '/game/advanced-commands' },
-    github:       { colors: "bg-github-accent-fg text-white", defaultPath: '/game/github-specific' }, 
-    pro:          { colors: "bg-github-done-fg text-white", defaultPath: '/game/pro-tips' },
+    github:       { colors: "bg-github-accent-fg text-white", defaultPath: '/game/github-commands' }, 
+    pro:          { colors: "bg-github-done-fg text-white" },
     default:      { colors: "bg-gray-500 text-white" }
   };
 

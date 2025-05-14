@@ -229,7 +229,7 @@ export const gitCommandsData: CommandCategory[] = [
       {
         name: "git bisect",
         description: "Encontra o commit que introduziu um bug.",
-        chapterLink: "/game/pro-tips#bisect",
+        chapterLink: "/game/advanced-commands#bisect",
         chapterText: "Cap. 15: Debugging",
         authors: gameAuthors,
         difficultyType: "pro",
@@ -238,7 +238,7 @@ export const gitCommandsData: CommandCategory[] = [
       {
         name: "git shortlog -sn",
         description: "Mostra contribuidores e contagem de commits.",
-        chapterLink: "/game/pro-tips#shortlog",
+        chapterLink: "/game/advanced-commands#shortlog",
         chapterText: "Cap. 16: Análise",
         authors: gameAuthors,
         difficultyType: "pro",
@@ -247,7 +247,7 @@ export const gitCommandsData: CommandCategory[] = [
       {
         name: "git reflog",
         description: "Mostra o histórico de movimentações do HEAD.",
-        chapterLink: "/game/pro-tips#reflog",
+        chapterLink: "/game/advanced-commands#reflog",
         chapterText: "Cap. 17: Recuperação",
         authors: gameAuthors,
         difficultyType: "pro",
