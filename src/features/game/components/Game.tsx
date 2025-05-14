@@ -131,7 +131,7 @@ const Game: React.FC = () => {
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?w=1920&auto=compress,format"
-            alt="Coding Challenge"
+            alt="Banner ilustrativo para a seção de desafio de codificação, mostrando um ambiente de desenvolvimento em um monitor"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-github-accent-emphasis/90 to-github-done-emphasis/90" />

@@ -46,22 +46,22 @@ const Footer: React.FC = () => {
                 ajudar outros desenvolvedores a alcançarem seu potencial máximo.
               </p>
               <div className="flex justify-center md:justify-start space-x-4">
-                <a href="#" aria-label="GitHub de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="GitHub de Julia Santos" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   <Github className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="X (anteriormente Twitter) de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="X (anteriormente Twitter) de Julia Santos" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
                 </a>
-                <a href="#" aria-label="LinkedIn de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="LinkedIn de Julia Santos" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   <Linkedin className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="Instagram de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="Instagram de Julia Santos" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   <Instagram className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="E-mail de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="E-mail de Julia Santos" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   <Mail className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="Website de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#" aria-label="Website de Julia Santos" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   <Globe className="h-5 w-5" />
                 </a>
               </div>
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
           <div className="md:col-span-1">
             <Link 
               to="/" 
-              className="flex items-center"
+              className="flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               <GitBranch className="h-8 w-8 text-blue-400" />
@@ -95,31 +95,31 @@ const Footer: React.FC = () => {
               <li>
                 <Link 
                   to="/" 
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   Início
                 </Link>
               </li>
               <li>
-                <button onClick={() => scrollToSection('challenges')} className="text-gray-400 hover:text-white transition-colors">
+                <button onClick={() => scrollToSection('challenges')} className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   Desafios
                 </button>
               </li>
               <li>
-                <button onClick={() => scrollToSection('benefits')} className="text-gray-400 hover:text-white transition-colors">
+                <button onClick={() => scrollToSection('benefits')} className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   Benefícios
                 </button>
               </li>
               <li>
-                <button onClick={() => scrollToSection('faq')} className="text-gray-400 hover:text-white transition-colors">
+                <button onClick={() => scrollToSection('faq')} className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">
                   Dúvidas Frequentes
                 </button>
               </li>
               <li>
                 <Link 
                   to="/about-author" 
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   Sobre a Autora
@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link 
                   to="/guest-author" 
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   Autores Convidados
@@ -137,7 +137,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link 
                   to="/ebook" 
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   E-book
@@ -146,7 +146,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link 
                   to="/game" 
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   Jogo
@@ -160,16 +160,16 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-medium mb-4">Recursos</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Documentação do Git</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">Documentação do Git</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Guias de Aprendizado</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">Guias de Aprendizado</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">Blog</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Suporte</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">Suporte</a>
               </li>
             </ul>
           </div>
@@ -185,11 +185,11 @@ const Footer: React.FC = () => {
                 <input 
                   type="email" 
                   placeholder="Digite seu e-mail" 
-                  className="px-4 py-2 w-full bg-gray-800 text-white rounded-l-md focus:outline-none"
+                  className="px-4 py-2 w-full bg-gray-800 text-white rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800"
                 />
                 <button 
                   type="submit" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md transition-colors"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900"
                 >
                   Inscrever-se
                 </button>
@@ -203,9 +203,9 @@ const Footer: React.FC = () => {
             &copy; {new Date().getFullYear()} GitSheet. Todos os direitos reservados.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Política de Privacidade</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Termos de Serviço</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Contato</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">Política de Privacidade</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">Termos de Serviço</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 focus:ring-offset-gray-900 rounded-sm">Contato</a>
           </div>
         </div>
       </div>

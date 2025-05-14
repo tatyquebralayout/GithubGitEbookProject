@@ -82,21 +82,21 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex space-x-6">
           <Link 
             to="/" 
-            className={`${linkClass} transition-colors`}
+            className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             Início
           </Link>
-          <button onClick={() => scrollToSection('features')} className={`${linkClass} transition-colors`}>
+          <button onClick={() => scrollToSection('features')} className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}>
             O Projeto
           </button>
-          <button onClick={() => scrollToSection('challenges')} className={`${linkClass} transition-colors`}>
+          <button onClick={() => scrollToSection('challenges')} className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}>
             Desafios
           </button>
-          <button onClick={() => scrollToSection('benefits')} className={`${linkClass} transition-colors`}>
+          <button onClick={() => scrollToSection('benefits')} className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}>
             Benefícios
           </button>
-          <button onClick={() => scrollToSection('sponsors')} className={`${linkClass} transition-colors`}>
+          <button onClick={() => scrollToSection('sponsors')} className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}>
             Patrocinadores
           </button>
           <div 
@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
           >
             <Link 
               to="/game"
-              className={`${linkClass} transition-colors inline-flex items-center cursor-pointer`}
+              className={`${linkClass} transition-colors inline-flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}
               onClick={() => {
                 navigate('/game');
                 setIsGameMenuOpen(prev => !prev);
@@ -119,7 +119,7 @@ const Navbar: React.FC = () => {
               >
                 <Link
                   to="/game"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
                   onClick={() => {
                     setIsGameMenuOpen(false);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -129,7 +129,7 @@ const Navbar: React.FC = () => {
                 </Link>
                 <Link
                   to="/game/basic-commands"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
                   onClick={() => {
                     setIsGameMenuOpen(false);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -142,33 +142,33 @@ const Navbar: React.FC = () => {
           </div>
           <Link 
             to="/about-author" 
-            className={`${linkClass} transition-colors`}
+            className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             Autora
           </Link>
           <Link 
             to="/guest-author" 
-            className={`${linkClass} transition-colors`}
+            className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             Autores Convidados
           </Link>
-          <button onClick={() => scrollToSection('faq')} className={`${linkClass} transition-colors`}>
+          <button onClick={() => scrollToSection('faq')} className={`${linkClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}>
             Dúvidas Frequentes
           </button>
         </div>
         
         <Link 
           to="/game"
-          className={`hidden md:block ${isScrolled || !isHome ? 'bg-blue-600 text-white' : 'bg-white text-blue-900'} font-medium px-5 py-2 rounded-md transition-colors hover:bg-opacity-90`}
+          className={`hidden md:block ${isScrolled || !isHome ? 'bg-blue-600 text-white focus:ring-blue-300 focus:ring-offset-blue-600' : 'bg-white text-blue-900 focus:ring-blue-500 focus:ring-offset-white'} font-medium px-5 py-2 rounded-md transition-colors hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2`}
         >
           Começar Agora
         </Link>
         
         {/* Mobile Menu Button */}
         <button 
-          className={`md:hidden ${isScrolled || !isHome ? 'text-gray-700' : 'text-white'}`}
+          className={`md:hidden ${isScrolled || !isHome ? 'text-gray-700 focus:ring-gray-500' : 'text-white focus:ring-gray-300'} focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-offset-white' : 'focus:ring-offset-gray-900' }`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -180,7 +180,7 @@ const Navbar: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 p-4 flex flex-col space-y-4">
           <Link 
             to="/" 
-            className="text-gray-700 hover:text-blue-600 transition-colors"
+            className="text-gray-700 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
             onClick={() => {
               setIsMenuOpen(false);
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -190,32 +190,32 @@ const Navbar: React.FC = () => {
           </Link>
           <button 
             onClick={() => scrollToSection('features')}
-            className="text-gray-700 hover:text-blue-600 transition-colors text-left"
+            className="text-gray-700 hover:text-blue-600 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
           >
             O Projeto
           </button>
           <button 
             onClick={() => scrollToSection('challenges')}
-            className="text-gray-700 hover:text-blue-600 transition-colors text-left"
+            className="text-gray-700 hover:text-blue-600 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
           >
             Desafios
           </button>
           <button 
             onClick={() => scrollToSection('benefits')}
-            className="text-gray-700 hover:text-blue-600 transition-colors text-left"
+            className="text-gray-700 hover:text-blue-600 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
           >
             Benefícios
           </button>
           <button 
             onClick={() => scrollToSection('sponsors')}
-            className="text-gray-700 hover:text-blue-600 transition-colors text-left"
+            className="text-gray-700 hover:text-blue-600 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
           >
             Patrocinadores
           </button>
           <div className="space-y-2">
             <Link 
               to="/game" 
-              className="text-gray-700 hover:text-blue-600 transition-colors block"
+              className="text-gray-700 hover:text-blue-600 transition-colors block focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
               onClick={() => {
                 setIsMenuOpen(false);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -225,7 +225,7 @@ const Navbar: React.FC = () => {
             </Link>
             <Link
               to="/game/basic-commands"
-              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm"
+              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
               onClick={() => {
                 setIsMenuOpen(false);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -236,7 +236,7 @@ const Navbar: React.FC = () => {
           </div>
           <Link 
             to="/about-author" 
-            className="text-gray-700 hover:text-blue-600 transition-colors"
+            className="text-gray-700 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
             onClick={() => {
               setIsMenuOpen(false);
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -246,7 +246,7 @@ const Navbar: React.FC = () => {
           </Link>
           <Link 
             to="/guest-author" 
-            className="text-gray-700 hover:text-blue-600 transition-colors"
+            className="text-gray-700 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
             onClick={() => {
               setIsMenuOpen(false);
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -256,13 +256,13 @@ const Navbar: React.FC = () => {
           </Link>
           <button 
             onClick={() => scrollToSection('faq')}
-            className="text-gray-700 hover:text-blue-600 transition-colors text-left"
+            className="text-gray-700 hover:text-blue-600 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
           >
             Dúvidas Frequentes
           </button>
           <Link 
             to="/game"
-            className="bg-blue-600 text-white font-medium px-5 py-2 rounded-md text-center transition-colors hover:bg-blue-700"
+            className="bg-blue-600 text-white font-medium px-5 py-2 rounded-md text-center transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-blue-600"
             onClick={() => setIsMenuOpen(false)}
           >
             Começar Agora
