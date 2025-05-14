@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-canvas-default: #ffffff;
+    --color-canvas-subtle: #f6f8fa;
+    --color-canvas-inset: #f6f8fa;
+    
+    --color-border-default: #d0d7de;
+    --color-border-muted: #d8dee4;
+    
+    --color-fg-default: #24292f;
+    --color-fg-muted: #57606a;
+    --color-fg-subtle: #6e7781;
+    
+    --color-accent-fg: #0969da;
+    --color-accent-emphasis: #0969da;
+    --color-accent-muted: #54aeff;
+    --color-accent-subtle: #ddf4ff;
+    
+    --color-success-fg: #1a7f37;
+    --color-success-emphasis: #2da44e;
+    --color-success-muted: #4ac26b;
+    --color-success-subtle: #dafbe1;
+    
+    --color-attention-fg: #9a6700;
+    --color-attention-emphasis: #bf8700;
+    --color-attention-muted: #d4a72c;
+    --color-attention-subtle: #fff8c5;
+    
+    --color-severe-fg: #bc4c00;
+    --color-severe-emphasis: #bc4c00;
+    --color-severe-muted: #fb8f44;
+    --color-severe-subtle: #fff1e5;
+    
+    --color-danger-fg: #cf222e;
+    --color-danger-emphasis: #cf222e;
+    --color-danger-muted: #ff818a;
+    --color-danger-subtle: #ffebe9;
+    
+    --color-done-fg: #8250df;
+    --color-done-emphasis: #8250df;
+    --color-done-muted: #c297ff;
+    --color-done-subtle: #fbefff;
+    
+    --shadow-resting-small: 0 1px 0 rgba(27,31,36,0.04);
+    --shadow-floating-small: 0 3px 6px rgba(140,149,159,0.15);
+    --shadow-floating-medium: 0 8px 24px rgba(140,149,159,0.2);
+  }
+}
+
+@layer components {
+  .gh-section {
+    @apply py-16 md:py-24 bg-github-canvas-subtle;
+  }
+
+  .gh-container {
+    @apply container mx-auto px-4;
+  }
+
+  .gh-header {
+    @apply text-center max-w-3xl mx-auto mb-12;
+  }
+
+  .gh-badge-primary {
+    @apply bg-github-accent-subtle text-github-accent-fg text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide;
+  }
+
+  .gh-title {
+    @apply mt-4 text-3xl md:text-4xl font-bold text-github-fg-default;
+  }
+
+  .gh-description {
+    @apply mt-4 text-lg text-github-fg-muted;
+  }
+
+  .gh-tabs {
+    @apply flex flex-wrap justify-center mb-8 max-w-4xl mx-auto;
+  }
+
+  .gh-tab {
+    @apply px-5 py-2 mx-1 mb-2 rounded-md transition-colors bg-github-canvas-default text-github-fg-default hover:bg-github-canvas-subtle;
+  }
+
+  .gh-tab-active {
+    @apply bg-github-accent-emphasis text-white;
+  }
+
+  .gh-content {
+    @apply max-w-6xl mx-auto;
+  }
+
+  .gh-card {
+    @apply bg-github-canvas-default rounded-lg border border-github-border-default;
+    @apply shadow-github-sm hover:shadow-github-md transition-shadow;
+  }
+
+  .gh-card-header {
+    @apply bg-github-canvas-subtle text-github-fg-default py-3 px-4 flex items-center;
+    @apply border-b border-github-border-muted;
+  }
+
+  .gh-card-body {
+    @apply p-4;
+  }
+
+  .gh-table {
+    @apply w-full text-sm;
+  }
+
+  .gh-table th {
+    @apply py-3 px-4 text-left bg-github-canvas-subtle;
+    @apply text-github-fg-default font-medium border-b border-github-border-muted;
+  }
+
+  .gh-table td {
+    @apply py-3 px-4 border-b border-github-border-muted;
+  }
+
+  .gh-badge {
+    @apply text-xs font-medium px-2.5 py-0.5 rounded;
+    @apply inline-flex items-center justify-center;
+  }
+
+  .gh-nav-link {
+    @apply text-github-fg-default hover:text-github-accent-fg transition-colors;
+    @apply px-3 py-2 rounded-md hover:bg-github-canvas-subtle;
+  }
+}
