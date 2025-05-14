@@ -1,13 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LandingPage from '../features/landing/LandingPage';
-import GuestAuthorPage from '../features/author/GuestAuthorPage';
-import GamePage from '../features/game/GamePage';
-import AboutAuthorPage from '../features/author/AboutAuthorPage';
-import EbookPage from '../features/ebook/EbookPage';
-import GitBasicCommandsPage from '../features/gitCommands/GitBasicCommandsPage';
-import GitIntermediateCommandsPage from '../features/gitCommands/GitIntermediateCommandsPage';
-import GitAdvancedCommandsPage from '../features/gitCommands/GitAdvancedCommandsPage';
-import GitHubCommandsPage from '../features/gitCommands/GitHubCommandsPage';
+import { lazy } from 'react';
+
+// Lazy imports para melhorar performance
+const LandingPage = lazy(() => import('../features/landing/LandingPage'));
+const GuestAuthorPage = lazy(() => import('../features/author/GuestAuthorPage'));
+const GamePage = lazy(() => import('../features/game/GamePage'));
+const AboutAuthorPage = lazy(() => import('../features/author/AboutAuthorPage'));
+const EbookPage = lazy(() => import('../features/ebook/EbookPage'));
+const GitBasicCommandsPage = lazy(() => import('../features/gitCommands/GitBasicCommandsPage'));
+const GitIntermediateCommandsPage = lazy(() => import('../features/gitCommands/GitIntermediateCommandsPage'));
+const GitAdvancedCommandsPage = lazy(() => import('../features/gitCommands/GitAdvancedCommandsPage'));
+const GitHubCommandsPage = lazy(() => import('../features/gitCommands/GitHubCommandsPage'));
 
 const router = createBrowserRouter([
   {

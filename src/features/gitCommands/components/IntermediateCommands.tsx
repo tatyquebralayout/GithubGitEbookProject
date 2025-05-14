@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Terminal, GitBranch, GitMerge, File, Github, Linkedin, Globe } from 'lucide-react';
-import { gitCommandsData } from '../../../features/game/data/commandsData';
+import { gitCommandsData, CommandCategory } from '../../../features/game/data/commandsData';
 import MermaidDiagram from '../../../components/common/MermaidDiagram';
+import { CommandData } from '../../../features/game/components/CommandTableRow';
 import PracticeChallengeSection from './practiceChallenge/PracticeChallengeSection';
 
 // Define a type for our author objects for better type safety
@@ -64,25 +65,25 @@ const intermediateCommandsIntroAuthors: AuthorProfileData[] = [
 
 const IntermediateCommands: React.FC = () => {
   // Obter apenas os comandos intermediários do gitCommandsData
-  const intermediateCommands = gitCommandsData.find(category => category.title === "Comandos Intermediários")?.commands || [];
+  const intermediateCommands = gitCommandsData.find((category: CommandCategory) => category.title === "Comandos Intermediários")?.commands || [];
   
   const [selectedAuthor, setSelectedAuthor] = useState<AuthorProfileData | null>(
     intermediateCommandsIntroAuthors.find(author => author.alt.includes("Carlos Silva")) || intermediateCommandsIntroAuthors[0] || null
   );
   const [currentDialogStep, setCurrentDialogStep] = useState(0);
 
-  const handleAuthorSelect = (author: AuthorProfileData) => {
+  const handleAuthorSelect = (author: AuthorProfileData): void => {
     setSelectedAuthor(author);
     setCurrentDialogStep(0);
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (): void => {
     if (selectedAuthor && selectedAuthor.dialogue && currentDialogStep < selectedAuthor.dialogue.length - 1) {
       setCurrentDialogStep(prev => prev + 1);
     }
   };
 
-  const handlePrevStep = () => {
+  const handlePrevStep = (): void => {
     if (currentDialogStep > 0) {
       setCurrentDialogStep(prev => prev - 1);
     }
@@ -144,7 +145,7 @@ const IntermediateCommands: React.FC = () => {
                 <span className="text-sm font-medium">Comandos Intermediários do Git</span>
               </div>
               <div className="gh-card-body space-y-6">
-                {intermediateCommands.map((command, index) => {
+                {intermediateCommands.map((command: CommandData, index: number) => {
                   // Gerar um ID único para cada diagrama
                   const diagramId = `intermediate-command-${index}-${command.name.replace(/[\s[\]]/g, '-')}`;
                   

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Terminal, GitBranch, GitMerge, File, Github, Linkedin, Globe } from 'lucide-react';
-import { gitCommandsData } from '../../../features/game/data/commandsData';
+import { gitCommandsData, CommandCategory } from '../../../features/game/data/commandsData';
 import MermaidDiagram from '../../../components/common/MermaidDiagram';
 import PracticeChallengeSection from './practiceChallenge/PracticeChallengeSection';
+import { CommandData } from '../../../features/game/components/CommandTableRow';
 
 // Define a type for our author objects for better type safety
 interface AuthorProfileData {
@@ -64,25 +65,25 @@ const advancedCommandsIntroAuthors: AuthorProfileData[] = [
 
 const AdvancedCommands: React.FC = () => {
   // Obter apenas os comandos avançados do gitCommandsData
-  const advancedCommands = gitCommandsData.find(category => category.title === "Comandos Avançados")?.commands || [];
+  const advancedCommands = gitCommandsData.find((category: CommandCategory) => category.title === "Comandos Avançados")?.commands || [];
   
   const [selectedAuthor, setSelectedAuthor] = useState<AuthorProfileData | null>(
     advancedCommandsIntroAuthors.find(author => author.alt.includes("André Souza")) || advancedCommandsIntroAuthors[0] || null
   );
   const [currentDialogStep, setCurrentDialogStep] = useState(0);
 
-  const handleAuthorSelect = (author: AuthorProfileData) => {
+  const handleAuthorSelect = (author: AuthorProfileData): void => {
     setSelectedAuthor(author);
     setCurrentDialogStep(0);
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (): void => {
     if (selectedAuthor && selectedAuthor.dialogue && currentDialogStep < selectedAuthor.dialogue.length - 1) {
       setCurrentDialogStep(prev => prev + 1);
     }
   };
 
-  const handlePrevStep = () => {
+  const handlePrevStep = (): void => {
     if (currentDialogStep > 0) {
       setCurrentDialogStep(prev => prev - 1);
     }
@@ -144,7 +145,7 @@ const AdvancedCommands: React.FC = () => {
                 <span className="text-sm font-medium">Comandos Avançados do Git</span>
               </div>
               <div className="gh-card-body space-y-6">
-                {advancedCommands.map((command, index) => {
+                {advancedCommands.map((command: CommandData, index: number) => {
                   // Gerar um ID único para cada diagrama
                   const diagramId = `advanced-command-${index}-${command.name.replace(/[\s[\]]/g, '-')}`;
                   

@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, memo } from 'react';
 import mermaid from 'mermaid';
 
-interface MermaidDiagramProps {
+export interface MermaidDiagramProps {
   chart: string; // The Mermaid diagram definition
   diagramId: string; // Unique ID for each diagram
 }
 
 // Initial global Mermaid configuration moved into useEffect
 
-const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => {
+export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => {
   const mermaidRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
