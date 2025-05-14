@@ -6,24 +6,6 @@ const initialFileSystem: FileSystemStructure = {
   '~': { type: 'dir', content: {} }
 };
 
-interface GitPracticeChallengeState {
-  // Estados relacionados ao Git
-  isRepoInitialized: boolean;
-  stagedFiles: string[];
-  commits: Commit[];
-  currentBranch: string;
-  allBranches: string[];
-  branchDetails: Map<string, BranchMeta>;
-  remoteOrigin: {[branchName: string]: string | null};
-  // Estados relacionados ao File System
-  fileSystem: FileSystemStructure;
-  currentPath: string[];
-  gitRepoPath: string[] | null;
-  workingDirectoryFiles: string[];
-  // Estado derivado para a UI
-  diagramDefinition: string;
-}
-
 interface GitPracticeChallengeAPI {
   processCommand: (command: string) => string;
   currentPathDisplay: string;
@@ -509,7 +491,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
       successMessage = `To origin/${branchToPush}\n * [new branch]      ${branchToPush} -> ${branchToPush}`;
     }
     return successMessage;
-  }, [isRepoInitialized, allBranches, remoteOrigin, getBranchHeadCommit, isAncestor, setRemoteOrigin, commits]);
+  }, [isRepoInitialized, allBranches, remoteOrigin, getBranchHeadCommit, isAncestor, setRemoteOrigin]);
 
   // --- Orquestração de Comandos ---
   const handleGitCommand = useCallback((gitSubCommand: string | undefined, commandParts: string[]): string => {
@@ -565,24 +547,43 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
 
   // --- Geração do Diagrama --- 
   const generateMermaidDiagramDefinition = useCallback((): string => {
+    // Adiciona log para depuração
+    console.log("[useGitPracticeChallenge] Gerando definição de diagrama");
+    
+    // TESTE: Versão simplificada para diagnóstico do problema
+    const testDiagram = 'gitGraph LR:\n  commit id: "Test"\n';
+    console.log("[useGitPracticeChallenge] Diagrama simplificado gerado:", testDiagram);
+    console.log("[useGitPracticeChallenge] Códigos dos caracteres:", [...testDiagram].slice(0, 20).map(c => c.charCodeAt(0)));
+    
+    // Retornar apenas o diagrama de teste enquanto resolvemos o problema
+    return testDiagram;
+    
+    /* Código original comentado temporariamente para testes
     if (!isRepoInitialized || !gitRepoPath) {
-      return 'gitGraph LR;\n  A[Repositório não inicializado];';
+      // return 'gitGraph LR;'; // Simplificado ao máximo para estado não inicializado
+       return 'gitGraph LR;\n  commit id: "Initial" tag: "No commits yet";'; // Adiciona um commit inicial para o Mermaid
     }
     let mermaidString = 'gitGraph LR;\n';
     const actualCommits = commits.filter(c => c.id !== 'Initial');
-    const chronologicalCommits = [...(actualCommits.length > 0 ? actualCommits : commits)].reverse();    
+    const chronologicalCommits = [...(actualCommits.length > 0 ? actualCommits : commits)].reverse();
+
+    // Função para escapar aspas duplas em strings para uso seguro em tags/nomes Mermaid
+    const escapeMermaidString = (str: string): string => str.replace(/"/g, '#quot;'); // Usando #quot; como um placeholder que Mermaid pode entender ou que não quebra a sintaxe. &quot; seria o ideal.
 
     if (chronologicalCommits.length === 0 || (chronologicalCommits.length === 1 && chronologicalCommits[0].id === 'Initial')) {
-      mermaidString += `  checkout "${currentBranch}";\n`;
-      mermaidString += '  commit id: "Initial", tag: "Sem commits ainda", type: REVERSE;\n';
-      return mermaidString;
+      // mermaidString += `  checkout "${escapeMermaidString(currentBranch)}";\n`;
+      // return mermaidString;
+       // Se não houver commits reais, ainda garantir que há um commit inicial no diagrama
+        mermaidString += `  commit id: "Initial" tag: "No commits yet";\n`;
+         mermaidString += `  checkout "${escapeMermaidString(currentBranch)}";\n`;
+       return mermaidString;
     }
+    
     let mermaidCheckoutBranch = ''; 
     const declaredMermaidBranches = new Set<string>();
-
     const initialCheckout = allBranches.includes('main') ? 'main' : currentBranch;
 
-    mermaidString += `  checkout "${initialCheckout}";\n`;
+    mermaidString += `  checkout "${escapeMermaidString(initialCheckout)}";\n`;
     mermaidCheckoutBranch = initialCheckout;
     declaredMermaidBranches.add(initialCheckout);
 
@@ -590,47 +591,55 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
       if(commit.id === 'Initial') return;
 
       const commitBranchMeta = branchDetails.get(commit.branch);
+      const safeCommitBranchName = escapeMermaidString(commit.branch);
 
       if (commit.branch !== mermaidCheckoutBranch && !declaredMermaidBranches.has(commit.branch) && commitBranchMeta) {
-         if (commitBranchMeta.parentBranch && commitBranchMeta.parentBranch !== mermaidCheckoutBranch) {
-            if(declaredMermaidBranches.has(commitBranchMeta.parentBranch)){
-                 mermaidString += `  checkout "${commitBranchMeta.parentBranch}";\n`;
-                 mermaidCheckoutBranch = commitBranchMeta.parentBranch;
+         const safeParentBranchName = commitBranchMeta.parentBranch ? escapeMermaidString(commitBranchMeta.parentBranch) : null;
+         if (safeParentBranchName && safeParentBranchName !== mermaidCheckoutBranch) {
+            if(declaredMermaidBranches.has(safeParentBranchName)){
+                 mermaidString += `  checkout "${safeParentBranchName}";\n`;
+                 mermaidCheckoutBranch = safeParentBranchName;
             } else {
-                 mermaidString += `  branch "${commitBranchMeta.parentBranch}";\n`;
-                 declaredMermaidBranches.add(commitBranchMeta.parentBranch);
-                 mermaidString += `  checkout "${commitBranchMeta.parentBranch}";\n`;
-                 mermaidCheckoutBranch = commitBranchMeta.parentBranch;
+                 mermaidString += `  branch "${safeParentBranchName}";\n`;
+                 declaredMermaidBranches.add(safeParentBranchName);
+                 mermaidString += `  checkout "${safeParentBranchName}";\n`;
+                 mermaidCheckoutBranch = safeParentBranchName;
             }
         }
-        if(!declaredMermaidBranches.has(commit.branch)){
-            mermaidString += `  branch "${commit.branch}";\n`;
-            declaredMermaidBranches.add(commit.branch);
+        if(!declaredMermaidBranches.has(safeCommitBranchName)){
+            mermaidString += `  branch "${safeCommitBranchName}";\n`;
+            declaredMermaidBranches.add(safeCommitBranchName);
         }
       }
 
       if (commit.branch !== mermaidCheckoutBranch) {
-        mermaidString += `  checkout "${commit.branch}";\n`;
-        mermaidCheckoutBranch = commit.branch;
+        mermaidString += `  checkout "${safeCommitBranchName}";\n`;
+        mermaidCheckoutBranch = safeCommitBranchName;
       }
       
-      const tag = `${commit.id.substring(0,5)}: ${commit.message.substring(0,20)}${commit.message.length > 20 ? '...' : ''}`;
-      mermaidString += `  commit id: "${commit.id}", tag: "${tag}";\n`;
+      const sanitizedMessage = escapeMermaidString(commit.message.replace(/;/g, ',')); // Também remover ponto e vírgula da mensagem
+      const tag = `${commit.id.substring(0,5)}: ${sanitizedMessage.substring(0,20)}${sanitizedMessage.length > 20 ? '...' : ''}`;
+      // Assegurar que o ID do commit (se contiver caracteres especiais) também seja seguro ou não precise de aspas se for um token simples.
+      // IDs de commit gerados por nós (Math.random) são seguros.
+      mermaidString += `  commit id: "${commit.id}" tag: "${tag}";\n`;
     });
 
     if (currentBranch !== mermaidCheckoutBranch) {
-        if (declaredMermaidBranches.has(currentBranch)){
-            mermaidString += `  checkout "${currentBranch}";\n`;
+        const safeCurrentBranch = escapeMermaidString(currentBranch);
+        if (declaredMermaidBranches.has(safeCurrentBranch)){
+            mermaidString += `  checkout "${safeCurrentBranch}";\n`;
         } else if (allBranches.includes(currentBranch)){
             const meta = branchDetails.get(currentBranch);
-            if(meta?.parentBranch && declaredMermaidBranches.has(meta.parentBranch)){
-                mermaidString += `  checkout "${meta.parentBranch}";\n`;
+            const safeParentBranch = meta?.parentBranch ? escapeMermaidString(meta.parentBranch) : null;
+            if(safeParentBranch && declaredMermaidBranches.has(safeParentBranch)){
+                mermaidString += `  checkout "${safeParentBranch}";\n`;
             }
-            mermaidString += `  branch "${currentBranch}";\n`;
-            mermaidString += `  checkout "${currentBranch}";\n`;
+            mermaidString += `  branch "${safeCurrentBranch}";\n`;
+            mermaidString += `  checkout "${safeCurrentBranch}";\n`;
         }
     }
     return mermaidString;
+    */
   }, [isRepoInitialized, gitRepoPath, commits, currentBranch, branchDetails, allBranches]);
 
   const diagramDefinition = generateMermaidDiagramDefinition();

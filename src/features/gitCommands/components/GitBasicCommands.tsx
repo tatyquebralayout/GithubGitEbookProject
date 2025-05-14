@@ -171,6 +171,7 @@ const GitBasicCommands: React.FC = () => {
 
                 return (
                   <button 
+                    type="button"
                     key={author.src} 
                     className={`flex flex-col items-center text-center p-2 rounded-lg transition-all duration-200 ease-in-out hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${isSelected ? 'ring-2 ring-blue-500 shadow-xl scale-105' : 'hover:scale-105'}`}
                     onClick={() => handleAuthorSelect(author)}

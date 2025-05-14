@@ -6,53 +6,70 @@ interface MermaidDiagramProps {
   diagramId: string; // Unique ID for each diagram
 }
 
-// Initial global Mermaid configuration
-// Moved outside the component to be called only once
-try {
-  mermaid.initialize({
-    startOnLoad: false, // We will control rendering manually
-    theme: 'base', // Themes: base, default, dark, forest, neutral
-    // Consider securityLevel: 'loose' if there are issues with external scripts, but assess risks.
-    fontFamily: '\'Mona Sans\', \'Inter\', sans-serif', // Use project fonts, if available
-    // You can add themeVariables here to customize colors, for example:
-    // themeVariables: {
-    //   primaryColor: '#f0f6fc', // Example: Node background color
-    //   primaryTextColor: '#1f2328', // Example: Text color
-    //   lineColor: '#d0d7de', // Example: Line color
-    // }
-  });
-} catch (e) {
-  console.error("Error initializing Mermaid (it may have already been initialized):", e);
-}
+// Initial global Mermaid configuration moved into useEffect
 
 const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => {
   const mermaidRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (mermaidRef.current && chart) {
-      try {
-        mermaidRef.current.innerHTML = ''; // Limpar conteúdo anterior
+    // Initialize Mermaid only once on the client side
+    try {
+      // Check if already initialized to prevent re-initialization if multiple diagrams are on a page
+      // or if HMR triggers re-execution. A simple flag or checking a property might be needed if
+      // mermaid.initialize throws error on re-init or if we want to be more robust.
+      // For now, the try-catch handles if it's already initialized by Mermaid's internal checks.
+      mermaid.initialize({
+        startOnLoad: false, // We will control rendering manually
+        theme: 'base', // Themes: base, default, dark, forest, neutral
+        fontFamily: '\'Mona Sans\', \'Inter\', sans-serif',
+      });
+    } catch (e) {
+      // Log non-critical initialization errors (e.g. already initialized)
+      // console.warn("Mermaid initialization issue (possibly already initialized):", e);
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
 
-        // Usar o callback para render e inserir o SVG
-        mermaid.render(diagramId, chart, (svgCode, bindFunctions) => {
+  useEffect(() => {
+    if (mermaidRef.current && chart) {
+      const renderMermaid = async () => {
+        try {
+          if (!mermaidRef.current) return;
+          mermaidRef.current.innerHTML = '';
+
+          // Logs de depuração avançados
+          console.log('[MermaidDiagram] Rendering chart:', chart);
+          console.log('[MermaidDiagram] Chart raw (primeiros 100 chars):', chart.substring(0, 100));
+          console.log('[MermaidDiagram] Chart length:', chart.length);
+          console.log('[MermaidDiagram] Chart charCodeAt (0-20):', [...chart].slice(0, 20).map(c => c.charCodeAt(0)));
+          
+          // Experimento: forçar a remoção de caracteres especiais no início da string
+          const cleanedChart = chart.replace(/^[\x00-\x1F\x7F-\x9F\u200B-\u200D\uFEFF]+/, '');
+          if (cleanedChart !== chart) {
+            console.log('[MermaidDiagram] Caracteres especiais encontrados no início e removidos');
+            console.log('[MermaidDiagram] Novo chart:', cleanedChart);
+          }
+
+          // Tentar renderizar a versão limpa
+          const { svg, bindFunctions } = await mermaid.render(diagramId, cleanedChart);
+          
           if (mermaidRef.current) {
-            mermaidRef.current.innerHTML = svgCode;
+            mermaidRef.current.innerHTML = svg;
             if (bindFunctions) {
-              bindFunctions(mermaidRef.current); // Necessário para interatividade (se houver)
+              bindFunctions(mermaidRef.current);
             }
           }
-        });
-
-      } catch (error) {
-        console.error(`Error rendering Mermaid for ID ${diagramId}:`, error);
-        if (mermaidRef.current) {
-          // Adicionar a string do diagrama ao erro para facilitar a depuração
+        } catch (error) {
           const errMessage = error instanceof Error ? error.message : String(error);
-          mermaidRef.current.innerHTML = `<p style="color: red; font-size: 0.8rem;">Error rendering diagram (ID: ${diagramId}). Details: ${errMessage}. Check console.</p>`;
+          console.error(`Error rendering Mermaid for ID ${diagramId}:`, errMessage);
+          console.error('Mermaid chart string that caused error:', chart);
+          if (mermaidRef.current) {
+            mermaidRef.current.innerHTML = `<p style="color: red; font-size: 0.8rem;">Error rendering diagram (ID: ${diagramId}). Details: ${errMessage}. Check console.</p>`;
+          }
         }
-      }
+      };
+      renderMermaid();
     }
-  }, [chart, diagramId]);
+  }, [diagramId, chart]);
 
   // We add a class for possible container styling if needed
   return <div ref={mermaidRef} className="mermaid-diagram-container flex justify-center items-center" />;

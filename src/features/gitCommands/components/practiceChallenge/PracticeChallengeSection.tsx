@@ -2,8 +2,6 @@ import React from 'react';
 import InteractiveTerminal from './InteractiveTerminal';
 import RepositoryGraph from './RepositoryGraph';
 import ChallengeProgress from './ChallengeProgress';
-// Commit, FileSystemStructure, BranchMeta são usados pelo hook, não diretamente aqui.
-// import { Commit, FileSystemStructure, BranchMeta } from './practiceChallengeTypes'; 
 import { useGitPracticeChallenge } from '../../hooks/useGitPracticeChallenge';
 
 // initialFileSystem foi movido para o hook
