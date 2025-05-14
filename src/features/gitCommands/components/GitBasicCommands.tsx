@@ -175,7 +175,7 @@ const GitBasicCommands: React.FC = () => {
       </section>
 
       {/* Wrapper for Author Profiles and Dialogue Box with custom spacing */}
-      <div className="space-y-8">
+      <div>
         {/* Author Profiles Section - Clickable */}
         <section className="bg-gray-50">
           <div className="container mx-auto px-4">
@@ -184,7 +184,7 @@ const GitBasicCommands: React.FC = () => {
               <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">Nossa equipe dedicada a fornecer o melhor conteúdo sobre Git e GitHub para sua jornada. Clique em um perfil para interagir!</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 max-w-5xl mx-auto">
               {basicCommandsIntroAuthors.map(author => {
                 const [name, role] = author.alt.split(' - ');
                 const isSelected = selectedAuthor?.src === author.src;
@@ -192,18 +192,18 @@ const GitBasicCommands: React.FC = () => {
                 return (
                   <button 
                     key={author.src} 
-                    className={`flex flex-col items-center text-center p-3 rounded-lg transition-all duration-200 ease-in-out hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${isSelected ? 'ring-2 ring-blue-500 shadow-xl scale-105' : 'hover:scale-105'}`}
+                    className={`flex flex-col items-center text-center p-2 rounded-lg transition-all duration-200 ease-in-out hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${isSelected ? 'ring-2 ring-blue-500 shadow-xl scale-105' : 'hover:scale-105'}`}
                     onClick={() => handleAuthorSelect(author)}
                     aria-pressed={isSelected ? "true" : "false"}
                   >
                     <img 
                       src={author.src} 
                       alt={name}
-                      className="w-28 h-28 rounded-full object-cover mb-3 shadow-lg"
+                      className="w-24 h-24 rounded-full object-cover mb-2 shadow-lg"
                       loading="lazy" 
                     />
-                    <h3 className="text-lg font-semibold text-gray-800 mb-1">{name}</h3>
-                    <p className="text-sm text-gray-600">{role}</p>
+                    <h3 className="text-base font-semibold text-gray-800 mb-1">{name}</h3>
+                    <p className="text-xs text-gray-600">{role}</p>
                   </button>
                 );
               })}
@@ -213,60 +213,60 @@ const GitBasicCommands: React.FC = () => {
 
         {/* Challenges Section */}
         {selectedAuthor && selectedAuthor.dialogue && selectedAuthor.dialogue.length > 0 && (
-          <section className="pb-8 bg-gradient-to-br from-slate-900 to-slate-800 text-white" id="challenges-section">
+          <section className="bg-gradient-to-br from-slate-900 to-slate-800 text-white" id="challenges-section">
             <div className="container mx-auto px-4">
               {/* Title for the Challenges Section */}
-              <div className="text-center mb-8">
+              <div className="text-center mb-1">
                 <h2 className="text-3xl font-bold text-white">Desafios Interativos</h2>
                 <p className="mt-2 text-lg text-blue-300">Interaja com nossos especialistas e teste seus conhecimentos!</p>
               </div>
-              <div className="flex flex-col lg:flex-row gap-6 items-center">
+              <div className="flex flex-col lg:flex-row gap-3 items-stretch">
                 {/* Left Column: Author Profile Details */}
-                <div className="lg:w-1/4 w-full bg-slate-800 p-4 rounded-xl shadow-2xl flex flex-col items-center justify-center text-center sticky top-24">
+                <div className="lg:w-1/4 w-full bg-slate-800 p-2 rounded-xl shadow-2xl flex flex-col items-center justify-center text-center sticky top-24">
                   <img 
                     src={selectedAuthor.src} 
                     alt={selectedAuthor.alt.split(' - ')[0]} 
-                    className="w-28 h-28 rounded-full object-cover mb-3 border-4 border-blue-400 shadow-md"
+                    className="w-20 h-20 rounded-full object-cover mb-2 border-4 border-blue-400 shadow-md"
                   />
-                  <h3 className="text-lg font-bold text-white mb-1">{selectedAuthor.alt.split(' - ')[0]}</h3>
-                  <p className="text-sm text-blue-300 mb-2">{selectedAuthor.alt.split(' - ')[1]}</p>
-                  <p className="text-sm text-gray-300 mb-3 leading-relaxed">
+                  <h3 className="text-lg font-bold text-white mb-0.5">{selectedAuthor.alt.split(' - ')[0]}</h3>
+                  <p className="text-sm text-blue-300 mb-1">{selectedAuthor.alt.split(' - ')[1]}</p>
+                  <p className="text-xs text-gray-300 mb-2 leading-relaxed">
                     {selectedAuthor.miniBio || "Mini biografia não disponível."}
                   </p>
-                  <div className="flex space-x-3 mb-3">
+                  <div className="flex space-x-3 mb-2">
                     {selectedAuthor.socialLinks?.github && (
                       <a href={selectedAuthor.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-gray-400 hover:text-blue-400 transition-colors">
-                        <Github size={20} />
+                        <Github size={18} />
                       </a>
                     )}
                     {selectedAuthor.socialLinks?.linkedin && (
                       <a href={selectedAuthor.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-blue-400 transition-colors">
-                        <Linkedin size={20} />
+                        <Linkedin size={18} />
                       </a>
                     )}
                     {selectedAuthor.socialLinks?.website && (
                       <a href={selectedAuthor.socialLinks.website} target="_blank" rel="noopener noreferrer" aria-label="Website" className="text-gray-400 hover:text-blue-400 transition-colors">
-                        <Globe size={20} />
+                        <Globe size={18} />
                       </a>
                     )}
                   </div>
                 </div>
 
                 {/* Right Column: Dialogue Area */}
-                <div className="lg:w-3/4 w-full bg-slate-800 p-4 md:p-6 rounded-xl shadow-2xl min-h-[220px] flex flex-col justify-between">
-                  <div className="dialogue-content mb-4">
+                <div className="lg:w-3/4 w-full bg-slate-800 p-2 rounded-xl shadow-2xl flex flex-col justify-between">
+                  <div className="dialogue-content mb-2">
                     {selectedAuthor.dialogue[currentDialogStep].type === 'text' && (
-                      <p className="text-base md:text-lg leading-relaxed text-gray-200">
+                      <p className="text-sm md:text-base leading-relaxed text-gray-200">
                         {selectedAuthor.dialogue[currentDialogStep].content}
                       </p>
                     )}
                     {/* Placeholder for other dialogue types like images if needed */}
                   </div>
-                  <div className="flex justify-between items-center border-t border-slate-700 pt-4">
+                  <div className="flex justify-between items-center border-t border-slate-700 pt-1">
                     <button 
                       onClick={handlePrevStep} 
                       disabled={currentDialogStep === 0}
-                      className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-800"
+                      className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                     >
                       Voltar
                     </button>
@@ -276,7 +276,7 @@ const GitBasicCommands: React.FC = () => {
                     <button 
                       onClick={handleNextStep} 
                       disabled={currentDialogStep === selectedAuthor.dialogue.length - 1}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-800"
+                      className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                     >
                       Prosseguir
                     </button>
@@ -286,6 +286,67 @@ const GitBasicCommands: React.FC = () => {
             </div>
           </section>
         )}
+
+        {/* Game Section: Prática do Desafio */}
+        <section id="game-section" className="pb-16">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-github-fg-default">Prática do Desafio</h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Coluna 1: Terminal Interativo */}
+              <div className="lg:col-span-1 bg-slate-900 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
+                <h3 className="text-xl font-semibold mb-3 text-white">Terminal Git Simulado</h3>
+                <div className="bg-black text-sm text-green-400 font-mono p-3 rounded-md flex-grow overflow-y-auto">
+                  <p><span className="text-blue-400">user@gitsheet</span>:<span className="text-purple-400">~</span>$ git init</p>
+                  <p>Initialized empty Git repository in ./.git/</p>
+                  <p><span className="text-blue-400">user@gitsheet</span>:<span className="text-purple-400">~</span>$ <span className="animate-pulse">_</span></p>
+                  {/* Conteúdo do terminal virá aqui */}
+                </div>
+              </div>
+
+              {/* Coluna 2: Visualização de Grafo (Mermaid.js) */}
+              <div className="lg:col-span-1 bg-gray-50 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
+                <h3 className="text-xl font-semibold mb-3 text-github-fg-default">Visualização do Repositório</h3>
+                <div className="flex-grow flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md bg-white">
+                  {/* Placeholder para o diagrama Mermaid.js */}
+                  {/* Poderíamos usar o componente <MermaidDiagram chart={`graph TD; A-->B;`} /> aqui no futuro */}
+                  <p className="text-gray-400 text-center">O grafo do repositório aparecerá aqui<br/>(Mermaid.js)</p>
+                </div>
+              </div>
+
+              {/* Coluna 3: Progresso do Usuário */}
+              <div className="lg:col-span-1 bg-gray-50 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
+                <h3 className="text-xl font-semibold mb-3 text-github-fg-default">Progresso do Desafio</h3>
+                <div className="space-y-2 mb-4 flex-grow">
+                  {/* Exemplo de linhas de progresso */}
+                  <p className="text-sm text-gray-700">1. Inicialize o repositório: <span className="font-semibold text-green-600">Concluído</span></p>
+                  <p className="text-sm text-gray-700">2. Adicione arquivos ao stage: <span className="font-semibold text-orange-500">Pendente</span></p>
+                  <p className="text-sm text-gray-700">3. Faça seu primeiro commit: <span className="font-semibold text-orange-500">Pendente</span></p>
+                  {/* Mais passos do desafio aqui */}
+                </div>
+
+                {/* Mensagem de Parabéns Condicional (Exemplo Comentado) */}
+                {/* 
+                <div className="my-4 p-3 bg-green-100 text-green-700 rounded-lg text-center">
+                  <p className="font-semibold">Parabéns, você concluiu!</p>
+                  <button className="mt-1 text-sm text-green-600 hover:underline focus:outline-none">Ver recompensa!</button>
+                </div>
+                */}
+                
+                <div className="mt-auto space-y-3">
+                  <button className="w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+                    Recomeçar Desafio
+                  </button>
+                  <button className="w-full px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
+                    Concluir Missão
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       {/* Commands Section */}
