@@ -11,16 +11,13 @@ const InteractiveTerminal: React.FC = () => {
   const [history, setHistory] = useState<TerminalHistoryItem[]>([
     { id: Date.now(), type: 'output', content: 'Bem-vindo ao Terminal Git Simulado! Digite um comando.' }
   ]);
-  const terminalEndRef = useRef<null | HTMLDivElement>(null);
+  const historyContainerRef = useRef<null | HTMLDivElement>(null);
   const inputRef = useRef<null | HTMLInputElement>(null);
-  const formRef = useRef<null | HTMLFormElement>(null);
-
-  const scrollToBottom = () => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }
 
   useEffect(() => {
-    scrollToBottom();
+    if (historyContainerRef.current) {
+      historyContainerRef.current.scrollTop = historyContainerRef.current.scrollHeight;
+    }
   }, [history]);
 
   useEffect(() => {
@@ -28,11 +25,9 @@ const InteractiveTerminal: React.FC = () => {
   }, []);
 
   const processCommand = (command: string): string => {
-    // Lógica de processamento de comando virá aqui
-    // Por enquanto, apenas um eco simples ou uma mensagem padrão
     if (command.trim().toLowerCase() === 'clear') {
       setHistory([]);
-      return ''; // Não adiciona 'clear' ou sua saída ao histórico visível, apenas limpa.
+      return ''; 
     }
     if (command.trim().toLowerCase() === 'git init') {
         return 'Initialized empty Git repository in ./.git/';
@@ -40,8 +35,6 @@ const InteractiveTerminal: React.FC = () => {
     if (command.trim().toLowerCase() === 'git status') {
         return 'On branch main\nNo commits yet\nNothing to commit (create/copy files and use "git add" to track)';
     }
-    // Adicione mais validações de comando aqui
-
     return `Comando não reconhecido: ${command}`;
   };
 
@@ -49,10 +42,7 @@ const InteractiveTerminal: React.FC = () => {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event?: React.FormEvent<HTMLFormElement>) => {
-    if (event) {
-      event.preventDefault(); 
-    }
+  const handleSubmitLogic = () => {
     const command = inputValue.trim();
 
     if (!command) {
@@ -62,32 +52,42 @@ const InteractiveTerminal: React.FC = () => {
 
     const newCommandId = Date.now();
 
-    setHistory(prevHistory => [
-      ...prevHistory,
-      { id: newCommandId, type: 'input', content: command },
-    ]);
-
+    let tempHistory = [
+      ...history,
+      { id: newCommandId, type: 'input' as 'input' | 'output', content: command },
+    ];
     const outputMessage = processCommand(command);
-    
     if (outputMessage) {
-      setHistory(prevHistory => [
-        ...prevHistory,
-        { id: newCommandId + 1, type: 'output', content: outputMessage },
-      ]);
+      tempHistory.push({ id: newCommandId + 1, type: 'output', content: outputMessage });
     }
+    setHistory(tempHistory);
 
     setInputValue('');
 
-    Promise.resolve().then(() => {
-      inputRef.current?.focus();
-      formRef.current?.scrollIntoView({ behavior: 'auto', block: 'nearest' });
-    });
+    // requestAnimationFrame(() => {
+    //   inputRef.current?.focus({ preventScroll: true });
+    // });
+  };
+
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); 
+    handleSubmitLogic();
+  };
+
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+      handleSubmitLogic();
+    }
   };
 
   return (
     <div className="h-full flex flex-col">
       <h3 className="text-xl font-semibold mb-3 text-white flex-shrink-0">Terminal Git Simulado</h3>
-      <div className="bg-black text-sm text-green-400 font-mono p-3 rounded-md flex-grow overflow-y-auto h-full">
+      <div 
+        ref={historyContainerRef}
+        className="bg-black text-sm text-green-400 font-mono p-3 rounded-md flex-grow overflow-y-auto h-full"
+      >
         {history.map((item) => (
           <div key={item.id}>
             {item.type === 'input' && (
@@ -98,11 +98,9 @@ const InteractiveTerminal: React.FC = () => {
             )}
           </div>
         ))}
-        <div ref={terminalEndRef} />
       </div>
       <form 
-        ref={formRef} 
-        onSubmit={handleSubmit} 
+        onSubmit={handleFormSubmit}
         className="mt-2 flex flex-wrap items-center gap-x-1 sm:gap-x-2 flex-shrink-0"
       >
         <div className="flex-shrink-0 py-2">
@@ -113,7 +111,8 @@ const InteractiveTerminal: React.FC = () => {
             ref={inputRef}
             type="text" 
             value={inputValue} 
-            onChange={handleInputChange} 
+            onChange={handleInputChange}
+            onKeyDown={handleInputKeyDown}
             className="flex-grow bg-gray-800 text-green-400 p-2 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-sm"
             placeholder="Digite seu comando..."
             spellCheck="false"
