@@ -1,125 +1,125 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, FormEvent } from 'react';
 
-interface TerminalHistoryItem {
+export interface TerminalHistoryItem {
   id: number;
-  type: 'input' | 'output';
-  content: string;
+  command: string;
+  output: string;
+  pathAtCommand: string[]; // Store path for historic prompts
 }
 
-const InteractiveTerminal: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [history, setHistory] = useState<TerminalHistoryItem[]>([
-    { id: Date.now(), type: 'output', content: 'Bem-vindo ao Terminal Git Simulado! Digite um comando.' }
-  ]);
-  const historyContainerRef = useRef<null | HTMLDivElement>(null);
-  const inputRef = useRef<null | HTMLInputElement>(null);
+// Remove Commit interface - it will be passed via props or defined in a shared types file later
+// interface Commit {
+//   id: string;
+//   message: string;
+//   author: string;
+//   date: string;
+// }
 
-  useEffect(() => {
+interface InteractiveTerminalProps {
+  onProcessCommand: (command: string) => string;
+  currentPath: string[]; // Current path from parent
+}
+
+const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
+  onProcessCommand,  // Prop received from parent
+  currentPath,       // Prop received from parent
+}) => {
+  const [inputValue, setInputValue] = useState('');
+  const [history, setHistory] = useState<TerminalHistoryItem[]>([]);
+  const historyContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const scrollToBottom = () => {
     if (historyContainerRef.current) {
       historyContainerRef.current.scrollTop = historyContainerRef.current.scrollHeight;
     }
-  }, [history]);
+  };
+
+  useEffect(scrollToBottom, [history]);
 
   useEffect(() => {
+    // Focus input on initial load and when terminal becomes visible/interactive
+    // This might need adjustment depending on how the component is mounted/displayed
     inputRef.current?.focus();
   }, []);
 
-  const processCommand = (command: string): string => {
-    if (command.trim().toLowerCase() === 'clear') {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!inputValue.trim()) return;
+
+    const commandToProcess = inputValue.trim();
+    let output = '';
+
+    if (commandToProcess.toLowerCase() === 'clear') {
+      // 'clear' is handled specially by parent to reset git states
+      // but terminal history clear is local
+      onProcessCommand(commandToProcess); // Notify parent to reset its state
       setHistory([]);
-      return ''; 
-    }
-    if (command.trim().toLowerCase() === 'git init') {
-        return 'Initialized empty Git repository in ./.git/';
-    }
-    if (command.trim().toLowerCase() === 'git status') {
-        return 'On branch main\nNo commits yet\nNothing to commit (create/copy files and use "git add" to track)';
-    }
-    return `Comando não reconhecido: ${command}`;
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
-
-  const handleSubmitLogic = () => {
-    const command = inputValue.trim();
-
-    if (!command) {
-      inputRef.current?.focus();
+      setInputValue('');
+      // Focus after a very short delay to ensure DOM is updated and form is visible
+      requestAnimationFrame(() => inputRef.current?.focus());
       return;
     }
 
-    const newCommandId = Date.now();
+    output = onProcessCommand(commandToProcess);
 
-    let tempHistory = [
-      ...history,
-      { id: newCommandId, type: 'input' as 'input' | 'output', content: command },
-    ];
-    const outputMessage = processCommand(command);
-    if (outputMessage) {
-      tempHistory.push({ id: newCommandId + 1, type: 'output', content: outputMessage });
-    }
-    setHistory(tempHistory);
-
+    setHistory(prevHistory => [
+      ...prevHistory,
+      { id: Date.now(), command: inputValue, output, pathAtCommand: [...currentPath] }, // Store currentPath with the command
+    ]);
     setInputValue('');
 
-    // requestAnimationFrame(() => {
-    //   inputRef.current?.focus({ preventScroll: true });
-    // });
+    // Re-focus the input after command submission using a microtask
+    // and preventScroll to avoid page jump if possible
+    Promise.resolve().then(() => {
+        inputRef.current?.focus({ preventScroll: true });
+    });
   };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); 
-    handleSubmitLogic();
-  };
-
-  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault(); 
-      handleSubmitLogic();
-    }
+  const getPathString = (pathArray: string[]): string => {
+    if (pathArray.length === 1 && pathArray[0] === '~') return '~';
+    return pathArray.join('/').replace(/^~\//, '~/'); // Ensure ~/ is at the start if present
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <h3 className="text-xl font-semibold mb-3 text-white flex-shrink-0">Terminal Git Simulado</h3>
-      <div 
-        ref={historyContainerRef}
-        className="bg-black text-sm text-green-400 font-mono p-3 rounded-md flex-grow overflow-y-auto h-full"
-      >
-        {history.map((item) => (
+    <div className="h-full flex flex-col bg-github-code-bg rounded-lg font-mono text-sm text-gray-300">
+      <div ref={historyContainerRef} className="flex-grow overflow-y-auto p-2 space-y-1">
+        {history.map(item => (
           <div key={item.id}>
-            {item.type === 'input' && (
-              <p><span className="text-blue-400">user@gitsheet</span>:<span className="text-purple-400">~</span>$ {item.content}</p>
-            )}
-            {item.type === 'output' && (
-              <p className="whitespace-pre-wrap">{item.content}</p>
+            <div className="flex">
+              <span className="text-green-400">user@gitsheet:</span>
+              <span className="text-blue-400">{getPathString(item.pathAtCommand)}</span> 
+              <span className="text-gray-300">$</span>
+              <span className="pl-2">{item.command}</span>
+            </div>
+            {item.output && (
+              <div className="whitespace-pre-wrap text-gray-300">{item.output}</div>
             )}
           </div>
         ))}
+         {/* Anchor for scrolling to bottom, if needed, though direct scrollTop manipulation is used */}
       </div>
-      <form 
-        onSubmit={handleFormSubmit}
-        className="mt-2 flex flex-wrap items-center gap-x-1 sm:gap-x-2 flex-shrink-0"
-      >
-        <div className="flex-shrink-0 py-2">
-          <span className="text-blue-400">user@gitsheet</span><span className="text-purple-400">:~$</span>
-        </div>
-        <div className="flex-grow flex min-w-[180px] sm:min-w-[250px]">
-          <input 
+      <form ref={formRef} onSubmit={handleSubmit} className="flex-shrink-0 p-2 border-t border-slate-700">
+        <div className="flex items-center flex-wrap gap-x-2">
+          <label htmlFor="commandInput" className="flex-shrink-0">
+            <span className="text-green-400">user@gitsheet:</span>
+            <span className="text-blue-400">{getPathString(currentPath)}</span>
+            <span className="text-gray-300">$</span>
+          </label>
+          <input
+            id="commandInput"
             ref={inputRef}
-            type="text" 
-            value={inputValue} 
-            onChange={handleInputChange}
-            onKeyDown={handleInputKeyDown}
-            className="flex-grow bg-gray-800 text-green-400 p-2 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-sm"
-            placeholder="Digite seu comando..."
+            type="text"
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+            className="flex-grow bg-transparent text-gray-300 outline-none min-w-[100px]"
+            autoComplete="off"
             spellCheck="false"
           />
           <button 
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900 text-sm whitespace-nowrap"
+            type="submit" 
+            className="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1 rounded text-xs flex-shrink-0"
           >
             Send
           </button>

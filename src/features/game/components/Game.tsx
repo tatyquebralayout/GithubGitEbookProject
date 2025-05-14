@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   TerminalIcon,
   PeopleIcon,
@@ -8,50 +8,6 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import MermaidDiagram from '../../../components/common/MermaidDiagram';
 import AuthorProfiles from '../../../components/common/AuthorProfiles';
-
-interface Challenge {
-  id: number;
-  title: string;
-  description: string;
-  command: string;
-  hint: string;
-  solution: string;
-  points: number;
-  category: 'basic' | 'intermediate' | 'advanced';
-}
-
-const challenges: Challenge[] = [
-  {
-    id: 1,
-    title: "Iniciando um Repositório",
-    description: "Crie um novo repositório Git no diretório atual.",
-    command: "git ____",
-    hint: "Este comando inicializa um novo repositório Git",
-    solution: "git init",
-    points: 10,
-    category: 'basic'
-  },
-  {
-    id: 2,
-    title: "Adicionando Arquivos",
-    description: "Adicione todos os arquivos ao staging area.",
-    command: "git ___ .",
-    hint: "Este comando adiciona arquivos ao staging area",
-    solution: "git add",
-    points: 10,
-    category: 'basic'
-  },
-  {
-    id: 3,
-    title: "Criando um Commit",
-    description: 'Crie um commit com a mensagem "Initial commit".',
-    command: 'git ______ -m "Initial commit"',
-    hint: "Este comando cria um novo commit com as mudanças staged",
-    solution: "git commit",
-    points: 15,
-    category: 'basic'
-  }
-];
 
 // Define author data for this component's context
 const gameAuthors = [
@@ -91,39 +47,6 @@ const ChallengeBadge: React.FC<{ type: string; text: string }> = ({ type, text }
 };
 
 const Game: React.FC = () => {
-  const [currentChallenge, setCurrentChallenge] = useState(0);
-  const [userAnswer, setUserAnswer] = useState('');
-  const [score, setScore] = useState(0);
-  const [showHint, setShowHint] = useState(false);
-  const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
-  const [streakCount, setStreakCount] = useState(0);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const isCorrect = userAnswer.trim().toLowerCase() === challenges[currentChallenge].solution.toLowerCase();
-    
-    if (isCorrect) {
-      setScore(prev => prev + challenges[currentChallenge].points);
-      setStreakCount(prev => prev + 1);
-      setFeedback('correct');
-      
-      setTimeout(() => {
-        if (currentChallenge < challenges.length - 1) {
-          setCurrentChallenge(prev => prev + 1);
-          setUserAnswer('');
-          setFeedback(null);
-          setShowHint(false);
-        }
-      }, 1500);
-    } else {
-      setStreakCount(0);
-      setFeedback('incorrect');
-    }
-  };
-
-  const challenge = challenges[currentChallenge];
-
   return (
     <div className="space-y-24">
       {/* Hero Banner */}
@@ -207,78 +130,6 @@ const Game: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Interactive Challenge Section */}
-      {/* {challenge && (
-        <section className="py-16 bg-github-canvas">
-          <div className="container mx-auto px-4">
-            <div className="gh-card max-w-2xl mx-auto p-6 md:p-8">
-              <h3 className="text-xl font-semibold text-github-fg-default mb-2">{challenge.title}</h3>
-              <p className="text-github-fg-muted mb-4">{challenge.description}</p>
-              <pre className="bg-github-canvas-inset p-4 rounded-md text-github-fg-default mb-6 overflow-x-auto">
-                <code>{challenge.command}</code>
-              </pre>
-              
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="userAnswer" className="block text-sm font-medium text-github-fg-muted mb-1">
-                    Sua Resposta:
-                  </label>
-                  <input
-                    type="text"
-                    id="userAnswer"
-                    name="userAnswer"
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    className="gh-input w-full"
-                    placeholder="Digite o comando aqui..."
-                  />
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <button
-                    type="submit"
-                    className="gh-button gh-button-primary w-full sm:w-auto"
-                  >
-                    Verificar Resposta
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowHint(prev => !prev)}
-                    className="gh-button gh-button-secondary w-full sm:w-auto"
-                  >
-                    {showHint ? 'Esconder Dica' : 'Mostrar Dica'}
-                  </button>
-                </div>
-              </form>
-
-              {showHint && (
-                <div className="mt-6 p-4 bg-github-canvas-inset rounded-md">
-                  <p className="text-sm text-github-fg-default"><span className="font-semibold">Dica:</span> {challenge.hint}</p>
-                </div>
-              )}
-
-              {feedback && (
-                <div className={`mt-6 p-4 rounded-md text-sm ${
-                  feedback === 'correct' 
-                    ? 'bg-github-success-subtle text-github-success-fg' 
-                    : 'bg-github-danger-subtle text-github-danger-fg'
-                }`}>
-                  {feedback === 'correct' ? '🎉 Correto! Ótimo trabalho!' : '❌ Incorreto. Tente novamente!'}
-                </div>
-              )}
-              
-              <div className="mt-8 text-center">
-                <p className="text-lg font-semibold text-github-fg-default">Pontuação: {score}</p>
-                {streakCount > 0 && (
-                  <p className="text-sm text-github-fg-muted mt-1">
-                    Sequência de acertos: {streakCount}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-      )} */}
 
       {/* Video Section */}
       <section className="py-16 bg-github-canvas-subtle">
