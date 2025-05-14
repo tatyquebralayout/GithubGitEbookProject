@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { File, GitBranch, GitCommit, Search, Github, Twitter, Mail, Globe, Instagram, Linkedin, Terminal, Users, Award, Code, Target, GitMerge, Star, UserCircle, GitPullRequest, History, Trash, Key, Lock } from 'lucide-react';
+import { File, GitBranch, GitCommit, Search, Github, /* Twitter, */ Mail, Globe, Instagram, Linkedin, Terminal, Users, Award, Code, Target, GitMerge, Star, UserCircle, GitPullRequest, History, Trash, Key, Lock } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface Challenge {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Twitter, Linkedin, Mail, Globe, BookOpen, Users, Award, Heart, GitBranch, Code, Target } from 'lucide-react';
+import { Github, /* Twitter, */ Linkedin, Mail, Globe, BookOpen, Users, Award, Heart, GitBranch, Code, Target } from 'lucide-react';
 
 const AboutAuthor: React.FC = () => {
   return (
@@ -31,8 +31,9 @@ const AboutAuthor: React.FC = () => {
             <a href="#" aria-label="Github" className="text-white/80 hover:text-white transition-colors">
               <Github className="h-6 w-6" />
             </a>
-            <a href="#" aria-label="Twitter" className="text-white/80 hover:text-white transition-colors">
-              <Twitter className="h-6 w-6" />
+            <a href="#" aria-label="X" className="text-white/80 hover:text-white transition-colors">
+              {/* <Twitter className="h-6 w-6" /> */}
+              <span className="h-6 w-6 flex items-center justify-center font-bold">X</span>
             </a>
             <a href="#" aria-label="LinkedIn" className="text-white/80 hover:text-white transition-colors">
               <Linkedin className="h-6 w-6" />

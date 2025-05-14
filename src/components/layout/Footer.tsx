@@ -1,5 +1,5 @@
 import React from 'react';
-import { GitBranch, Github, Twitter, Linkedin, Mail, Globe, Instagram } from 'lucide-react';
+import { GitBranch, Github, /* Twitter, */ Linkedin, Mail, Globe, Instagram } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -48,8 +48,8 @@ const Footer: React.FC = () => {
                 <a href="#" aria-label="GitHub de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
                   <Github className="h-5 w-5" />
                 </a>
-                <a href="#" aria-label="Twitter de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
-                  <Twitter className="h-5 w-5" />
+                <a href="#" aria-label="X de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
+                  <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
                 </a>
                 <a href="#" aria-label="LinkedIn de Julia Santos" className="text-gray-400 hover:text-white transition-colors">
                   <Linkedin className="h-5 w-5" />

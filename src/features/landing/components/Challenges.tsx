@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Twitter, Mail, Globe, Instagram, Linkedin } from 'lucide-react';
+import { Github, /* Twitter, */ Mail, Globe, Instagram, Linkedin } from 'lucide-react';
 
 const Challenges: React.FC = () => {
   return (
@@ -29,8 +29,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Julia Santos" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Julia Santos" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Julia Santos" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Instagram de Julia Santos" className="text-gray-600 hover:text-red-500 transition-colors">
                 <Instagram className="h-5 w-5" />
@@ -55,8 +55,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Pedro Alves" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Pedro Alves" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Pedro Alves" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Email de Pedro Alves" className="text-gray-600 hover:text-blue-500 transition-colors">
                 <Mail className="h-5 w-5" />
@@ -78,8 +78,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Ana Silva" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Ana Silva" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Ana Silva" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Instagram de Ana Silva" className="text-gray-600 hover:text-red-500 transition-colors">
                 <Instagram className="h-5 w-5" />
@@ -101,8 +101,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Lucas Oliveira" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Lucas Oliveira" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Lucas Oliveira" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Site de Lucas Oliveira" className="text-gray-600 hover:text-green-600 transition-colors">
                 <Globe className="h-5 w-5" />
@@ -121,8 +121,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Mariana Costa" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Instagram de Mariana Costa" className="text-gray-600 hover:text-red-500 transition-colors">
-                <Instagram className="h-5 w-5" />
+              <a href="#" aria-label="X de Mariana Costa" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Email de Mariana Costa" className="text-gray-600 hover:text-blue-500 transition-colors">
                 <Mail className="h-5 w-5" />
@@ -144,8 +144,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Rafael Santos" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Rafael Santos" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Rafael Santos" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Email de Rafael Santos" className="text-gray-600 hover:text-blue-500 transition-colors">
                 <Mail className="h-5 w-5" />
@@ -164,8 +164,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Isabela Lima" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Isabela Lima" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Isabela Lima" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Site de Isabela Lima" className="text-gray-600 hover:text-green-600 transition-colors">
                 <Globe className="h-5 w-5" />
@@ -184,8 +184,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Gabriel Ferreira" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Instagram de Gabriel Ferreira" className="text-gray-600 hover:text-red-500 transition-colors">
-                <Instagram className="h-5 w-5" />
+              <a href="#" aria-label="X de Gabriel Ferreira" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Email de Gabriel Ferreira" className="text-gray-600 hover:text-blue-500 transition-colors">
                 <Mail className="h-5 w-5" />
@@ -204,8 +204,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Carolina Mendes" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Carolina Mendes" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Carolina Mendes" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Site de Carolina Mendes" className="text-gray-600 hover:text-green-600 transition-colors">
                 <Globe className="h-5 w-5" />
@@ -224,8 +224,8 @@ const Challenges: React.FC = () => {
               <a href="#" aria-label="LinkedIn de Thiago Martins" className="text-gray-600 hover:text-blue-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter de Thiago Martins" className="text-gray-600 hover:text-gray-900 transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" aria-label="X de Thiago Martins" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <span className="h-5 w-5 flex items-center justify-center font-bold">X</span>
               </a>
               <a href="#" aria-label="Instagram de Thiago Martins" className="text-gray-600 hover:text-red-500 transition-colors">
                 <Instagram className="h-5 w-5" />
