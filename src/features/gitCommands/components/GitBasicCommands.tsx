@@ -1,13 +1,13 @@
 import React from 'react';
 import { Terminal, GitBranch, GitCommit } from 'lucide-react';
+import AuthorProfiles from '../../../components/common/AuthorProfiles';
 
-const AuthorProfiles: React.FC = () => (
-  <div className="flex -space-x-2">
-    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Autor 1" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Autor 2" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg" alt="Autor 3" className="w-8 h-8 rounded-full border-2 border-white" />
-  </div>
-);
+// Define author data for this component's context
+const basicCommandsAuthors = [
+  { src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg", alt: "Autor 1" },
+  { src: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg", alt: "Autor 2" },
+  { src: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg", alt: "Autor 3" },
+];
 
 const ChallengeBadge: React.FC<{ type: string; text: string }> = ({ type, text }) => {
   const baseClasses = "gh-badge transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer";
@@ -78,35 +78,35 @@ const GitBasicCommands: React.FC = () => {
                       <td className="font-mono">git init</td>
                       <td>Inicializa um novo repositório Git</td>
                       <td className="font-mono text-sm">git init meu-projeto</td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={basicCommandsAuthors} /></td>
                       <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
                       <td className="font-mono">git add</td>
                       <td>Adiciona arquivos ao staging area</td>
                       <td className="font-mono text-sm">git add .</td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={basicCommandsAuthors} /></td>
                       <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
                       <td className="font-mono">git commit</td>
                       <td>Cria um novo commit com as mudanças</td>
                       <td className="font-mono text-sm">git commit -m "feat: nova feature"</td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={basicCommandsAuthors} /></td>
                       <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
                       <td className="font-mono">git status</td>
                       <td>Mostra o estado dos arquivos</td>
                       <td className="font-mono text-sm">git status</td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={basicCommandsAuthors} /></td>
                       <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
                       <td className="font-mono">git log</td>
                       <td>Mostra o histórico de commits</td>
                       <td className="font-mono text-sm">git log --oneline</td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={basicCommandsAuthors} /></td>
                       <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                   </tbody>

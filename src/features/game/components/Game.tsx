@@ -7,6 +7,7 @@ import {
 } from '@primer/octicons-react';
 import { Link, useNavigate } from 'react-router-dom';
 import MermaidDiagram from '../../../components/common/MermaidDiagram';
+import AuthorProfiles from '../../../components/common/AuthorProfiles';
 
 interface Challenge {
   id: number;
@@ -52,16 +53,15 @@ const challenges: Challenge[] = [
   }
 ];
 
-const AuthorProfiles: React.FC = () => (
-  <div className="flex -space-x-2">
-    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Autor 1" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Autor 2" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg" alt="Autor 3" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg" alt="Autor 4" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Autor 5" className="w-8 h-8 rounded-full border-2 border-white" />
-    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg" alt="Autor 6" className="w-8 h-8 rounded-full border-2 border-white" />
-  </div>
-);
+// Define author data for this component's context
+const gameAuthors = [
+  { src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg", alt: "Autor 1" },
+  { src: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg", alt: "Autor 2" },
+  { src: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg", alt: "Autor 3" },
+  { src: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg", alt: "Autor 4" },
+  { src: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg", alt: "Autor 5" },
+  { src: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg", alt: "Autor 6" },
+];
 
 const ChallengeBadge: React.FC<{ type: string; text: string }> = ({ type, text }) => {
   const navigate = useNavigate();
@@ -331,42 +331,42 @@ const Game: React.FC = () => {
                   <tbody>
                     <tr>
                       <td className="font-mono p-3">git init</td>
-                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitInitDiagram" chart={`graph TD; A("git init") --> B(".git directory");`} /></td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitInitDiagram" chart={"graph TD; A(\"git init\") --> B(\".git directory\");"} /></td>
                       <td className="p-3">Inicializa um novo repositório Git.</td>
                       <td className="p-3"><Link to="/game/basic-commands#init" className="gh-link">Cap. 1: Setup</Link></td>
-                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><AuthorProfiles authors={gameAuthors} /></td>
                       <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
                       <td className="font-mono p-3">git clone [url]</td>
-                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitCloneDiagram" chart={`graph TD; A("git clone URL") --> B("Local Copy");`} /></td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitCloneDiagram" chart={"graph TD; A(\"git clone URL\") --> B(\"Local Copy\");"} /></td>
                       <td className="p-3">Clona um repositório existente.</td>
                       <td className="p-3"><Link to="/game/basic-commands#clone" className="gh-link">Cap. 1: Setup</Link></td>
-                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><AuthorProfiles authors={gameAuthors} /></td>
                       <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
                       <td className="font-mono p-3">git add [file]</td>
-                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitAddDiagram" chart={`graph TD; WD["Working Dir"] -- git add file --> SA["Staging Area"];`} /></td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitAddDiagram" chart={"graph TD; WD[\"Working Dir\"] -- git add file --> SA[\"Staging Area\"];"} /></td>
                       <td className="p-3">Adiciona arquivos ao staging area.</td>
                       <td className="p-3"><Link to="/game/basic-commands#add" className="gh-link">Cap. 2: Mudanças</Link></td>
-                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><AuthorProfiles authors={gameAuthors} /></td>
                       <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                      <tr>
                       <td className="font-mono p-3">git commit -m "[message]"</td>
-                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitCommitDiagram" chart={`graph TD; SA["Staging Area"] -- "git commit" --> LR["Local Repo"];`} /></td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitCommitDiagram" chart={"graph TD; SA[\"Staging Area\"] -- \"git commit\" --> LR[\"Local Repo\"];"} /></td>
                       <td className="p-3">Salva as mudanças no repositório.</td>
                       <td className="p-3"><Link to="/game/basic-commands#commit" className="gh-link">Cap. 2: Mudanças</Link></td>
-                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><AuthorProfiles authors={gameAuthors} /></td>
                       <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
                       <td className="font-mono p-3">git status</td>
-                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitStatusDiagram" chart={`graph TD; C["git status"] --> WS["Working Dir State"]; C --> SS["Staging Area State"];`} /></td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitStatusDiagram" chart={"graph TD; C[\"git status\"] --> WS[\"Working Dir State\"]; C --> SS[\"Staging Area State\"];"} /></td>
                       <td className="p-3">Mostra o estado das mudanças.</td>
                       <td className="p-3"><Link to="/game/basic-commands#status" className="gh-link">Cap. 2: Mudanças</Link></td>
-                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><AuthorProfiles authors={gameAuthors} /></td>
                       <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     </tbody>
@@ -399,7 +399,7 @@ const Game: React.FC = () => {
                           Cap. 3: Branches
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="intermediate" text="Intermediário" /></td>
                     </tr>
                     <tr>
@@ -410,7 +410,7 @@ const Game: React.FC = () => {
                           Cap. 3: Branches
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="intermediate" text="Intermediário" /></td>
                     </tr>
                     <tr>
@@ -421,7 +421,7 @@ const Game: React.FC = () => {
                           Cap. 3: Branches
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="intermediate" text="Intermediário" /></td>
                     </tr>
                     <tr>
@@ -432,7 +432,7 @@ const Game: React.FC = () => {
                           Cap. 4: Merging
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="intermediate" text="Intermediário" /></td>
                     </tr>
                     <tr>
@@ -443,7 +443,7 @@ const Game: React.FC = () => {
                           Cap. 5: Remotos
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="intermediate" text="Intermediário" /></td>
                     </tr>
                     <tr>
@@ -454,7 +454,7 @@ const Game: React.FC = () => {
                           Cap. 5: Remotos
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="intermediate" text="Intermediário" /></td>
                     </tr>
                   </tbody>
@@ -487,7 +487,7 @@ const Game: React.FC = () => {
                           Cap. 6: Rebase
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="advanced" text="Avançado" /></td>
                     </tr>
                     <tr>
@@ -498,7 +498,7 @@ const Game: React.FC = () => {
                           Cap. 7: Stash
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="advanced" text="Avançado" /></td>
                     </tr>
                     <tr>
@@ -509,7 +509,7 @@ const Game: React.FC = () => {
                           Cap. 8: Cherry-pick
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="advanced" text="Avançado" /></td>
                     </tr>
                      <tr>
@@ -520,7 +520,7 @@ const Game: React.FC = () => {
                           Cap. 9: Histórico
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="advanced" text="Avançado" /></td>
                     </tr>
                      <tr>
@@ -531,7 +531,7 @@ const Game: React.FC = () => {
                           Cap. 10: Reset
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="advanced" text="Avançado" /></td>
                     </tr>
                     <tr>
@@ -542,7 +542,7 @@ const Game: React.FC = () => {
                           Cap. 11: Tags
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="advanced" text="Avançado" /></td>
                     </tr>
                   </tbody>
@@ -575,7 +575,7 @@ const Game: React.FC = () => {
                           Cap. 12: GitHub PRs
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="github" text="GitHub" /></td>
                     </tr>
                     <tr>
@@ -586,7 +586,7 @@ const Game: React.FC = () => {
                           Cap. 13: GitHub Issues
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="github" text="GitHub" /></td>
                     </tr>
                     <tr>
@@ -597,7 +597,7 @@ const Game: React.FC = () => {
                           Cap. 14: GitHub Forks
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="github" text="GitHub" /></td>
                     </tr>
                   </tbody>
@@ -630,7 +630,7 @@ const Game: React.FC = () => {
                           Cap. 15: Debugging
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="pro" text="Pro" /></td>
                     </tr>
                     <tr>
@@ -641,7 +641,7 @@ const Game: React.FC = () => {
                           Cap. 16: Análise
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="pro" text="Pro" /></td>
                     </tr>
                     <tr>
@@ -652,7 +652,7 @@ const Game: React.FC = () => {
                           Cap. 17: Recuperação
                         </Link>
                       </td>
-                      <td><AuthorProfiles /></td>
+                      <td><AuthorProfiles authors={gameAuthors} /></td>
                       <td><ChallengeBadge type="pro" text="Pro" /></td>
                     </tr>
                   </tbody>
