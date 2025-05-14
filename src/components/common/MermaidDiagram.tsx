@@ -37,7 +37,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => 
           mermaidRef.current.innerHTML = '';
 
           // Remover logs de depuração excessivos, mantendo apenas a limpeza de caracteres especiais
-          const cleanedChart = chart.replace(/^[\x00-\x1F\x7F-\x9F\u200B-\u200D\uFEFF]+/, '');
+          const cleanedChart = chart.replace(/[^\x20-\x7E]/g, ''); // Remove caracteres não imprimíveis
           
           // Renderizar a versão limpa
           const { svg, bindFunctions } = await mermaid.render(diagramId, cleanedChart);

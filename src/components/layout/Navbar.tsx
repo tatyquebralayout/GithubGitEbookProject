@@ -103,16 +103,14 @@ const Navbar: React.FC = () => {
             ref={gameMenuRef}
             className="relative"
           >
-            <Link 
-              to="/game"
+            <button 
               className={`${linkClass} transition-colors inline-flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-blue-500 focus:ring-offset-white' : 'focus:ring-blue-300 focus:ring-offset-gray-900'}`}
               onClick={() => {
-                navigate('/game');
                 setIsGameMenuOpen(prev => !prev);
               }}
             >
               Jogo
-            </Link>
+            </button>
             {isGameMenuOpen && (
               <div 
                 className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50"
@@ -244,56 +242,70 @@ const Navbar: React.FC = () => {
             Patrocinadores
           </button>
           <div className="space-y-2">
-            <Link 
-              to="/game" 
-              className="text-gray-700 hover:text-blue-600 transition-colors block focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+            <button 
+              className="text-gray-700 hover:text-blue-600 transition-colors block focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white w-full text-left"
               onClick={() => {
-                setIsMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Toggle mobile submenu
+                const mobileSubmenu = document.getElementById('mobile-game-submenu');
+                if (mobileSubmenu) {
+                  mobileSubmenu.classList.toggle('hidden');
+                }
               }}
             >
               Jogo
-            </Link>
-            <Link
-              to="/game/basic-commands"
-              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
-              onClick={() => {
-                setIsMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              Comandos Básicos do Git
-            </Link>
-            <Link
-              to="/game/intermediate-commands"
-              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
-              onClick={() => {
-                setIsMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              Comandos Intermediários do Git
-            </Link>
-            <Link
-              to="/game/advanced-commands"
-              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
-              onClick={() => {
-                setIsMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              Comandos Avançados do Git
-            </Link>
-            <Link
-              to="/game/github-commands"
-              className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
-              onClick={() => {
-                setIsMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            >
-              Comandos GitHub CLI
-            </Link>
+            </button>
+            <div id="mobile-game-submenu" className="hidden">
+              <Link
+                to="/game/basic-commands"
+                className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Comandos Básicos do Git
+              </Link>
+              <Link
+                to="/game/intermediate-commands"
+                className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Comandos Intermediários do Git
+              </Link>
+              <Link
+                to="/game/advanced-commands"
+                className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Comandos Avançados do Git
+              </Link>
+              <Link
+                to="/game/github-commands"
+                className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Comandos GitHub CLI
+              </Link>
+              <Link
+                to="/game"
+                className="text-gray-700 hover:text-blue-600 transition-colors block pl-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Visão Geral do Jogo
+              </Link>
+            </div>
           </div>
           <Link 
             to="/about-author" 

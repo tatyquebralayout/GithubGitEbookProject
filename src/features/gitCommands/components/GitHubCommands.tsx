@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Terminal, Github, GitMerge, File, Linkedin, Globe } from 'lucide-react';
-import { gitCommandsData } from '../../../features/game/data/commandsData';
+import { Github, GitMerge, File, Linkedin, Globe } from 'lucide-react';
+import { gitCommandsData, CommandCategory } from '../../../features/game/data/commandsData';
 import MermaidDiagram from '../../../components/common/MermaidDiagram';
 import PracticeChallengeSection from './practiceChallenge/PracticeChallengeSection';
+import { CommandData } from '../../../features/game/components/CommandTableRow';
 
 // Define a type for our author objects for better type safety
 interface AuthorProfileData {
@@ -64,7 +65,7 @@ const githubCommandsIntroAuthors: AuthorProfileData[] = [
 
 const GitHubCommands: React.FC = () => {
   // Obter apenas os comandos GitHub do gitCommandsData
-  const githubCommands = gitCommandsData.find(category => category.title === "Comandos GitHub")?.commands || [];
+  const githubCommands = gitCommandsData.find((category: CommandCategory) => category.title === "Comandos GitHub")?.commands || [];
   
   const [selectedAuthor, setSelectedAuthor] = useState<AuthorProfileData | null>(
     githubCommandsIntroAuthors.find(author => author.alt.includes("Ricardo Alves")) || githubCommandsIntroAuthors[0] || null
@@ -145,9 +146,9 @@ const GitHubCommands: React.FC = () => {
                 <span className="text-sm font-medium">Comandos GitHub (CLI)</span>
               </div>
               <div className="gh-card-body space-y-6">
-                {githubCommands.map((command, index) => {
+                {githubCommands.map((command: CommandData, index: number) => {
                   // Gerar um ID único para cada diagrama
-                  const diagramId = `github-command-${index}-${command.name.replace(/[\s\[\]]/g, '-')}`;
+                  const diagramId = `github-command-${index}-${command.name.replace(/[\s[\]]/g, '-')}`;
                   
                   return (
                     <div key={index} className="border-b border-gray-200 pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">

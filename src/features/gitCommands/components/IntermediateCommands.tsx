@@ -146,7 +146,7 @@ const IntermediateCommands: React.FC = () => {
               <div className="gh-card-body space-y-6">
                 {intermediateCommands.map((command, index) => {
                   // Gerar um ID único para cada diagrama
-                  const diagramId = `intermediate-command-${index}-${command.name.replace(/[\s\[\]]/g, '-')}`;
+                  const diagramId = `intermediate-command-${index}-${command.name.replace(/[\s[\]]/g, '-')}`;
                   
                   return (
                     <div key={index} className="border-b border-gray-200 pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
