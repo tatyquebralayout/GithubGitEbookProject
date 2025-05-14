@@ -11,9 +11,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default [
+  {
+    ignores: ['dist/**/', 'eslint-js.d.ts']
+  },
   js.configs.recommended,
   {
-    ignores: ['dist/**/*'],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -46,7 +48,7 @@ export default [
       'react-hooks/exhaustive-deps': 'warn',
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExports: true }
+        { allowConstantExport: true }
       ]
     }
   }

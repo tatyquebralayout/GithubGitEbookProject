@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { File, GitBranch, GitCommit, Search, Github, /* Twitter, */ Mail, Globe, Instagram, Linkedin, Terminal, Users, Award, Code, Target, GitMerge, Star, UserCircle, GitPullRequest, History, Trash, Key, Lock } from 'lucide-react';
+import {
+  TerminalIcon,
+  PeopleIcon,
+  CodeIcon,
+  GoalIcon
+} from '@primer/octicons-react';
 import { Link, useNavigate } from 'react-router-dom';
+import MermaidDiagram from '../../../components/common/MermaidDiagram';
 
 interface Challenge {
   id: number;
@@ -169,7 +175,7 @@ const Game: React.FC = () => {
             {/* Card 1 - Choose Command */}
             <div className="gh-card p-8 text-center hover:shadow-lg transition-shadow">
               <div className="bg-github-accent-subtle rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Code className="h-8 w-8 text-github-accent-fg" />
+                <CodeIcon size={24} className="text-github-accent-fg" />
               </div>
               <h3 className="text-xl font-bold text-github-fg-default mb-4">1° Escolha O Comando</h3>
               <p className="text-github-fg-muted">
@@ -180,7 +186,7 @@ const Game: React.FC = () => {
             {/* Card 2 - Choose Authors */}
             <div className="gh-card p-8 text-center hover:shadow-lg transition-shadow">
               <div className="bg-github-success-subtle rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <UserCircle className="h-8 w-8 text-github-success-fg" />
+                <PeopleIcon size={24} className="text-github-success-fg" />
               </div>
               <h3 className="text-xl font-bold text-github-fg-default mb-4">2° Escolha o Autor(es)</h3>
               <p className="text-github-fg-muted">
@@ -191,7 +197,7 @@ const Game: React.FC = () => {
             {/* Card 3 - Choose Difficulty */}
             <div className="gh-card p-8 text-center hover:shadow-lg transition-shadow">
               <div className="bg-github-attention-subtle rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                <Target className="h-8 w-8 text-github-attention-fg" />
+                <GoalIcon size={24} className="text-github-attention-fg" />
               </div>
               <h3 className="text-xl font-bold text-github-fg-default mb-4">3° Escolha a Dificuldade</h3>
               <p className="text-github-fg-muted">
@@ -201,6 +207,82 @@ const Game: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Interactive Challenge Section */}
+      {challenge && (
+        <section className="py-16 bg-github-canvas">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-github-fg-default">Desafio Atual</h2>
+              <p className="text-github-fg-muted">Complete o comando Git abaixo.</p>
+            </div>
+            <div className="gh-card max-w-2xl mx-auto p-6 md:p-8">
+              <h3 className="text-xl font-semibold text-github-fg-default mb-2">{challenge.title}</h3>
+              <p className="text-github-fg-muted mb-4">{challenge.description}</p>
+              <pre className="bg-github-canvas-inset p-4 rounded-md text-github-fg-default mb-6 overflow-x-auto">
+                <code>{challenge.command}</code>
+              </pre>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="userAnswer" className="block text-sm font-medium text-github-fg-muted mb-1">
+                    Sua Resposta:
+                  </label>
+                  <input
+                    type="text"
+                    id="userAnswer"
+                    name="userAnswer"
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    className="gh-input w-full"
+                    placeholder="Digite o comando aqui..."
+                  />
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <button
+                    type="submit"
+                    className="gh-button gh-button-primary w-full sm:w-auto"
+                  >
+                    Verificar Resposta
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowHint(prev => !prev)}
+                    className="gh-button gh-button-secondary w-full sm:w-auto"
+                  >
+                    {showHint ? 'Esconder Dica' : 'Mostrar Dica'}
+                  </button>
+                </div>
+              </form>
+
+              {showHint && (
+                <div className="mt-6 p-4 bg-github-canvas-inset rounded-md">
+                  <p className="text-sm text-github-fg-default"><span className="font-semibold">Dica:</span> {challenge.hint}</p>
+                </div>
+              )}
+
+              {feedback && (
+                <div className={`mt-6 p-4 rounded-md text-sm ${
+                  feedback === 'correct' 
+                    ? 'bg-github-success-subtle text-github-success-fg' 
+                    : 'bg-github-danger-subtle text-github-danger-fg'
+                }`}>
+                  {feedback === 'correct' ? '🎉 Correto! Ótimo trabalho!' : '❌ Incorreto. Tente novamente!'}
+                </div>
+              )}
+              
+              <div className="mt-8 text-center">
+                <p className="text-lg font-semibold text-github-fg-default">Pontuação: {score}</p>
+                {streakCount > 0 && (
+                  <p className="text-sm text-github-fg-muted mt-1">
+                    Sequência de acertos: {streakCount}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Video Section */}
       <section className="py-16 bg-github-canvas-subtle">
@@ -213,7 +295,7 @@ const Game: React.FC = () => {
             <div className="gh-card">
               <div className="aspect-w-16 aspect-h-9 bg-github-canvas-subtle rounded-lg flex items-center justify-center">
                 <div className="text-center">
-                  <Terminal className="h-12 w-12 text-github-fg-muted mx-auto mb-4" />
+                  <TerminalIcon size={32} className="text-github-fg-muted mx-auto mb-4" />
                   <p className="text-github-fg-muted">Vídeo explicativo em breve</p>
                 </div>
               </div>
@@ -235,71 +317,57 @@ const Game: React.FC = () => {
             <h3 className="text-2xl font-bold text-github-fg-default mb-6">Comandos Básicos</h3>
             <div className="gh-card">
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full text-sm">
                   <thead>
-                    <tr>
-                      <th>Comando</th>
-                      <th>Descrição</th>
-                      <th>Capítulo</th>
-                      <th>Autores</th>
-                      <th>Dificuldade</th>
+                    <tr className="text-left">
+                      <th className="p-3">Comando</th>
+                      <th className="p-3">Visualização</th>
+                      <th className="p-3">Descrição</th>
+                      <th className="p-3">Capítulo</th>
+                      <th className="p-3">Autores</th>
+                      <th className="p-3">Dificuldade</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="font-mono">git init</td>
-                      <td>Inicializa um novo repositório Git.</td>
-                      <td>
-                        <Link to="/game/basic-commands#init" className="gh-link">
-                          Cap. 1: Setup
-                        </Link>
-                      </td>
-                      <td><AuthorProfiles /></td>
-                      <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
+                      <td className="font-mono p-3">git init</td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitInitDiagram" chart={`graph TD; A("git init") --> B(".git directory");`} /></td>
+                      <td className="p-3">Inicializa um novo repositório Git.</td>
+                      <td className="p-3"><Link to="/game/basic-commands#init" className="gh-link">Cap. 1: Setup</Link></td>
+                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
-                      <td className="font-mono">git clone [url]</td>
-                      <td>Clona um repositório existente.</td>
-                      <td>
-                        <Link to="/game/basic-commands#clone" className="gh-link">
-                          Cap. 1: Setup
-                        </Link>
-                      </td>
-                      <td><AuthorProfiles /></td>
-                      <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
+                      <td className="font-mono p-3">git clone [url]</td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitCloneDiagram" chart={`graph TD; A("git clone URL") --> B("Local Copy");`} /></td>
+                      <td className="p-3">Clona um repositório existente.</td>
+                      <td className="p-3"><Link to="/game/basic-commands#clone" className="gh-link">Cap. 1: Setup</Link></td>
+                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
-                      <td className="font-mono">git add [file]</td>
-                      <td>Adiciona arquivos ao staging area.</td>
-                      <td>
-                        <Link to="/game/basic-commands#add" className="gh-link">
-                          Cap. 2: Mudanças
-                        </Link>
-                      </td>
-                      <td><AuthorProfiles /></td>
-                      <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
+                      <td className="font-mono p-3">git add [file]</td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitAddDiagram" chart={`graph TD; WD["Working Dir"] -- git add file --> SA["Staging Area"];`} /></td>
+                      <td className="p-3">Adiciona arquivos ao staging area.</td>
+                      <td className="p-3"><Link to="/game/basic-commands#add" className="gh-link">Cap. 2: Mudanças</Link></td>
+                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                      <tr>
-                      <td className="font-mono">git commit -m "[message]"</td>
-                      <td>Salva as mudanças no repositório.</td>
-                      <td>
-                        <Link to="/game/basic-commands#commit" className="gh-link">
-                          Cap. 2: Mudanças
-                        </Link>
-                      </td>
-                      <td><AuthorProfiles /></td>
-                      <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
+                      <td className="font-mono p-3">git commit -m "[message]"</td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitCommitDiagram" chart={`graph TD; SA["Staging Area"] -- "git commit" --> LR["Local Repo"];`} /></td>
+                      <td className="p-3">Salva as mudanças no repositório.</td>
+                      <td className="p-3"><Link to="/game/basic-commands#commit" className="gh-link">Cap. 2: Mudanças</Link></td>
+                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     <tr>
-                      <td className="font-mono">git status</td>
-                      <td>Mostra o estado das mudanças.</td>
-                      <td>
-                        <Link to="/game/basic-commands#status" className="gh-link">
-                          Cap. 2: Mudanças
-                        </Link>
-                      </td>
-                      <td><AuthorProfiles /></td>
-                      <td><ChallengeBadge type="beginner" text="Iniciante" /></td>
+                      <td className="font-mono p-3">git status</td>
+                      <td className="p-3 min-w-[200px] min-h-[100px]"><MermaidDiagram diagramId="gitStatusDiagram" chart={`graph TD; C["git status"] --> WS["Working Dir State"]; C --> SS["Staging Area State"];`} /></td>
+                      <td className="p-3">Mostra o estado das mudanças.</td>
+                      <td className="p-3"><Link to="/game/basic-commands#status" className="gh-link">Cap. 2: Mudanças</Link></td>
+                      <td className="p-3"><AuthorProfiles /></td>
+                      <td className="p-3"><ChallengeBadge type="beginner" text="Iniciante" /></td>
                     </tr>
                     </tbody>
                 </table>

@@ -102,10 +102,9 @@ const Navbar: React.FC = () => {
             <Link 
               to="/game"
               className={`${linkClass} transition-colors inline-flex items-center cursor-pointer`}
-              onClick={(e) => {
+              onClick={() => {
                 navigate('/game');
                 setIsGameMenuOpen(prev => !prev);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
               Game

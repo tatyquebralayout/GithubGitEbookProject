@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Star, Users, Award, BookOpen, Code, GitBranch, GitCommit, Terminal, Heart, Folders, Target, Zap } from 'lucide-react';
+import { Users, BookOpen, Code, GitBranch, GitCommit, Terminal, Heart, Folders, Target, Zap } from 'lucide-react';
 
 const EbookContent: React.FC = () => {
   return (

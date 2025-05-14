@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { faqItems, FAQItem } from '../../faq/data/faq-data'; // Corrigido
+import { faqItems } from '../../faq/data/faq-data'; 
+import type { FAQItem } from '../../faq/types/faq.types';
 
 const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -57,4 +58,5 @@ const FAQ: React.FC = () => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default FAQ; 

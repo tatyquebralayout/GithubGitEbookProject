@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, GitBranch, GitCommit, GitMerge } from 'lucide-react';
+import { Terminal, GitBranch, GitCommit } from 'lucide-react';
 
 const AuthorProfiles: React.FC = () => (
   <div className="flex -space-x-2">

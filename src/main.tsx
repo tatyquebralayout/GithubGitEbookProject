@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from '@primer/react-brand'; // Importar ThemeProvider
 // import App from './App.tsx'; // App foi movido para features/landing/LandingPage.tsx e é gerenciado pelo router
 // import GuestAuthorPage from './pages/GuestAuthorPage.tsx'; // Gerenciado pelo router
 // import GamePage from './pages/GamePage.tsx'; // Gerenciado pelo router
@@ -9,6 +10,8 @@ import { RouterProvider } from 'react-router-dom';
 // import GitBasicCommandsPage from './pages/GitBasicCommandsPage.tsx'; // Gerenciado pelo router
 import router from './router/index.tsx'; // Importar o router configurado
 import './index.css';
+import '@primer/react-brand/lib/css/main.css'; // Importar estilos principais do Primer Brand
+import '@primer/react-brand/fonts/fonts.css'; // Importar fontes do Primer Brand (Mona Sans)
 
 // A definição do router foi movida para src/router/index.tsx
 // const router = createBrowserRouter([
@@ -40,6 +43,8 @@ import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>
 );
