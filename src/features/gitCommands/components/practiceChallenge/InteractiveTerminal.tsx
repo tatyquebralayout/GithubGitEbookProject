@@ -4,7 +4,7 @@ export interface TerminalHistoryItem {
   id: number;
   command: string;
   output: string;
-  pathAtCommand: string[]; // Store path for historic prompts
+  pathAtCommand: string[]; // Continua como array para o histórico
 }
 
 // Remove Commit interface - it will be passed via props or defined in a shared types file later
@@ -17,12 +17,14 @@ export interface TerminalHistoryItem {
 
 interface InteractiveTerminalProps {
   onProcessCommand: (command: string) => string;
-  currentPath: string[]; // Current path from parent
+  currentPathString: string; // Para o prompt atual
+  currentPathForHistory: string[]; // Para salvar no histórico
 }
 
 const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
-  onProcessCommand,  // Prop received from parent
-  currentPath,       // Prop received from parent
+  onProcessCommand,
+  currentPathString, // Nova prop para o prompt
+  currentPathForHistory, // Nova prop para o histórico
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [history, setHistory] = useState<TerminalHistoryItem[]>([]);
@@ -66,7 +68,8 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     setHistory(prevHistory => [
       ...prevHistory,
-      { id: Date.now(), command: inputValue, output, pathAtCommand: [...currentPath] }, // Store currentPath with the command
+      // Usar currentPathForHistory ao criar o item de histórico
+      { id: Date.now(), command: inputValue, output, pathAtCommand: [...currentPathForHistory] }, 
     ]);
     setInputValue('');
 
@@ -78,8 +81,14 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   };
 
   const getPathString = (pathArray: string[]): string => {
+    if (!pathArray || pathArray.length === 0) return '~'; // Guarda contra pathAtCommand indefinido/vazio
     if (pathArray.length === 1 && pathArray[0] === '~') return '~';
-    return pathArray.join('/').replace(/^~\//, '~/'); // Ensure ~/ is at the start if present
+    // Assegura que se começar com '~', mantenha, senão não adicione duplicado.
+    // E remove qualquer '~' que não seja o primeiro elemento.
+    const processedPath = pathArray.filter((part, index) => part !== '~' || index === 0);
+    if (processedPath.length === 1 && processedPath[0] === '~') return '~';
+    if (processedPath[0] === '~') return '~' + processedPath.slice(1).join('/');
+    return processedPath.join('/') || '/'; // Para o caso de um path vazio após o filtro, default para root
   };
 
   return (
@@ -89,6 +98,7 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           <div key={item.id}>
             <div className="flex">
               <span className="text-green-400">user@gitsheet:</span>
+              {/* Usa getPathString para o histórico */}
               <span className="text-blue-400">{getPathString(item.pathAtCommand)}</span> 
               <span className="text-gray-300">$</span>
               <span className="pl-2">{item.command}</span>
@@ -104,7 +114,8 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         <div className="flex items-center flex-wrap gap-x-2">
           <label htmlFor="commandInput" className="flex-shrink-0">
             <span className="text-green-400">user@gitsheet:</span>
-            <span className="text-blue-400">{getPathString(currentPath)}</span>
+            {/* Usa currentPathString diretamente para o prompt */}
+            <span className="text-blue-400">{currentPathString}</span>
             <span className="text-gray-300">$</span>
           </label>
           <input

@@ -31,20 +31,28 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => 
   useEffect(() => {
     if (mermaidRef.current && chart) {
       try {
-        // Clear previous content to avoid duplication and ID errors
-        mermaidRef.current.innerHTML = '';
-        // Mermaid inserts the SVG directly into the provided element
-        // Note: the mermaid.render API may vary. If this doesn't work,
-        // we can revert to using the callback and inserting the svgCode manually.
-        mermaid.render(diagramId, chart, mermaidRef.current);
+        mermaidRef.current.innerHTML = ''; // Limpar conteúdo anterior
+
+        // Usar o callback para render e inserir o SVG
+        mermaid.render(diagramId, chart, (svgCode, bindFunctions) => {
+          if (mermaidRef.current) {
+            mermaidRef.current.innerHTML = svgCode;
+            if (bindFunctions) {
+              bindFunctions(mermaidRef.current); // Necessário para interatividade (se houver)
+            }
+          }
+        });
+
       } catch (error) {
         console.error(`Error rendering Mermaid for ID ${diagramId}:`, error);
         if (mermaidRef.current) {
-          mermaidRef.current.innerHTML = `<p style="color: red; font-size: 0.8rem;">Error rendering diagram. ID: ${diagramId}</p>`;
+          // Adicionar a string do diagrama ao erro para facilitar a depuração
+          const errMessage = error instanceof Error ? error.message : String(error);
+          mermaidRef.current.innerHTML = `<p style="color: red; font-size: 0.8rem;">Error rendering diagram (ID: ${diagramId}). Details: ${errMessage}. Check console.</p>`;
         }
       }
     }
-  }, [chart, diagramId]); // Re-render when 'chart' or 'diagramId' changes
+  }, [chart, diagramId]);
 
   // We add a class for possible container styling if needed
   return <div ref={mermaidRef} className="mermaid-diagram-container flex justify-center items-center" />;

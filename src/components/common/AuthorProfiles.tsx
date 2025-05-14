@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface AuthorProfile {
+export interface AuthorProfile {
   src: string;
   alt: string;
 }
