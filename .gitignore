@@ -7,19 +7,50 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Vite cache and temp files
+.vite/
+.vite-temp/
+
+# Environment variables and local overrides
 *.local
+.env
+.env.*
+!.env.example
+!.env.sample
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
+.project
+*.tmproj
+*.sublime-workspace
+*.sublime-project
 .DS_Store
+Thumbs.db
+
+# IDE-specific files (JetBrains, VS, etc.)
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.env
+
+# Test runner files
+coverage/
+.nyc_output/
+
+# Optional Linter/Formatter cache
+.eslintcache
+.prettiercache
+
+# Optional: if you bundle your .env files, but this is generally not recommended
+# unless they are template/example files.
+# src/.env
