@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 // import React from 'react'; // Removed as it's not explicitly used with the new JSX transform
 import Navbar from '../../components/layout/Navbar';
 import Hero from './components/Hero';
@@ -10,6 +11,10 @@ import SponsorsSection from './components/SponsorsSection';
 import Footer from '../../components/layout/Footer';
 
 function LandingPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />

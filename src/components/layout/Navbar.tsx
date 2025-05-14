@@ -162,6 +162,7 @@ const Navbar: React.FC = () => {
         <Link 
           to="/game"
           className={`hidden md:block ${isScrolled || !isHome ? 'bg-blue-600 text-white focus:ring-blue-300 focus:ring-offset-blue-600' : 'bg-white text-blue-900 focus:ring-blue-500 focus:ring-offset-white'} font-medium px-5 py-2 rounded-md transition-colors hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2`}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           Começar Agora
         </Link>
@@ -263,7 +264,10 @@ const Navbar: React.FC = () => {
           <Link 
             to="/game"
             className="bg-blue-600 text-white font-medium px-5 py-2 rounded-md text-center transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-blue-600"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => {
+              setIsMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             Começar Agora
           </Link>
