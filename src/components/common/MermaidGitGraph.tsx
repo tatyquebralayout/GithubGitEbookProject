@@ -46,8 +46,89 @@ const MermaidGitGraph: React.FC<MermaidGitGraphProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   
+  // Função para formatar corretamente a definição do gitGraph
+  const formatGitGraphDefinition = (rawDefinition: string): string => {
+    // Dividir a entrada em linhas
+    const lines = rawDefinition.trim().split('\n');
+    let formattedLines: string[] = [];
+    
+    // Processar cada linha para garantir a sintaxe correta
+    lines.forEach(line => {
+      const trimmedLine = line.trim();
+      
+      if (trimmedLine.startsWith('commit')) {
+        // Comando commit
+        const _parts = trimmedLine.split(' ');
+        let commitLine = 'commit';
+        
+        // Verificar se há id ou tag ou type
+        if (trimmedLine.includes('id:')) {
+          const idMatch = trimmedLine.match(/id:\s*"([^"]+)"/);
+          if (idMatch && idMatch[1]) {
+            commitLine += ` id: "${idMatch[1]}"`;
+          }
+        }
+        
+        if (trimmedLine.includes('tag:')) {
+          const tagMatch = trimmedLine.match(/tag:\s*"([^"]+)"/);
+          if (tagMatch && tagMatch[1]) {
+            commitLine += ` tag: "${tagMatch[1]}"`;
+          }
+        }
+        
+        if (trimmedLine.includes('type:')) {
+          const typeMatch = trimmedLine.match(/type:\s*(\w+)/);
+          if (typeMatch && typeMatch[1]) {
+            commitLine += ` type: ${typeMatch[1]}`;
+          }
+        }
+        
+        formattedLines.push(commitLine);
+      } 
+      else if (trimmedLine.startsWith('branch')) {
+        // Comando branch
+        const branchName = trimmedLine.replace('branch', '').trim();
+        formattedLines.push(`branch ${branchName}`);
+      }
+      else if (trimmedLine.startsWith('checkout')) {
+        // Comando checkout
+        const branchName = trimmedLine.replace('checkout', '').trim();
+        formattedLines.push(`checkout ${branchName}`);
+      }
+      else if (trimmedLine.startsWith('merge')) {
+        // Comando merge
+        const branchName = trimmedLine.replace('merge', '').trim();
+        formattedLines.push(`merge ${branchName}`);
+      }
+      else {
+        // Qualquer outro comando
+        formattedLines.push(trimmedLine);
+      }
+    });
+    
+    return formattedLines.join('\n');
+  };
+  
   useEffect(() => {
     if (containerRef.current) {
+      // Função para construir a definição do diagrama
+      const buildDefinition = (formattedDef: string): string => {
+        const orientation = config.orientation || 'LR';
+        let configOptions = '';
+        
+        if (config.parallelCommits) {
+          configOptions += ' parallelCommits: true,';
+        }
+        
+        if (config.mainBranchName && config.mainBranchName !== 'main') {
+          configOptions += ` mainBranchName: "${config.mainBranchName}",`;
+        }
+        
+        const configBlock = configOptions ? `\nconfig { ${configOptions} }\n` : '\n';
+        
+        return `gitGraph ${orientation}:${configBlock}${formattedDef}`;
+      };
+      
       const renderDiagram = async () => {
         // Configuração do Mermaid
         mermaid.initialize({
@@ -132,7 +213,7 @@ const MermaidGitGraph: React.FC<MermaidGitGraphProps> = ({
               });
             }
           }
-        } catch (error) {
+        } catch (error: any) {
           console.error('Erro ao renderizar o diagrama Mermaid:', error);
           if (containerRef.current) {
             containerRef.current.innerHTML = `
@@ -148,86 +229,6 @@ const MermaidGitGraph: React.FC<MermaidGitGraphProps> = ({
       renderDiagram();
     }
   }, [id, definition, config]);
-  
-  // Função para formatar corretamente a definição do gitGraph
-  const formatGitGraphDefinition = (rawDefinition: string): string => {
-    // Dividir a entrada em linhas
-    const lines = rawDefinition.trim().split('\n');
-    let formattedLines: string[] = [];
-    
-    // Processar cada linha para garantir a sintaxe correta
-    lines.forEach(line => {
-      const trimmedLine = line.trim();
-      
-      if (trimmedLine.startsWith('commit')) {
-        // Comando commit
-        const parts = trimmedLine.split(' ');
-        let commitLine = 'commit';
-        
-        // Verificar se há id ou tag ou type
-        if (trimmedLine.includes('id:')) {
-          const idMatch = trimmedLine.match(/id:\s*"([^"]+)"/);
-          if (idMatch && idMatch[1]) {
-            commitLine += ` id: "${idMatch[1]}"`;
-          }
-        }
-        
-        if (trimmedLine.includes('tag:')) {
-          const tagMatch = trimmedLine.match(/tag:\s*"([^"]+)"/);
-          if (tagMatch && tagMatch[1]) {
-            commitLine += ` tag: "${tagMatch[1]}"`;
-          }
-        }
-        
-        if (trimmedLine.includes('type:')) {
-          const typeMatch = trimmedLine.match(/type:\s*(\w+)/);
-          if (typeMatch && typeMatch[1]) {
-            commitLine += ` type: ${typeMatch[1]}`;
-          }
-        }
-        
-        formattedLines.push(commitLine);
-      } 
-      else if (trimmedLine.startsWith('branch')) {
-        // Comando branch
-        const branchName = trimmedLine.replace('branch', '').trim();
-        formattedLines.push(`branch ${branchName}`);
-      }
-      else if (trimmedLine.startsWith('checkout')) {
-        // Comando checkout
-        const branchName = trimmedLine.replace('checkout', '').trim();
-        formattedLines.push(`checkout ${branchName}`);
-      }
-      else if (trimmedLine.startsWith('merge')) {
-        // Comando merge
-        const branchName = trimmedLine.replace('merge', '').trim();
-        formattedLines.push(`merge ${branchName}`);
-      }
-      else {
-        // Qualquer outro comando
-        formattedLines.push(trimmedLine);
-      }
-    });
-    
-    return formattedLines.join('\n');
-  };
-  
-  const buildDefinition = (formattedDef: string) => {
-    const orientation = config.orientation || 'LR';
-    let configOptions = '';
-    
-    if (config.parallelCommits) {
-      configOptions += ' parallelCommits: true,';
-    }
-    
-    if (config.mainBranchName && config.mainBranchName !== 'main') {
-      configOptions += ` mainBranchName: "${config.mainBranchName}",`;
-    }
-    
-    const configBlock = configOptions ? `\nconfig { ${configOptions} }\n` : '\n';
-    
-    return `gitGraph ${orientation}:${configBlock}${formattedDef}`;
-  };
   
   return (
     <div 

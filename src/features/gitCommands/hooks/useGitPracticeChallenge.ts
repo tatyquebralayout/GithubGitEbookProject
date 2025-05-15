@@ -111,13 +111,20 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   }, [fileSystem, gitRepoPath, stagedFiles]);
 
   // Função para atualizar o estado do GitHub após um push
-  const updateGitHubAfterPush = useCallback((remoteName: string, branchName: string, headCommit: Commit) => {
+  const updateGitHubAfterPush = useCallback((_remoteName: string, branchName: string, headCommit: Commit) => {
     // Atualizar a estrutura de arquivos no GitHub
     const updatedFileStructure: GitHubFileStructure = { ...gitHubFileStructure };
     
     // Simulação simples: adicionar todos os arquivos do commit ao GitHub
     // Em um caso real, analisaríamos o histórico de commits e mudanças
     const filePathsInRepo = getFilesInRepository();
+    
+    // Certificar-se de incluir arquivos staged que possam não estar ainda no sistema de arquivos
+    stagedFiles.forEach(file => {
+      if (!filePathsInRepo.includes(file)) {
+        filePathsInRepo.push(file);
+      }
+    });
     
     filePathsInRepo.forEach(filePath => {
       if (!updatedFileStructure[filePath]) {
@@ -154,7 +161,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     if (!pushedBranches.includes(branchName)) {
       setPushedBranches(prev => [...prev, branchName]);
     }
-  }, [gitHubFileStructure, gitHubRepository, pushedBranches, getFilesInRepository]);
+  }, [gitHubFileStructure, gitHubRepository, pushedBranches, getFilesInRepository, stagedFiles]);
 
   // --- Funções Auxiliares --- 
   const getBranchHeadCommit = useCallback((branchName: string): Commit | undefined => {

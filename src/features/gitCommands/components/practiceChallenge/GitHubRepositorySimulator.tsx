@@ -24,6 +24,7 @@ interface GitHubRepositorySimulatorProps {
   gitHubFileStructure: GitHubFileStructure;
   commits: Commit[];
   pushedBranches: string[];
+  // O branch atual do usuário, não usado diretamente no componente 
   _currentBranch: string;
   createRepository?: (repoName: string, repoDescription: string, isPrivate: boolean) => void;
 }
@@ -34,6 +35,7 @@ const GitHubRepositorySimulator: React.FC<GitHubRepositorySimulatorProps> = ({
   gitHubFileStructure,
   commits,
   pushedBranches,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _currentBranch,
   createRepository
 }) => {
@@ -361,8 +363,9 @@ const GitHubRepositorySimulator: React.FC<GitHubRepositorySimulatorProps> = ({
                   defaultValue={gitHubRepository.defaultBranch}
                   aria-label="Selecionar branch"
                 >
-                  {remoteBranches.map(branch => (
-                    <option key={branch} value={branch}>{branch}</option>
+                  {/* Usar um Set para garantir que não haja branches com a mesma chave */}
+                  {[...new Set(remoteBranches)].map(branch => (
+                    <option key={`branch-${branch}`} value={branch}>{branch}</option>
                   ))}
                 </select>
               </div>
