@@ -63,10 +63,10 @@ const SimpleMermaidGitGraph: React.FC<SimpleMermaidGitGraphProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`simple-mermaid-diagram p-4 bg-github-canvas-subtle rounded-lg overflow-x-auto ${className}`}
+      className={`simple-mermaid-diagram overflow-x-auto rounded-lg bg-github-canvas-subtle p-4 ${className}`}
       data-testid={`simple-mermaid-diagram-${id}`}
     />
   );
 };
 
-export default SimpleMermaidGitGraph; 
+export default SimpleMermaidGitGraph;

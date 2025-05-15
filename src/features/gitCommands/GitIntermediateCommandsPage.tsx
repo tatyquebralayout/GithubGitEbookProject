@@ -19,4 +19,4 @@ const GitIntermediateCommandsPage: React.FC = () => {
   );
 };
 
-export default GitIntermediateCommandsPage; 
+export default GitIntermediateCommandsPage;

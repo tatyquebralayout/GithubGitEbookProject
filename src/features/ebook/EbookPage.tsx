@@ -19,4 +19,4 @@ const EbookPage: React.FC = () => {
   );
 };
 
-export default EbookPage; 
+export default EbookPage;

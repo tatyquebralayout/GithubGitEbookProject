@@ -27,10 +27,16 @@ const Hero: React.FC = () => {
 
     const timer = setInterval(() => {
       currentStep++;
-      
+
       setStats({
-        commands: Math.min(Math.floor((targetStats.commands / steps) * currentStep), targetStats.commands),
-        categories: Math.min(Math.floor((targetStats.categories / steps) * currentStep), targetStats.categories),
+        commands: Math.min(
+          Math.floor((targetStats.commands / steps) * currentStep),
+          targetStats.commands
+        ),
+        categories: Math.min(
+          Math.floor((targetStats.categories / steps) * currentStep),
+          targetStats.categories
+        ),
         tips: Math.min(Math.floor((targetStats.tips / steps) * currentStep), targetStats.tips),
         free: Math.min(Math.floor((targetStats.free / steps) * currentStep), targetStats.free),
       });
@@ -44,82 +50,94 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 py-32" id="hero">
+    <section
+      className="relative flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 py-32"
+      id="hero"
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 z-0 opacity-5">
-        <div className="absolute left-0 top-20 text-github-fg-default text-xs font-mono">
+        <div className="absolute left-0 top-20 font-mono text-xs text-github-fg-default">
           {Array.from({ length: 15 }).map((_, i) => (
             <div key={i} className="my-2">
-              $ git {['status', 'commit', 'push', 'pull', 'branch', 'checkout', 'merge'][i % 7]} {i % 3 === 0 ? '-m "update feature"' : ''}
+              $ git {['status', 'commit', 'push', 'pull', 'branch', 'checkout', 'merge'][i % 7]}{' '}
+              {i % 3 === 0 ? '-m "update feature"' : ''}
             </div>
           ))}
         </div>
-        <div className="absolute right-0 bottom-20 text-github-fg-default text-xs font-mono">
+        <div className="absolute bottom-20 right-0 font-mono text-xs text-github-fg-default">
           {Array.from({ length: 15 }).map((_, i) => (
             <div key={i} className="my-2">
-              $ git {['init', 'add .', 'clone', 'fetch', 'rebase', 'tag', 'stash'][i % 7]} {i % 3 === 0 ? 'origin main' : ''}
+              $ git {['init', 'add .', 'clone', 'fetch', 'rebase', 'tag', 'stash'][i % 7]}{' '}
+              {i % 3 === 0 ? 'origin main' : ''}
             </div>
           ))}
         </div>
       </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
+
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="mx-auto max-w-4xl text-center">
           <div className="flex justify-center">
-            <span className="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm">
-            Mussum Ipsum, cacilds vidis litro abertis.
+            <span className="rounded-full bg-blue-500/20 px-4 py-2 text-sm font-semibold text-blue-400 backdrop-blur-sm">
+              Mussum Ipsum, cacilds vidis litro abertis.
             </span>
           </div>
-          
-          <h1 className="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-          Suco de cevadiss deixa as pessoas mais interessantis.<br className="hidden md:block" />
-          Viva Forevis aptent taciti sociosqu ad litora torquent. <span className="text-blue-400">GitSheet</span>
+
+          <h1 className="mt-8 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+            Suco de cevadiss deixa as pessoas mais interessantis.
+            <br className="hidden md:block" />
+            Viva Forevis aptent taciti sociosqu ad litora torquent.{' '}
+            <span className="text-blue-400">GitSheet</span>
           </h1>
-          
-          <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-          Leite de capivaris, leite de mula manquis sem cabeça. {stats.commands} Si num tem leite então bota uma pinga aí cumpadi!
+
+          <p className="mx-auto mt-6 max-w-3xl text-lg text-gray-300 md:text-xl">
+            Leite de capivaris, leite de mula manquis sem cabeça. {stats.commands} Si num tem leite
+            então bota uma pinga aí cumpadi!
           </p>
-          
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Link 
+
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link
               to="/about-author"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-8 py-4 rounded-lg transition-colors flex items-center justify-center"
+              className="flex items-center justify-center rounded-lg bg-blue-500 px-8 py-4 font-medium text-white transition-colors hover:bg-blue-600"
             >
               <GitBranch className="mr-2 h-5 w-5" />
-              cacilds vidis 
+              cacilds vidis
             </Link>
-            <Link 
+            <Link
               to="/about-author"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="bg-gray-700 hover:bg-gray-600 text-white font-medium px-8 py-4 rounded-lg transition-colors flex items-center justify-center"
+              className="flex items-center justify-center rounded-lg bg-gray-700 px-8 py-4 font-medium text-white transition-colors hover:bg-gray-600"
             >
               <GitMerge className="mr-2 h-5 w-5" />
               Saiba Mais
             </Link>
           </div>
         </div>
-        
+
         {/* Interactive Stats Cards */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 transform hover:scale-105 transition-all duration-300 border border-gray-700/50">
-            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{stats.commands}+</div>
-            <p className="text-gray-400 text-sm md:text-base">litro abertis</p>
+        <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-6 md:grid-cols-4">
+          <div className="transform rounded-lg border border-gray-700/50 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105">
+            <div className="mb-2 text-3xl font-bold text-blue-400 md:text-4xl">
+              {stats.commands}+
+            </div>
+            <p className="text-sm text-gray-400 md:text-base">litro abertis</p>
           </div>
-          
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 transform hover:scale-105 transition-all duration-300 border border-gray-700/50">
-            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{stats.categories}</div>
-            <p className="text-gray-400 text-sm md:text-base">litro abertis</p>
+
+          <div className="transform rounded-lg border border-gray-700/50 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105">
+            <div className="mb-2 text-3xl font-bold text-blue-400 md:text-4xl">
+              {stats.categories}
+            </div>
+            <p className="text-sm text-gray-400 md:text-base">litro abertis</p>
           </div>
-          
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 transform hover:scale-105 transition-all duration-300 border border-gray-700/50">
-            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{stats.tips}+</div>
-            <p className="text-gray-400 text-sm md:text-base">litro abertis</p>
+
+          <div className="transform rounded-lg border border-gray-700/50 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105">
+            <div className="mb-2 text-3xl font-bold text-blue-400 md:text-4xl">{stats.tips}+</div>
+            <p className="text-sm text-gray-400 md:text-base">litro abertis</p>
           </div>
-          
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 transform hover:scale-105 transition-all duration-300 border border-gray-700/50">
-            <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{stats.free}%</div>
-            <p className="text-gray-400 text-sm md:text-base">litro abertis</p>
+
+          <div className="transform rounded-lg border border-gray-700/50 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105">
+            <div className="mb-2 text-3xl font-bold text-blue-400 md:text-4xl">{stats.free}%</div>
+            <p className="text-sm text-gray-400 md:text-base">litro abertis</p>
           </div>
         </div>
       </div>
@@ -127,4 +145,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero; 
+export default Hero;

@@ -3,12 +3,12 @@ import SimpleMermaidGitGraph from '../../../../components/common/SimpleMermaidGi
 
 const GitChallengeExample: React.FC = () => {
   const [orientation, setOrientation] = useState<'LR' | 'TB' | 'BT'>('TB');
-  
+
   return (
-    <div className="p-6 bg-white rounded-lg shadow">
-      <div className="flex justify-between items-center mb-6">
+    <div className="rounded-lg bg-white p-6 shadow">
+      <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Exemplo Simples de Diagrama Git</h2>
-        
+
         <div className="flex items-center gap-3">
           <label htmlFor="orientation-select" className="text-sm font-medium">
             Orientação:
@@ -17,7 +17,7 @@ const GitChallengeExample: React.FC = () => {
             id="orientation-select"
             value={orientation}
             onChange={(e) => setOrientation(e.target.value as any)}
-            className="px-3 py-1.5 border border-gray-300 rounded text-sm"
+            className="rounded border border-gray-300 px-3 py-1.5 text-sm"
           >
             <option value="TB">De Cima para Baixo</option>
             <option value="BT">De Baixo para Cima</option>
@@ -25,18 +25,15 @@ const GitChallengeExample: React.FC = () => {
           </select>
         </div>
       </div>
-      
+
       <div className="mb-6">
-        <SimpleMermaidGitGraph
-          id="example-diagram"
-          orientation={orientation}
-        />
+        <SimpleMermaidGitGraph id="example-diagram" orientation={orientation} />
       </div>
-      
+
       <div className="mt-6">
-        <h3 className="text-lg font-semibold mb-2">Comando Git correspondentes:</h3>
-        <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-{`# Inicializar repositório
+        <h3 className="mb-2 text-lg font-semibold">Comando Git correspondentes:</h3>
+        <pre className="overflow-x-auto rounded-lg bg-gray-100 p-4 text-sm">
+          {`# Inicializar repositório
 git init
 
 # Commits iniciais na branch principal
@@ -65,4 +62,4 @@ git commit -m "Ajustes pós-merge" --allow-empty`}
   );
 };
 
-export default GitChallengeExample; 
+export default GitChallengeExample;

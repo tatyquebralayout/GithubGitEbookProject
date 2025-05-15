@@ -31,9 +31,10 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     {
       id: Date.now() - 1000,
       command: '',
-      output: 'Bem-vindo ao Simulador de Terminal Git!\n\nVocê ainda não tem nenhum projeto iniciado. Para começar, você pode:\n- Criar um diretório com: mkdir meu-projeto\n- Navegar até ele com: cd meu-projeto\n- Inicializar um repositório Git com: git init\n\nDigite um comando para começar:',
-      pathAtCommand: currentPathForHistory
-    }
+      output:
+        'Bem-vindo ao Simulador de Terminal Git!\n\nVocê ainda não tem nenhum projeto iniciado. Para começar, você pode:\n- Criar um diretório com: mkdir meu-projeto\n- Navegar até ele com: cd meu-projeto\n- Inicializar um repositório Git com: git init\n\nDigite um comando para começar:',
+      pathAtCommand: currentPathForHistory,
+    },
   ]);
   const historyContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -68,9 +69,10 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         {
           id: Date.now(),
           command: '',
-          output: 'Bem-vindo ao Simulador de Terminal Git!\n\nVocê ainda não tem nenhum projeto iniciado. Para começar, você pode:\n- Criar um diretório com: mkdir meu-projeto\n- Navegar até ele com: cd meu-projeto\n- Inicializar um repositório Git com: git init\n\nDigite um comando para começar:',
-          pathAtCommand: currentPathForHistory
-        }
+          output:
+            'Bem-vindo ao Simulador de Terminal Git!\n\nVocê ainda não tem nenhum projeto iniciado. Para começar, você pode:\n- Criar um diretório com: mkdir meu-projeto\n- Navegar até ele com: cd meu-projeto\n- Inicializar um repositório Git com: git init\n\nDigite um comando para começar:',
+          pathAtCommand: currentPathForHistory,
+        },
       ]);
       setInputValue('');
       // Focus after a very short delay to ensure DOM is updated and form is visible
@@ -80,17 +82,17 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     output = onProcessCommand(commandToProcess);
 
-    setHistory(prevHistory => [
+    setHistory((prevHistory) => [
       ...prevHistory,
       // Usar currentPathForHistory ao criar o item de histórico
-      { id: Date.now(), command: inputValue, output, pathAtCommand: [...currentPathForHistory] }, 
+      { id: Date.now(), command: inputValue, output, pathAtCommand: [...currentPathForHistory] },
     ]);
     setInputValue('');
 
     // Re-focus the input after command submission using a microtask
     // and preventScroll to avoid page jump if possible
     Promise.resolve().then(() => {
-        inputRef.current?.focus({ preventScroll: true });
+      inputRef.current?.focus({ preventScroll: true });
     });
   };
 
@@ -106,28 +108,30 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col bg-github-code-bg rounded-lg font-mono text-sm text-gray-300">
-      <div ref={historyContainerRef} className="flex-grow overflow-y-auto p-2 space-y-1">
-        {history.map(item => (
+    <div className="bg-github-code-bg flex h-full flex-col rounded-lg font-mono text-sm text-gray-300">
+      <div ref={historyContainerRef} className="flex-grow space-y-1 overflow-y-auto p-2">
+        {history.map((item) => (
           <div key={item.id}>
             {item.command ? (
               <div className="flex">
                 <span className="text-green-400">user@gitsheet:</span>
                 {/* Usa getPathString para o histórico */}
-                <span className="text-blue-400">{getPathString(item.pathAtCommand)}</span> 
+                <span className="text-blue-400">{getPathString(item.pathAtCommand)}</span>
                 <span className="text-gray-300">$</span>
                 <span className="pl-2">{item.command}</span>
               </div>
             ) : null}
-            {item.output && (
-              <div className="whitespace-pre-wrap text-gray-300">{item.output}</div>
-            )}
+            {item.output && <div className="whitespace-pre-wrap text-gray-300">{item.output}</div>}
           </div>
         ))}
-         {/* Anchor for scrolling to bottom, if needed, though direct scrollTop manipulation is used */}
+        {/* Anchor for scrolling to bottom, if needed, though direct scrollTop manipulation is used */}
       </div>
-      <form ref={formRef} onSubmit={handleSubmit} className="flex-shrink-0 p-2 border-t border-slate-700">
-        <div className="flex items-center flex-wrap gap-x-2">
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className="flex-shrink-0 border-t border-slate-700 p-2"
+      >
+        <div className="flex flex-wrap items-center gap-x-2">
           <label htmlFor="commandInput" className="flex-shrink-0">
             <span className="text-green-400">user@gitsheet:</span>
             {/* Usa currentPathString diretamente para o prompt */}
@@ -139,14 +143,14 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             ref={inputRef}
             type="text"
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
-            className="flex-grow bg-transparent text-gray-300 outline-none min-w-[100px]"
+            onChange={(e) => setInputValue(e.target.value)}
+            className="min-w-[100px] flex-grow bg-transparent text-gray-300 outline-none"
             autoComplete="off"
             spellCheck="false"
           />
-          <button 
-            type="submit" 
-            className="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1 rounded text-xs flex-shrink-0"
+          <button
+            type="submit"
+            className="flex-shrink-0 rounded bg-slate-600 px-3 py-1 text-xs text-white hover:bg-slate-500"
           >
             Send
           </button>
@@ -156,4 +160,4 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   );
 };
 
-export default InteractiveTerminal; 
+export default InteractiveTerminal;

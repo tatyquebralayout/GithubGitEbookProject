@@ -6,4 +6,4 @@ export * from './layout/Navbar';
 export * from './layout/Footer';
 
 // Exportação direta para o Fast Refresh funcionar
-export const COMPONENTS_VERSION = '1.0.0'; 
+export const COMPONENTS_VERSION = '1.0.0';

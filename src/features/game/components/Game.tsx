@@ -4,7 +4,7 @@ import {
   PeopleIcon,
   CodeIcon,
   GoalIcon,
-  CodespacesIcon
+  CodespacesIcon,
 } from '@primer/octicons-react';
 import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom'; // Link não é mais usado diretamente aqui, CommandCategorySection cuida disso
@@ -15,6 +15,7 @@ import CommandCategorySection from './CommandCategorySection';
 import { gitCommandsData } from '../data/commandsData';
 import GitChallengeExamples from '../../gitCommands/components/practiceChallenge/GitChallengeExamples';
 import GitChallengeExample from '../../gitCommands/components/practiceChallenge/GitChallengeExample';
+import { GitChallengeCard } from '../../../components/ui';
 
 // Define author data for this component's context // Movido para commandsData.ts
 // const gameAuthors = [
@@ -30,37 +31,37 @@ const Game: React.FC = () => {
   return (
     <div className="space-y-24">
       {/* Hero Banner */}
-      <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
+      <section className="relative flex h-[500px] items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?w=1920&auto=compress,format"
             alt="Banner ilustrativo para a seção de desafio de codificação, mostrando um ambiente de desenvolvimento em um monitor"
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-github-accent-emphasis/90 to-github-done-emphasis/90" />
+          <div className="from-github-accent-emphasis/90 to-github-done-emphasis/90 absolute inset-0 bg-gradient-to-r" />
         </div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <span className="inline-block bg-white/10 text-white text-sm font-semibold px-4 py-2 rounded-full uppercase tracking-wide backdrop-blur-sm">
+
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center text-white">
+          <span className="inline-block rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white backdrop-blur-sm">
             Git Challenge
           </span>
-          <h1 className="mt-6 text-4xl md:text-5xl font-bold leading-tight">
+          <h1 className="mt-6 text-4xl font-bold leading-tight md:text-5xl">
             Aprenda Git na Prática
           </h1>
           <p className="mt-6 text-xl text-white/80">
             Complete desafios, ganhe pontos e domine os comandos Git através de exercícios práticos
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link 
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
               to="/git-visualizer"
-              className="px-6 py-3 bg-white text-github-accent-emphasis font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center gap-2"
+              className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-medium text-github-accent-emphasis transition-colors hover:bg-opacity-90"
             >
               <CodespacesIcon size={20} />
               Visualizador de Comandos Git
             </Link>
-            <Link 
+            <Link
               to="/game/basic-commands"
-              className="px-6 py-3 bg-white/20 text-white font-medium rounded-lg hover:bg-white/30 transition-colors backdrop-blur-sm"
+              className="rounded-lg bg-white/20 px-6 py-3 font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/30"
             >
               Ver Desafios
             </Link>
@@ -83,79 +84,86 @@ const Game: React.FC = () => {
       </section>
 
       {/* Game Instructions Cards */}
-      <section className="py-16 bg-white">
+      <section className="bg-white py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-github-fg-default">Entenda o Game</h2>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3">
             {/* Card 1 - Choose Command */}
-            <div className="gh-card p-8 text-center hover:shadow-lg transition-shadow">
-              <div className="bg-github-accent-subtle rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+            <GitChallengeCard className="p-8 text-center transition-shadow hover:shadow-lg">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-github-accent-subtle">
                 <CodeIcon size={24} className="text-github-accent-fg" />
               </div>
-              <h3 className="text-xl font-bold text-github-fg-default mb-4">1° Escolha O Comando</h3>
+              <h3 className="mb-4 text-xl font-bold text-github-fg-default">
+                1° Escolha O Comando
+              </h3>
               <p className="text-github-fg-muted">
-                Explore nossa biblioteca de comandos Git organizados por nível de dificuldade e categoria
+                Explore nossa biblioteca de comandos Git organizados por nível de dificuldade e
+                categoria
               </p>
-            </div>
+            </GitChallengeCard>
 
             {/* Card 2 - Choose Authors */}
-            <div className="gh-card p-8 text-center hover:shadow-lg transition-shadow">
-              <div className="bg-github-success-subtle rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+            <GitChallengeCard className="p-8 text-center transition-shadow hover:shadow-lg">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-github-success-subtle">
                 <PeopleIcon size={24} className="text-github-success-fg" />
               </div>
-              <h3 className="text-xl font-bold text-github-fg-default mb-4">2° Escolha o Autor(es)</h3>
+              <h3 className="mb-4 text-xl font-bold text-github-fg-default">
+                2° Escolha o Autor(es)
+              </h3>
               <p className="text-github-fg-muted">
                 Selecione os autores especialistas que irão guiar seu aprendizado em Git
               </p>
-            </div>
+            </GitChallengeCard>
 
             {/* Card 3 - Choose Difficulty */}
-            <div className="gh-card p-8 text-center hover:shadow-lg transition-shadow">
-              <div className="bg-github-attention-subtle rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+            <GitChallengeCard className="p-8 text-center transition-shadow hover:shadow-lg">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-github-attention-subtle">
                 <GoalIcon size={24} className="text-github-attention-fg" />
               </div>
-              <h3 className="text-xl font-bold text-github-fg-default mb-4">3° Escolha a Dificuldade</h3>
+              <h3 className="mb-4 text-xl font-bold text-github-fg-default">
+                3° Escolha a Dificuldade
+              </h3>
               <p className="text-github-fg-muted">
                 Defina seu nível de desafio, desde iniciante até profissional avançado
               </p>
-            </div>
+            </GitChallengeCard>
           </div>
         </div>
       </section>
 
       {/* Exemplo simples de Diagrama Git */}
-      <section className="py-16 bg-github-canvas-subtle">
+      <section className="bg-github-canvas-subtle py-16">
         <div className="container mx-auto px-4">
           <GitChallengeExample />
         </div>
       </section>
 
       {/* Git Challenge Examples Section */}
-      <section className="py-16 bg-github-canvas-subtle" id="git-challenge-examples">
+      <section className="bg-github-canvas-subtle py-16" id="git-challenge-examples">
         <div className="container mx-auto px-4">
           <GitChallengeExamples />
         </div>
       </section>
 
       {/* Video Section */}
-      <section className="py-16 bg-white">
+      <section className="bg-white py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-github-fg-default">Entenda o Game</h2>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="gh-card">
-              <div className="aspect-w-16 aspect-h-9 bg-github-canvas-subtle rounded-lg flex items-center justify-center">
+          <div className="mx-auto max-w-4xl">
+            <GitChallengeCard>
+              <div className="aspect-w-16 aspect-h-9 flex items-center justify-center rounded-lg bg-github-canvas-subtle">
                 <div className="text-center">
-                  <TerminalIcon size={32} className="text-github-fg-muted mx-auto mb-4" />
+                  <TerminalIcon size={32} className="mx-auto mb-4 text-github-fg-muted" />
                   <p className="text-github-fg-muted">Vídeo explicativo em breve</p>
                 </div>
               </div>
-            </div>
+            </GitChallengeCard>
           </div>
         </div>
       </section>
@@ -163,34 +171,36 @@ const Game: React.FC = () => {
       {/* Commands Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-github-fg-default">Comandos Git</h2>
-            <p className="mt-4 text-github-fg-muted">Explore todos os comandos organizados por categoria</p>
+            <p className="mt-4 text-github-fg-muted">
+              Explore todos os comandos organizados por categoria
+            </p>
           </div>
 
           {/* Botões de navegação para as páginas de comandos */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Link 
+          <div className="mb-12 flex flex-wrap justify-center gap-4">
+            <Link
               to="/game/basic-commands"
-              className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors"
+              className="rounded-lg bg-green-600 px-6 py-3 font-medium text-white transition-colors hover:bg-green-700"
             >
               Comandos Básicos
             </Link>
-            <Link 
+            <Link
               to="/game/intermediate-commands"
-              className="px-6 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors"
+              className="rounded-lg bg-yellow-600 px-6 py-3 font-medium text-white transition-colors hover:bg-yellow-700"
             >
               Comandos Intermediários
             </Link>
-            <Link 
+            <Link
               to="/game/advanced-commands"
-              className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors"
+              className="rounded-lg bg-red-600 px-6 py-3 font-medium text-white transition-colors hover:bg-red-700"
             >
               Comandos Avançados
             </Link>
-            <Link 
+            <Link
               to="/game/github-commands"
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+              className="rounded-lg bg-purple-600 px-6 py-3 font-medium text-white transition-colors hover:bg-purple-700"
             >
               Comandos GitHub
             </Link>
@@ -209,4 +219,4 @@ const Game: React.FC = () => {
   );
 };
 
-export default Game; 
+export default Game;

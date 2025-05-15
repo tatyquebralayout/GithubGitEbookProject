@@ -19,4 +19,4 @@ const GitAdvancedCommandsPage: React.FC = () => {
   );
 };
 
-export default GitAdvancedCommandsPage; 
+export default GitAdvancedCommandsPage;

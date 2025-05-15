@@ -8,8 +8,12 @@ const GamePage = lazy(() => import('../features/game/GamePage'));
 const AboutAuthorPage = lazy(() => import('../features/author/AboutAuthorPage'));
 const EbookPage = lazy(() => import('../features/ebook/EbookPage'));
 const GitBasicCommandsPage = lazy(() => import('../features/gitCommands/GitBasicCommandsPage'));
-const GitIntermediateCommandsPage = lazy(() => import('../features/gitCommands/GitIntermediateCommandsPage'));
-const GitAdvancedCommandsPage = lazy(() => import('../features/gitCommands/GitAdvancedCommandsPage'));
+const GitIntermediateCommandsPage = lazy(
+  () => import('../features/gitCommands/GitIntermediateCommandsPage')
+);
+const GitAdvancedCommandsPage = lazy(
+  () => import('../features/gitCommands/GitAdvancedCommandsPage')
+);
 const GitHubCommandsPage = lazy(() => import('../features/gitCommands/GitHubCommandsPage'));
 
 const router = createBrowserRouter([
@@ -51,4 +55,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default router; 
+export default router;

@@ -37,12 +37,8 @@ const Demo: React.FC = () => {
     <section className="gh-section" id="demo">
       <div className="gh-container">
         <div className="gh-header">
-          <span className="gh-badge-primary">
-            Demonstração Interativa
-          </span>
-          <h2 className="gh-title">
-            Veja Como Funciona
-          </h2>
+          <span className="gh-badge-primary">Demonstração Interativa</span>
+          <h2 className="gh-title">Veja Como Funciona</h2>
           <p className="gh-description">
             Explore os recursos da nossa Planilha de Comandos Git com esta prévia interativa.
           </p>
@@ -60,12 +56,10 @@ const Demo: React.FC = () => {
           ))}
         </div>
 
-        <div className="gh-content">
-          {renderTabContent()}
-        </div>
+        <div className="gh-content">{renderTabContent()}</div>
       </div>
     </section>
   );
 };
 
-export default Demo; 
+export default Demo;

@@ -10,5 +10,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Suspense fallback={<LoadingFallback />}>
       <RouterProvider router={router} />
     </Suspense>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

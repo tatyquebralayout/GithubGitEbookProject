@@ -1,13 +1,13 @@
 declare module 'lucide-react' {
   import { FunctionComponent, SVGProps } from 'react';
-  
+
   export interface LucideProps extends SVGProps<SVGSVGElement> {
     color?: string;
     size?: string | number;
   }
-  
+
   type Icon = FunctionComponent<LucideProps>;
-  
+
   export const GitBranch: Icon;
   export const GitCommit: Icon;
   export const GitMerge: Icon;

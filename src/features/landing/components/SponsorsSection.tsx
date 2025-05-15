@@ -2,13 +2,13 @@ import React from 'react';
 
 const SponsorsSection: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-white" id="sponsors">
+    <section className="bg-white py-16 md:py-24" id="sponsors">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-800">
             Patrocinadores
           </span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="mt-4 text-3xl font-bold text-gray-900 md:text-4xl">
             Quem Apoia o litro abertis
           </h2>
           <p className="mt-4 text-lg text-gray-600">
@@ -17,59 +17,62 @@ const SponsorsSection: React.FC = () => {
         </div>
 
         {/* Sponsors Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 md:grid-cols-4">
           {/* Sponsor 1 */}
           <div className="flex flex-col items-center">
-            <img 
-              src="https://images.pexels.com/photos/2977565/pexels-photo-2977565.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
-              alt="Tech Solutions" 
-              className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+            <img
+              src="https://images.pexels.com/photos/2977565/pexels-photo-2977565.jpeg?w=256&h=256&fit=crop&auto=compress,format"
+              alt="Tech Solutions"
+              className="mb-4 h-32 w-32 rounded-lg object-cover grayscale filter transition-all hover:grayscale-0"
               loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Tech Solutions</h3>
-            <p className="text-sm text-gray-600 text-center">Soluções em Tecnologia</p>
+            <p className="text-center text-sm text-gray-600">Soluções em Tecnologia</p>
           </div>
 
           {/* Sponsor 2 */}
           <div className="flex flex-col items-center">
-            <img 
-              src="https://images.pexels.com/photos/1337380/pexels-photo-1337380.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
-              alt="Dev Academy" 
-              className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+            <img
+              src="https://images.pexels.com/photos/1337380/pexels-photo-1337380.jpeg?w=256&h=256&fit=crop&auto=compress,format"
+              alt="Dev Academy"
+              className="mb-4 h-32 w-32 rounded-lg object-cover grayscale filter transition-all hover:grayscale-0"
               loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Dev Academy</h3>
-            <p className="text-sm text-gray-600 text-center">Educação em Tecnologia</p>
+            <p className="text-center text-sm text-gray-600">Educação em Tecnologia</p>
           </div>
 
           {/* Sponsor 3 */}
           <div className="flex flex-col items-center">
-            <img 
-              src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
-              alt="Cloud Systems" 
-              className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+            <img
+              src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?w=256&h=256&fit=crop&auto=compress,format"
+              alt="Cloud Systems"
+              className="mb-4 h-32 w-32 rounded-lg object-cover grayscale filter transition-all hover:grayscale-0"
               loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Cloud Systems</h3>
-            <p className="text-sm text-gray-600 text-center">Infraestrutura Cloud</p>
+            <p className="text-center text-sm text-gray-600">Infraestrutura Cloud</p>
           </div>
 
           {/* Sponsor 4 */}
           <div className="flex flex-col items-center">
-            <img 
-              src="https://images.pexels.com/photos/3182833/pexels-photo-3182833.jpeg?w=256&h=256&fit=crop&auto=compress,format" 
-              alt="Code Labs" 
-              className="w-32 h-32 object-cover rounded-lg mb-4 filter grayscale hover:grayscale-0 transition-all"
+            <img
+              src="https://images.pexels.com/photos/3182833/pexels-photo-3182833.jpeg?w=256&h=256&fit=crop&auto=compress,format"
+              alt="Code Labs"
+              className="mb-4 h-32 w-32 rounded-lg object-cover grayscale filter transition-all hover:grayscale-0"
               loading="lazy"
             />
             <h3 className="text-lg font-semibold text-gray-900">Code Labs</h3>
-            <p className="text-sm text-gray-600 text-center">Laboratório de Inovação</p>
+            <p className="text-center text-sm text-gray-600">Laboratório de Inovação</p>
           </div>
         </div>
 
         {/* Become a Sponsor CTA */}
         <div className="mt-16 text-center">
-          <button type="button" className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors">
+          <button
+            type="button"
+            className="rounded-md bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+          >
             Seja um Patrocinador
           </button>
           <p className="mt-4 text-sm text-gray-600">
@@ -81,4 +84,4 @@ const SponsorsSection: React.FC = () => {
   );
 };
 
-export default SponsorsSection; 
+export default SponsorsSection;

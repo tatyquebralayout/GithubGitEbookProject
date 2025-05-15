@@ -19,4 +19,4 @@ const GitBasicCommandsPage: React.FC = () => {
   );
 };
 
-export default GitBasicCommandsPage; 
+export default GitBasicCommandsPage;

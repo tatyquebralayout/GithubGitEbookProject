@@ -6,7 +6,8 @@ const challenges = [
   {
     id: 'branch-merge',
     title: 'Criando e Mesclando Branches',
-    description: 'Crie um novo branch, faça algumas alterações e mescle-o de volta ao branch principal.',
+    description:
+      'Crie um novo branch, faça algumas alterações e mescle-o de volta ao branch principal.',
     difficulty: 'Básico' as const,
     initialDiagram: `commit
 commit
@@ -23,13 +24,14 @@ commit`,
       'Use git branch desenvolvimento para criar um novo branch',
       'Use git checkout desenvolvimento para mudar para o novo branch',
       'Após fazer commits, use git checkout main para voltar ao branch principal',
-      'Use git merge desenvolvimento para mesclar as mudanças'
-    ]
+      'Use git merge desenvolvimento para mesclar as mudanças',
+    ],
   },
   {
     id: 'feature-with-tag',
     title: 'Desenvolvimento de Feature com Tag',
-    description: 'Desenvolva uma nova feature em um branch separado e marque a versão com uma tag antes de mesclar.',
+    description:
+      'Desenvolva uma nova feature em um branch separado e marque a versão com uma tag antes de mesclar.',
     difficulty: 'Intermediário' as const,
     initialDiagram: `commit
 commit
@@ -49,8 +51,8 @@ commit id: "i7j8k9l" tag: "v1.1.0"`,
       'Crie um branch com git branch feature/login',
       'Faça seus commits no branch feature',
       'Use git tag v1.1.0-beta para marcar uma versão beta',
-      'Mescle usando git merge e crie a tag final com git tag v1.1.0'
-    ]
+      'Mescle usando git merge e crie a tag final com git tag v1.1.0',
+    ],
   },
   {
     id: 'rebase-workflow',
@@ -78,13 +80,14 @@ commit id: "release" type: HIGHLIGHT tag: "v2.0"`,
       'Quando estiver no branch feature, use git rebase main para atualizar',
       'Resolva quaisquer conflitos que apareçam durante o rebase',
       'Continue com git rebase --continue após resolver conflitos',
-      'Use git checkout main e git merge feature para mesclar as mudanças'
-    ]
+      'Use git checkout main e git merge feature para mesclar as mudanças',
+    ],
   },
   {
     id: 'github-flow',
     title: 'GitHub Flow com Pull Requests',
-    description: 'Trabalhe no modelo GitHub Flow criando branches, pull requests e realizando merges.',
+    description:
+      'Trabalhe no modelo GitHub Flow criando branches, pull requests e realizando merges.',
     difficulty: 'GitHub' as const,
     initialDiagram: `commit
 commit`,
@@ -107,22 +110,22 @@ commit id: "deploy" type: HIGHLIGHT tag: "deploy"`,
       'Crie branches específicos para cada funcionalidade',
       'Mantenha os commits pequenos e focados',
       'Abra pull requests para revisão de código',
-      'Mescle apenas quando a revisão for aprovada'
-    ]
-  }
+      'Mescle apenas quando a revisão for aprovada',
+    ],
+  },
 ];
 
 const GitChallengeExamples: React.FC = () => {
   return (
     <div className="space-y-12 py-8">
-      <div className="text-center mb-8">
+      <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold text-github-fg-default">Desafios Git Práticos</h2>
-        <p className="mt-3 text-github-fg-muted max-w-3xl mx-auto">
-          Aprenda Git com desafios práticos que ilustram fluxos de trabalho do mundo real. 
-          Cada desafio mostra o estado inicial e o objetivo que você precisa alcançar.
+        <p className="mx-auto mt-3 max-w-3xl text-github-fg-muted">
+          Aprenda Git com desafios práticos que ilustram fluxos de trabalho do mundo real. Cada
+          desafio mostra o estado inicial e o objetivo que você precisa alcançar.
         </p>
       </div>
-      
+
       <div className="grid grid-cols-1 gap-12">
         {challenges.map((challenge) => (
           <GitChallengeVisualizer
@@ -140,4 +143,4 @@ const GitChallengeExamples: React.FC = () => {
   );
 };
 
-export default GitChallengeExamples; 
+export default GitChallengeExamples;

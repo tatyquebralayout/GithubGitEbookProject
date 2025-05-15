@@ -10,12 +10,8 @@ import { useGitPracticeChallenge } from '../../hooks/useGitPracticeChallenge';
 // };
 
 const PracticeChallengeSection: React.FC = () => {
-  const { 
-    diagramDefinition, 
-    processCommand, 
-    currentPathDisplay,
-    currentPathArray
-  } = useGitPracticeChallenge();
+  const { diagramDefinition, processCommand, currentPathDisplay, currentPathArray } =
+    useGitPracticeChallenge();
 
   // Todos os useState e funções de lógica foram movidos para useGitPracticeChallenge
 
@@ -24,14 +20,14 @@ const PracticeChallengeSection: React.FC = () => {
   return (
     <section id="practice-challenge-section" className="pb-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-6">
+        <div className="mb-6 text-center">
           <h2 className="text-3xl font-bold text-github-fg-default">Prática do Desafio Git</h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Coluna 1: Terminal Interativo */}
-          <div className="lg:col-span-1 bg-slate-900 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
-            <InteractiveTerminal 
+          <div className="flex h-[350px] flex-col rounded-lg bg-slate-900 p-4 shadow-md lg:col-span-1">
+            <InteractiveTerminal
               onProcessCommand={processCommand}
               currentPathString={currentPathDisplay} // Para o prompt atual
               currentPathForHistory={currentPathArray} // Para armazenar no histórico
@@ -39,14 +35,14 @@ const PracticeChallengeSection: React.FC = () => {
           </div>
 
           {/* Coluna 2: Visualização de Grafo (Mermaid.js) */}
-          <div className="lg:col-span-1 bg-gray-50 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
+          <div className="flex h-[350px] flex-col rounded-lg bg-gray-50 p-4 shadow-md lg:col-span-1">
             <RepositoryGraph diagramDefinition={diagramDefinition} />
           </div>
 
           {/* Coluna 3: Progresso do Usuário */}
-          <div className="lg:col-span-1 bg-gray-50 p-4 rounded-lg shadow-md h-[350px] flex flex-col">
+          <div className="flex h-[350px] flex-col rounded-lg bg-gray-50 p-4 shadow-md lg:col-span-1">
             {/* TODO: Conectar ChallengeProgress ao estado do hook se necessário */}
-            <ChallengeProgress /> 
+            <ChallengeProgress />
           </div>
         </div>
       </div>
@@ -54,4 +50,4 @@ const PracticeChallengeSection: React.FC = () => {
   );
 };
 
-export default PracticeChallengeSection; 
+export default PracticeChallengeSection;

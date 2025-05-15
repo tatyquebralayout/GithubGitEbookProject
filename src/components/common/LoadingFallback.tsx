@@ -1,10 +1,10 @@
 import React from 'react';
 
 export const LoadingFallback: React.FC = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+  <div className="flex h-screen items-center justify-center">
+    <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-blue-500"></div>
     <span className="ml-3 text-lg text-gray-700">Carregando...</span>
   </div>
 );
 
-export default LoadingFallback; 
+export default LoadingFallback;

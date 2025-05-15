@@ -33,10 +33,10 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId
           // Limpar caracteres problemáticos e gerar um ID válido para o diagrama
           const cleanedChart = chart.replace(/[^\x20-\x7E]/g, ''); // Remove caracteres não imprimíveis
           const safeId = sanitizeId(diagramId);
-          
+
           // Renderizar com ID seguro
           const { svg, bindFunctions } = await mermaid.render(safeId, cleanedChart);
-          
+
           if (mermaidRef.current) {
             mermaidRef.current.innerHTML = svg;
             if (bindFunctions) {
@@ -57,7 +57,9 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId
   }, [diagramId, chart]);
 
   // We add a class for possible container styling if needed
-  return <div ref={mermaidRef} className="mermaid-diagram-container flex justify-center items-center" />;
+  return (
+    <div ref={mermaidRef} className="mermaid-diagram-container flex items-center justify-center" />
+  );
 };
 
-export default memo(MermaidDiagram); 
+export default memo(MermaidDiagram);

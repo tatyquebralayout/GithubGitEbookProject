@@ -19,4 +19,4 @@ const AboutAuthorPage: React.FC = () => {
   );
 };
 
-export default AboutAuthorPage; 
+export default AboutAuthorPage;

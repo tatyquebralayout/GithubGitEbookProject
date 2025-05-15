@@ -19,4 +19,4 @@ const GitHubCommandsPage: React.FC = () => {
   );
 };
 
-export default GitHubCommandsPage; 
+export default GitHubCommandsPage;

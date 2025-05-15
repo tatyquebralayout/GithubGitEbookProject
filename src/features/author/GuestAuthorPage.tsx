@@ -19,4 +19,4 @@ const GuestAuthorPage: React.FC = () => {
   );
 };
 
-export default GuestAuthorPage; 
+export default GuestAuthorPage;
