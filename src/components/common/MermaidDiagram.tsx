@@ -6,28 +6,22 @@ export interface MermaidDiagramProps {
   diagramId: string; // Unique ID for each diagram
 }
 
-// Initial global Mermaid configuration moved into useEffect
+// Configuração global do Mermaid
+mermaid.initialize({
+  startOnLoad: false,
+  securityLevel: 'loose',
+  theme: 'default',
+});
 
 export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId }) => {
   const mermaidRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Initialize Mermaid only once on the client side
-    try {
-      // Check if already initialized to prevent re-initialization if multiple diagrams are on a page
-      // or if HMR triggers re-execution. A simple flag or checking a property might be needed if
-      // mermaid.initialize throws error on re-init or if we want to be more robust.
-      // For now, the try-catch handles if it's already initialized by Mermaid's internal checks.
-      mermaid.initialize({
-        startOnLoad: false, // We will control rendering manually
-        theme: 'base', // Themes: base, default, dark, forest, neutral
-        fontFamily: '\'Mona Sans\', \'Inter\', sans-serif',
-      });
-    } catch (e) {
-      // Log non-critical initialization errors (e.g. already initialized)
-      // console.warn("Mermaid initialization issue (possibly already initialized):", e);
-    }
-  }, []); // Empty dependency array ensures this runs only once on mount
+  // Limpa caracteres especiais que podem causar problemas em IDs
+  const sanitizeId = (id: string): string => {
+    return id.replace(/[^\w-]/g, '_');
+  };
+
+  // Empty dependency array ensures this runs only once on mount
 
   useEffect(() => {
     if (mermaidRef.current && chart) {
@@ -36,11 +30,12 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId
           if (!mermaidRef.current) return;
           mermaidRef.current.innerHTML = '';
 
-          // Remover logs de depuração excessivos, mantendo apenas a limpeza de caracteres especiais
+          // Limpar caracteres problemáticos e gerar um ID válido para o diagrama
           const cleanedChart = chart.replace(/[^\x20-\x7E]/g, ''); // Remove caracteres não imprimíveis
+          const safeId = sanitizeId(diagramId);
           
-          // Renderizar a versão limpa
-          const { svg, bindFunctions } = await mermaid.render(diagramId, cleanedChart);
+          // Renderizar com ID seguro
+          const { svg, bindFunctions } = await mermaid.render(safeId, cleanedChart);
           
           if (mermaidRef.current) {
             mermaidRef.current.innerHTML = svg;
@@ -65,5 +60,4 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, diagramId
   return <div ref={mermaidRef} className="mermaid-diagram-container flex justify-center items-center" />;
 };
 
-// Use memo to avoid unnecessary re-renders if props don't change
 export default memo(MermaidDiagram); 

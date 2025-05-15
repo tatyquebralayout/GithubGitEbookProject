@@ -1,9 +1,32 @@
 import { useState, useCallback } from 'react';
-import { Commit, FileSystemStructure, BranchMeta } from '../components/practiceChallenge/practiceChallengeTypes';
+import { 
+  Commit, 
+  FileSystemStructure, 
+  BranchMeta, 
+  GitHubRepository,
+  GitHubRemote,
+  GitHubPullRequest,
+  GitHubIssue,
+  GitHubFileStructure
+} from '../components/practiceChallenge/practiceChallengeTypes';
 
 // TODO: Considerar se initialFileSystem deve ser definido aqui ou passado como argumento.
 const initialFileSystem: FileSystemStructure = {
   '~': { type: 'dir', content: {} }
+};
+
+// Estado inicial do repositório GitHub simulado
+const initialGitHubRepository: GitHubRepository = {
+  name: 'meu-projeto',
+  owner: 'usuario',
+  description: 'Um repositório de exemplo',
+  isPrivate: false,
+  stars: 0,
+  forks: 0,
+  watchers: 0,
+  defaultBranch: 'main',
+  createdAt: new Date().toISOString(),
+  lastUpdatedAt: new Date().toISOString(),
 };
 
 interface GitPracticeChallengeAPI {
@@ -11,7 +34,15 @@ interface GitPracticeChallengeAPI {
   currentPathDisplay: string;
   currentPathArray: string[];
   diagramDefinition: string;
-  // Outros estados ou funções que a UI possa precisar diretamente
+  // GitHub simulado
+  gitHubRepository: GitHubRepository | null;
+  gitHubRemotes: GitHubRemote[];
+  gitHubPullRequests: GitHubPullRequest[];
+  gitHubIssues: GitHubIssue[];
+  gitHubFileStructure: GitHubFileStructure;
+  pushedBranches: string[];
+  commits: Commit[];
+  createRepository: (repoName: string, repoDescription: string, isPrivate: boolean) => void;
 }
 
 export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
@@ -33,6 +64,14 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   const [currentPath, setCurrentPath] = useState<string[]>(['~']);
   const [gitRepoPath, setGitRepoPath] = useState<string[] | null>(null);
   const [workingDirectoryFiles, setWorkingDirectoryFiles] = useState<string[]>([]);
+
+  // GitHub simulado
+  const [gitHubRepository, setGitHubRepository] = useState<GitHubRepository | null>(null);
+  const [gitHubRemotes, setGitHubRemotes] = useState<GitHubRemote[]>([]);
+  const [gitHubPullRequests, setGitHubPullRequests] = useState<GitHubPullRequest[]>([]);
+  const [gitHubIssues, setGitHubIssues] = useState<GitHubIssue[]>([]);
+  const [gitHubFileStructure, setGitHubFileStructure] = useState<GitHubFileStructure>({});
+  const [pushedBranches, setPushedBranches] = useState<string[]>([]);
 
   // --- Funções Auxiliares --- 
   const getBranchHeadCommit = useCallback((branchName: string): Commit | undefined => {
@@ -220,8 +259,27 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     setCurrentBranch('main'); 
     setAllBranches(['main']); 
     setBranchDetails(new Map([['main', { parentBranch: null, parentCommitId: null }]]));
+    
+    // Reset GitHub states
+    setGitHubRepository(null);
+    setGitHubRemotes([]);
+    setGitHubPullRequests([]);
+    setGitHubIssues([]);
+    setGitHubFileStructure({});
+    setPushedBranches([]);
+    
     return `Initialized empty Git repository in ${currentPath.join('/')}/.git/`;
-  }, [currentPath, setGitRepoPath, setIsRepoInitialized, setStagedFiles, setCommits, setWorkingDirectoryFiles, setCurrentBranch, setAllBranches, setBranchDetails]);
+  }, [
+    currentPath, 
+    setGitRepoPath, 
+    setIsRepoInitialized, 
+    setStagedFiles, 
+    setCommits, 
+    setWorkingDirectoryFiles, 
+    setCurrentBranch, 
+    setAllBranches, 
+    setBranchDetails
+  ]);
 
   const executeGitStatus = useCallback((): string => {
     let statusMessage = `On branch ${currentBranch}\n`;
@@ -464,34 +522,68 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
 
   const executeGitPush = useCallback((args: string[]): string => {
     if (!isRepoInitialized) return 'fatal: not a git repository (or any of the parent directories): .git';
-    const remoteName = args[0];
-    const branchToPush = args[1];
+    
+    const remoteName = args[0] || 'origin';
+    const branchToPush = args[1] || currentBranch;
 
-    if (remoteName !== 'origin') return `fatal: '${remoteName}' does not appear to be a git repository`;
-    if (!branchToPush) return 'error: src refspec <branchname> does not match any.';
-    if (!allBranches.includes(branchToPush)) return `error: src refspec ${branchToPush} does not match any.`;
+    // Verificar se o remote existe
+    const remote = gitHubRemotes.find(r => r.name === remoteName);
+    if (!remote) {
+      return `fatal: '${remoteName}' does not appear to be a git repository`;
+    }
+
+    if (!allBranches.includes(branchToPush)) {
+      return `error: src refspec ${branchToPush} does not match any.`;
+    }
 
     const localHeadCommit = getBranchHeadCommit(branchToPush);
-    if (!localHeadCommit) return `error: failed to push some refs to 'origin'. Branch ${branchToPush} has no commits.`;
+    if (!localHeadCommit) {
+      return `error: failed to push some refs to '${remoteName}'. Branch ${branchToPush} has no commits.`;
+    }
 
     const remoteBranchHeadCommitId = remoteOrigin[branchToPush] || null;
     let successMessage = '';
 
     if (remoteBranchHeadCommitId) { 
-      if (localHeadCommit.id === remoteBranchHeadCommitId) return `Everything up-to-date`;
+      if (localHeadCommit.id === remoteBranchHeadCommitId) {
+        return `Everything up-to-date`;
+      }
       
       if (isAncestor(remoteBranchHeadCommitId, localHeadCommit.id)) {
         setRemoteOrigin(prev => ({ ...prev, [branchToPush]: localHeadCommit.id }));
-        successMessage = `To origin/${branchToPush}\n  ${remoteBranchHeadCommitId.substring(0,7)}..${localHeadCommit.id.substring(0,7)}  ${branchToPush} -> ${branchToPush}`;
+
+        // Atualizar GitHub após push bem-sucedido
+        updateGitHubAfterPush(remoteName, branchToPush, localHeadCommit);
+        
+        successMessage = `To ${remote.url}\n  ${remoteBranchHeadCommitId.substring(0,7)}..${localHeadCommit.id.substring(0,7)}  ${branchToPush} -> ${branchToPush}`;
       } else {
-         return `error: failed to push some refs to 'origin'\nTo prevent you from losing history, non-fast-forward updates were rejected.\nMerge the remote changes (e.g. 'git pull') before pushing again.`;
+        return `error: failed to push some refs to '${remoteName}'\nTo prevent you from losing history, non-fast-forward updates were rejected.\nMerge the remote changes (e.g. 'git pull') before pushing again.`;
       }
     } else { 
       setRemoteOrigin(prev => ({ ...prev, [branchToPush]: localHeadCommit.id }));
-      successMessage = `To origin/${branchToPush}\n * [new branch]      ${branchToPush} -> ${branchToPush}`;
+      
+      // Atualizar GitHub após push bem-sucedido
+      updateGitHubAfterPush(remoteName, branchToPush, localHeadCommit);
+
+      // Adicionar a branch como pushed
+      if (!pushedBranches.includes(branchToPush)) {
+        setPushedBranches(prev => [...prev, branchToPush]);
+      }
+      
+      successMessage = `To ${remote.url}\n * [new branch]      ${branchToPush} -> ${branchToPush}`;
     }
+    
     return successMessage;
-  }, [isRepoInitialized, allBranches, remoteOrigin, getBranchHeadCommit, isAncestor, setRemoteOrigin]);
+  }, [
+    isRepoInitialized, 
+    allBranches, 
+    remoteOrigin, 
+    getBranchHeadCommit, 
+    isAncestor, 
+    gitHubRemotes,
+    currentBranch,
+    pushedBranches
+  ]);
 
   const executeGitMerge = useCallback((args: string[]): string => {
     if (!isRepoInitialized) return 'fatal: not a git repository (or any of the parent directories): .git';
@@ -543,14 +635,284 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     getBranchHeadCommit, isAncestor, setCommits
   ]);
 
+  // Novas funções para GitHub
+  
+  const executeGitRemote = useCallback((args: string[]): string => {
+    if (!isRepoInitialized) return 'fatal: not a git repository (or any of the parent directories): .git';
+
+    const subCommand = args[0]?.toLowerCase();
+
+    if (!subCommand || subCommand === '-v' || subCommand === '--verbose') {
+      if (gitHubRemotes.length === 0) {
+        return '';
+      }
+      return gitHubRemotes.map(remote => 
+        `${remote.name}\t${remote.url} (fetch)\n${remote.name}\t${remote.url} (push)`
+      ).join('\n');
+    }
+
+    if (subCommand === 'add') {
+      const remoteName = args[1];
+      const remoteUrl = args[2];
+
+      if (!remoteName) return 'error: No remote name specified';
+      if (!remoteUrl) return 'error: No remote URL specified';
+
+      const existingRemote = gitHubRemotes.find(r => r.name === remoteName);
+      if (existingRemote) {
+        return `error: remote ${remoteName} already exists.`;
+      }
+
+      // Criar repositório GitHub se for o primeiro remote
+      if (gitHubRemotes.length === 0 && remoteName === 'origin') {
+        const repoName = gitRepoPath ? gitRepoPath[gitRepoPath.length - 1] : 'meu-projeto';
+        const newGitHubRepo = {
+          ...initialGitHubRepository,
+          name: repoName,
+          createdAt: new Date().toISOString(),
+          lastUpdatedAt: new Date().toISOString()
+        };
+        setGitHubRepository(newGitHubRepo);
+      }
+
+      const newRemote = { 
+        name: remoteName, 
+        url: remoteUrl,
+        isConnected: true
+      };
+      
+      setGitHubRemotes(prev => [...prev, newRemote]);
+
+      return '';
+    }
+
+    if (subCommand === 'remove' || subCommand === 'rm') {
+      const remoteName = args[1];
+      if (!remoteName) return 'error: No remote name specified';
+
+      const existingRemoteIndex = gitHubRemotes.findIndex(r => r.name === remoteName);
+      if (existingRemoteIndex === -1) {
+        return `error: No such remote: ${remoteName}`;
+      }
+
+      setGitHubRemotes(prev => prev.filter(r => r.name !== remoteName));
+      return '';
+    }
+
+    return `error: Unknown subcommand: ${subCommand}`;
+  }, [isRepoInitialized, gitHubRemotes, gitRepoPath]);
+
+  const executeGitPull = useCallback((args: string[]): string => {
+    if (!isRepoInitialized) return 'fatal: not a git repository (or any of the parent directories): .git';
+    
+    const remoteName = args[0] || 'origin';
+    const branchName = args[1] || currentBranch;
+
+    // Verificar se o remote existe
+    const remote = gitHubRemotes.find(r => r.name === remoteName);
+    if (!remote) {
+      return `fatal: '${remoteName}' does not appear to be a git repository`;
+    }
+
+    // Verificar se a branch existe no remote (foi pushed)
+    if (!pushedBranches.includes(branchName)) {
+      return `fatal: couldn't find remote ref ${branchName}`;
+    }
+
+    // Simulação simples de pull (apenas para fins didáticos)
+    // Em um cenário real, verificaríamos mudanças remotas, conflitos, etc.
+    return `Already up to date.`;
+  }, [isRepoInitialized, gitHubRemotes, currentBranch, pushedBranches]);
+
+  // Função para atualizar o estado do GitHub após um push
+  const updateGitHubAfterPush = useCallback((remoteName: string, branchName: string, headCommit: Commit) => {
+    // Atualizar a estrutura de arquivos no GitHub
+    const updatedFileStructure: GitHubFileStructure = { ...gitHubFileStructure };
+    
+    // Simulação simples: adicionar todos os arquivos do commit ao GitHub
+    // Em um caso real, analisaríamos o histórico de commits e mudanças
+    const filePathsInRepo = getFilesInRepository();
+    
+    filePathsInRepo.forEach(filePath => {
+      if (!updatedFileStructure[filePath]) {
+        updatedFileStructure[filePath] = {
+          name: filePath.split('/').pop() || '',
+          path: filePath,
+          type: 'file',
+          size: 0,
+          lastModified: new Date().toISOString(),
+          lastCommitId: headCommit.id,
+          lastCommitMessage: headCommit.message
+        };
+      } else {
+        updatedFileStructure[filePath] = {
+          ...updatedFileStructure[filePath],
+          lastModified: new Date().toISOString(),
+          lastCommitId: headCommit.id,
+          lastCommitMessage: headCommit.message
+        };
+      }
+    });
+    
+    setGitHubFileStructure(updatedFileStructure);
+    
+    // Atualizar timestamp do repositório
+    if (gitHubRepository) {
+      setGitHubRepository({
+        ...gitHubRepository,
+        lastUpdatedAt: new Date().toISOString()
+      });
+    }
+
+    // Se a branch não estiver na lista de branches pushed, adicione
+    if (!pushedBranches.includes(branchName)) {
+      setPushedBranches(prev => [...prev, branchName]);
+    }
+  }, [gitHubFileStructure, gitHubRepository, pushedBranches]);
+
+  // Função auxiliar para obter todos os arquivos no repositório
+  const getFilesInRepository = useCallback((): string[] => {
+    if (!gitRepoPath) return [];
+    
+    // Coleta os arquivos staged e commits realizados
+    const result: string[] = [...stagedFiles];
+    
+    // Recursivamente percorre o sistema de arquivos para encontrar todos os arquivos
+    const collectFiles = (path: string[], parentFsLevel: FileSystemStructure) => {
+      if (!parentFsLevel) return;
+      
+      Object.entries(parentFsLevel).forEach(([name, node]) => {
+        const currentPath = [...path, name];
+        if (node.type === 'file') {
+          // Obter caminho relativo ao repositório
+          if (gitRepoPath && currentPath.join('/').startsWith(gitRepoPath.join('/'))) {
+            const relativePathParts = currentPath.slice(gitRepoPath.length);
+            const fullRelativePath = relativePathParts.filter(p => p && p !== '~').join('/');
+            if (fullRelativePath && !result.includes(fullRelativePath)) {
+              result.push(fullRelativePath);
+            }
+          }
+        } else if (node.type === 'dir' && node.content) {
+          collectFiles(currentPath, node.content);
+        }
+      });
+    };
+    
+    // Começar pelo diretório raiz do repositório
+    const repoRoot = fileSystem['~'].content;
+    if (repoRoot) {
+      collectFiles(['~'], { '~': { type: 'dir', content: repoRoot } });
+    }
+    
+    return result;
+  }, [fileSystem, gitRepoPath, stagedFiles]);
+
+  // Adicionar função para implementar git clone
+  const executeGitClone = useCallback((args: string[]): string => {
+    const repoUrl = args[0];
+    
+    if (!repoUrl) {
+      return 'usage: git clone <repository> [<directory>]';
+    }
+    
+    // Extrair nome do repositório da URL
+    let repoName = '';
+    try {
+      // Extrai o último segmento da URL sem a extensão .git
+      repoName = repoUrl.split('/').pop()?.replace(/\.git$/, '') || '';
+      if (!repoName) {
+        return 'fatal: invalid repository URL format';
+      }
+    } catch (error) {
+      return 'fatal: unable to parse repository URL';
+    }
+    
+    // Verificar se diretório já existe no caminho atual
+    let effectiveFsLevel = fileSystem['~'].content;
+    if (currentPath.length > 1) {
+      for (const part of currentPath.slice(1)) {
+        if (effectiveFsLevel && effectiveFsLevel[part] && effectiveFsLevel[part].type === 'dir') {
+          effectiveFsLevel = effectiveFsLevel[part].content!;
+        } else {
+          return `fatal: destination path '${repoName}' already exists and is not an empty directory.`;
+        }
+      }
+    }
+    
+    // Verificar se pasta destino já existe
+    if (effectiveFsLevel && effectiveFsLevel[repoName]) {
+      return `fatal: destination path '${repoName}' already exists and is not an empty directory.`;
+    }
+    
+    // Criar diretório para o repositório
+    if (effectiveFsLevel) {
+      // Criar diretório do repositório
+      effectiveFsLevel[repoName] = { type: 'dir', content: {} };
+      setFileSystem(prevFs => ({ ...prevFs }));
+      
+      // Navegar para o diretório (similar ao CD)
+      setCurrentPath(prev => [...prev, repoName]);
+      
+      // Inicializar um repositório Git nesse diretório
+      setGitRepoPath([...currentPath, repoName]);
+      setIsRepoInitialized(true);
+      setStagedFiles([]);
+      setCommits([]);
+      setWorkingDirectoryFiles([]);
+      setCurrentBranch('main');
+      setAllBranches(['main']);
+      setBranchDetails(new Map([['main', { parentBranch: null, parentCommitId: null }]]));
+      
+      // Simulação de conexão com repositório remoto
+      const remoteUrl = repoUrl;
+      const remoteName = 'origin';
+
+      // Criar repositório no GitHub simulado
+      const newGitHubRepo = {
+        ...initialGitHubRepository,
+        name: repoName,
+        createdAt: new Date().toISOString(),
+        lastUpdatedAt: new Date().toISOString()
+      };
+      
+      setGitHubRepository(newGitHubRepo);
+      
+      // Adicionar o remote origin
+      setGitHubRemotes([{ 
+        name: remoteName, 
+        url: remoteUrl,
+        isConnected: true
+      }]);
+      
+      return `Cloning into '${repoName}'...\nremote: Enumerating objects: 0, done.\nremote: Counting objects: 100% (0/0), done.\nremote: Compressing objects: 100% (0/0), done.\nremote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0\nConnected to ${remoteUrl}\nRepositório inicializado em ${[...currentPath, repoName].join('/')}/.git/`;
+    } else {
+      return `fatal: unable to create directory for '${repoName}'`;
+    }
+  }, [
+    fileSystem, 
+    currentPath, 
+    setFileSystem, 
+    setCurrentPath, 
+    setGitRepoPath,
+    setIsRepoInitialized,
+    setStagedFiles,
+    setCommits,
+    setWorkingDirectoryFiles,
+    setCurrentBranch,
+    setAllBranches,
+    setBranchDetails,
+    setGitHubRepository,
+    setGitHubRemotes
+  ]);
+
   // --- Orquestração de Comandos ---
   const handleGitCommand = useCallback((gitSubCommand: string | undefined, commandParts: string[]): string => {
     const remainingArgs = commandParts.slice(2);
-    if (gitSubCommand !== 'init' && !isRepoInitialized) {
+    if (gitSubCommand !== 'init' && gitSubCommand !== 'clone' && !isRepoInitialized) {
       return 'fatal: not a git repository (or any of the parent directories): .git';
     }
 
-    if (gitSubCommand !== 'init' && isRepoInitialized && gitRepoPath) {
+    if (gitSubCommand !== 'init' && gitSubCommand !== 'clone' && isRepoInitialized && gitRepoPath) {
         const currentPathString = currentPath.join('/');
         const repoPathString = gitRepoPath.join('/');
         if (!currentPathString.startsWith(repoPathString)) {
@@ -562,6 +924,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
 
     switch (gitSubCommand) {
       case 'init': return executeGitInit();
+      case 'clone': return executeGitClone(remainingArgs);
       case 'status': return executeGitStatus();
       case 'add': return executeGitAdd(remainingArgs);
       case 'commit': return executeGitCommit(commandParts);
@@ -570,6 +933,8 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
       case 'checkout': return executeGitCheckout(remainingArgs);
       case 'push': return executeGitPush(remainingArgs);
       case 'merge': return executeGitMerge(remainingArgs);
+      case 'remote': return executeGitRemote(remainingArgs);
+      case 'pull': return executeGitPull(remainingArgs);
       default:
         if (gitSubCommand) return `git: '${gitSubCommand}' is not a git command. See 'git --help'.`;
         return "Usage: git <command> [<args>]";
@@ -577,7 +942,8 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   }, [
     isRepoInitialized, gitRepoPath, currentPath, 
     executeGitInit, executeGitStatus, executeGitAdd, executeGitCommit, 
-    executeGitLog, executeGitBranch, executeGitCheckout, executeGitPush, executeGitMerge
+    executeGitLog, executeGitBranch, executeGitCheckout, executeGitPush, executeGitMerge,
+    executeGitRemote, executeGitPull, executeGitClone
   ]);
   
   const processCommand = useCallback((command: string): string => {
@@ -716,10 +1082,66 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   const diagramDefinition = generateMermaidDiagramDefinition();
   const currentPathDisplay = currentPath.join('/');
 
+  // Adicionar função para criar repositório diretamente (para ser chamada pelo componente)
+  const createRepository = useCallback((repoName: string, repoDescription: string, isPrivate: boolean): void => {
+    // Só cria se não tiver repositório inicializado
+    if (!isRepoInitialized) {
+      setGitRepoPath([...currentPath]); 
+      setIsRepoInitialized(true);
+      setStagedFiles([]);
+      setCommits([]);
+      setWorkingDirectoryFiles([]); 
+      setCurrentBranch('main'); 
+      setAllBranches(['main']); 
+      setBranchDetails(new Map([['main', { parentBranch: null, parentCommitId: null }]]));
+    }
+    
+    // Criar o repositório GitHub
+    const newGitHubRepo = {
+      ...initialGitHubRepository,
+      name: repoName || 'meu-projeto',
+      description: repoDescription || 'Um repositório de exemplo',
+      isPrivate: isPrivate,
+      createdAt: new Date().toISOString(),
+      lastUpdatedAt: new Date().toISOString()
+    };
+    
+    setGitHubRepository(newGitHubRepo);
+    
+    // Adicionar o remote origin automaticamente
+    const newRemote = { 
+      name: 'origin', 
+      url: `https://github.com/usuario/${repoName || 'meu-projeto'}.git`,
+      isConnected: true
+    };
+    
+    setGitHubRemotes(prev => [...prev, newRemote]);
+  }, [
+    currentPath, 
+    isRepoInitialized,
+    setGitRepoPath, 
+    setIsRepoInitialized, 
+    setStagedFiles, 
+    setCommits, 
+    setWorkingDirectoryFiles, 
+    setCurrentBranch, 
+    setAllBranches, 
+    setBranchDetails
+  ]);
+
   return {
     processCommand,
     diagramDefinition,
     currentPathDisplay,
     currentPathArray: currentPath,
+    // GitHub simulado
+    gitHubRepository,
+    gitHubRemotes,
+    gitHubPullRequests,
+    gitHubIssues,
+    gitHubFileStructure,
+    pushedBranches,
+    commits,
+    createRepository  // Nova função exportada
   };
 }; 

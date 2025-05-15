@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
-import { TerminalIcon, GitBranchIcon, InfoIcon } from '@primer/octicons-react';
+import { TerminalIcon, GitBranchIcon, InfoIcon, MarkGithubIcon } from '@primer/octicons-react';
 import InteractiveTerminal from './practiceChallenge/InteractiveTerminal';
 import RepositoryGraph from './practiceChallenge/RepositoryGraph';
+import GitHubRepositorySimulator from './practiceChallenge/GitHubRepositorySimulator';
 import { useGitPracticeChallenge } from '../hooks/useGitPracticeChallenge';
 
 const GitTerminalSimulator: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'terminal' | 'graph' | 'info'>('terminal');
+  const [activeTab, setActiveTab] = useState<'terminal' | 'graph' | 'github' | 'info'>('terminal');
   const { 
     diagramDefinition, 
     processCommand, 
     currentPathDisplay,
-    currentPathArray
+    currentPathArray,
+    // GitHub simulado
+    gitHubRepository,
+    gitHubRemotes,
+    gitHubPullRequests: _gitHubPullRequests,
+    gitHubIssues: _gitHubIssues,
+    gitHubFileStructure,
+    pushedBranches,
+    commits,
+    createRepository
   } = useGitPracticeChallenge();
 
   return (
@@ -30,8 +40,8 @@ const GitTerminalSimulator: React.FC = () => {
         </div>
       </div>
 
-      {/* Navigation Tabs - Visível apenas em telas pequenas */}
-      <div className="flex items-center bg-gray-800 border-b border-gray-700 lg:hidden">
+      {/* Navigation Tabs */}
+      <div className="flex items-center bg-gray-800 border-b border-gray-700">
         <button 
           onClick={() => setActiveTab('terminal')}
           className={`flex items-center px-4 py-2 text-sm ${
@@ -55,6 +65,17 @@ const GitTerminalSimulator: React.FC = () => {
           Grafo
         </button>
         <button 
+          onClick={() => setActiveTab('github')}
+          className={`flex items-center px-4 py-2 text-sm ${
+            activeTab === 'github' 
+              ? 'text-white border-b-2 border-github-accent-emphasis' 
+              : 'text-gray-400 hover:text-gray-300'
+          }`}
+        >
+          <MarkGithubIcon className="mr-1" size={16} />
+          GitHub
+        </button>
+        <button 
           onClick={() => setActiveTab('info')}
           className={`flex items-center px-4 py-2 text-sm ${
             activeTab === 'info' 
@@ -68,11 +89,11 @@ const GitTerminalSimulator: React.FC = () => {
       </div>
 
       {/* Content Area */}
-      <div className="flex flex-col lg:flex-row h-[500px]">
-        {/* Terminal Panel - Sempre visível em desktop, condicional em mobile */}
+      <div className="flex flex-col lg:flex-row h-[600px]">
+        {/* Terminal Panel */}
         <div className={`${
-          activeTab === 'terminal' || activeTab === 'info' ? 'block' : 'hidden'
-        } lg:block lg:w-1/2 h-full ${activeTab === 'info' ? 'hidden lg:block' : ''}`}>
+          activeTab === 'terminal' ? 'block' : 'hidden'
+        } lg:block lg:w-1/3 h-full`}>
           <InteractiveTerminal 
             onProcessCommand={processCommand}
             currentPathString={currentPathDisplay}
@@ -80,11 +101,26 @@ const GitTerminalSimulator: React.FC = () => {
           />
         </div>
 
-        {/* Graph Panel - Sempre visível em desktop, condicional em mobile */}
+        {/* Graph Panel */}
         <div className={`${
-          activeTab === 'graph' || activeTab === 'info' ? 'block' : 'hidden'
-        } lg:block lg:w-1/2 h-full p-4 bg-gray-800 ${activeTab === 'info' ? 'hidden lg:block' : ''}`}>
+          activeTab === 'graph' ? 'block' : 'hidden'
+        } lg:block lg:w-1/3 h-full p-4 bg-gray-800`}>
           <RepositoryGraph diagramDefinition={diagramDefinition} />
+        </div>
+
+        {/* GitHub Panel */}
+        <div className={`${
+          activeTab === 'github' ? 'block' : 'hidden'
+        } lg:block lg:w-1/3 h-full p-4 bg-white overflow-auto`}>
+          <GitHubRepositorySimulator 
+            gitHubRepository={gitHubRepository}
+            gitHubRemotes={gitHubRemotes}
+            gitHubFileStructure={gitHubFileStructure}
+            commits={commits}
+            pushedBranches={pushedBranches}
+            _currentBranch={currentPathArray[currentPathArray.length - 1] || 'main'}
+            createRepository={createRepository}
+          />
         </div>
 
         {/* Info Panel - Visível apenas quando selecionado */}
@@ -97,6 +133,7 @@ const GitTerminalSimulator: React.FC = () => {
               <h4 className="text-lg font-semibold text-github-accent-fg">Inicialização</h4>
               <ul className="mt-2 space-y-2">
                 <li><code className="bg-gray-700 px-2 py-1 rounded">git init</code> - Inicializa um novo repositório</li>
+                <li><code className="bg-gray-700 px-2 py-1 rounded">git clone [url]</code> - Clona um repositório existente</li>
               </ul>
             </div>
             
@@ -117,6 +154,15 @@ const GitTerminalSimulator: React.FC = () => {
                 <li><code className="bg-gray-700 px-2 py-1 rounded">git branch [nome]</code> - Cria uma nova branch</li>
                 <li><code className="bg-gray-700 px-2 py-1 rounded">git checkout [branch]</code> - Muda para outra branch</li>
                 <li><code className="bg-gray-700 px-2 py-1 rounded">git merge [branch]</code> - Mescla outra branch na branch atual</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-github-accent-fg">GitHub & Remotos</h4>
+              <ul className="mt-2 space-y-2">
+                <li><code className="bg-gray-700 px-2 py-1 rounded">git remote add [nome] [url]</code> - Adiciona um remoto</li>
+                <li><code className="bg-gray-700 px-2 py-1 rounded">git push [remoto] [branch]</code> - Envia commits para o repositório remoto</li>
+                <li><code className="bg-gray-700 px-2 py-1 rounded">git pull [remoto] [branch]</code> - Recebe commits do repositório remoto</li>
               </ul>
             </div>
             
