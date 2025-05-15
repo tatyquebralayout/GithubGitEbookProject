@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Github, Linkedin, Globe } from 'lucide-react';
-import PracticeChallengeSection from './practiceChallenge/PracticeChallengeSection';
+import GitTerminalSimulator from './GitTerminalSimulator';
 import BasicCommands from './BasicCommands';
 
 // New author data for the intro section
@@ -278,8 +278,21 @@ const GitBasicCommands: React.FC = () => {
           </section>
         )}
 
-        {/* Game Section: Prática do Desafio - Agora usa o componente dedicado */}
-        <PracticeChallengeSection />
+        {/* Terminal Simulator Section - Substituindo o PracticeChallengeSection */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold text-github-fg-default">Simulador de Terminal Git</h2>
+              <p className="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">
+                Pratique comandos Git em um ambiente simulado e veja como o gráfico do repositório evolui em tempo real.
+              </p>
+            </div>
+            
+            <div className="max-w-6xl mx-auto">
+              <GitTerminalSimulator />
+            </div>
+          </div>
+        </section>
       </div>
 
     </div>

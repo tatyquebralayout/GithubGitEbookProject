@@ -598,23 +598,31 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
 
   // --- Geração do Diagrama --- 
   const generateMermaidDiagramDefinition = useCallback((): string => {
-    // Remover código de teste e restaurar o código original
     if (!isRepoInitialized || !gitRepoPath) {
-      // Atualizar a sintaxe para Mermaid 11.6.0
-      return 'gitGraph LR:\n  commit id: "Initial" tag: "No commits yet"\n';
+      // Retorna string vazia para não mostrar diagrama ao iniciar
+      return '';
     }
     
     // Atualizar a sintaxe para Mermaid 11.6.0
-    let mermaidString = 'gitGraph LR:\n';
+    let mermaidString = 'gitGraph TB:\n';
+    
+    // Adicionar configuração para tornar a visualização mais clara
+    mermaidString += '  config {\n';
+    mermaidString += '    showBranches: true,\n';
+    mermaidString += '    showCommitLabel: true,\n';
+    mermaidString += '    mainBranchName: "main"\n';
+    mermaidString += '  }\n';
+    
     const actualCommits = commits.filter(c => c.id !== 'Initial');
     const chronologicalCommits = [...(actualCommits.length > 0 ? actualCommits : commits)].reverse();
 
     // Função para escapar aspas duplas em strings para uso seguro em tags/nomes Mermaid
-    const escapeMermaidString = (str: string): string => str.replace(/"/g, '#quot;'); // Usando #quot; como um placeholder que Mermaid pode entender ou que não quebra a sintaxe. &quot; seria o ideal.
+    const escapeMermaidString = (str: string): string => str.replace(/"/g, '').replace(/'/g, '');
 
     if (chronologicalCommits.length === 0 || (chronologicalCommits.length === 1 && chronologicalCommits[0].id === 'Initial')) {
       // Se não houver commits reais, ainda garantir que há um commit inicial no diagrama
-      mermaidString += `  commit id: "Initial" tag: "No commits yet"\n`;
+      mermaidString += `  commit id: "Initial"\n`;
+      mermaidString += `  commit tag: "No commits yet"\n`;
       mermaidString += `  checkout "${escapeMermaidString(currentBranch)}"\n`;
       return mermaidString;
     }
@@ -676,11 +684,14 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
         }
       } else {
         // Commit normal (não é merge)
-        const sanitizedMessage = escapeMermaidString(commit.message.replace(/;/g, ',')); // Também remover ponto e vírgula da mensagem
-        const tag = `${commit.id.substring(0,5)}: ${sanitizedMessage.substring(0,20)}${sanitizedMessage.length > 20 ? '...' : ''}`;
+        const sanitizedMessage = escapeMermaidString(commit.message).substring(0, 30);
         
-        // Adicionar commit normal
-        mermaidString += `  commit id: "${commit.id}" tag: "${tag}"\n`;
+        // Adicionar commit normal com tag formatada
+        if (sanitizedMessage.length > 0) {
+          mermaidString += `  commit id: "${commit.id.substring(0,5)}" tag: "${sanitizedMessage}"\n`;
+        } else {
+          mermaidString += `  commit id: "${commit.id.substring(0,5)}"\n`;
+        }
       }
     });
 
@@ -698,6 +709,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
             mermaidString += `  checkout "${safeCurrentBranch}"\n`;
         }
     }
+    
     return mermaidString;
   }, [isRepoInitialized, gitRepoPath, commits, currentBranch, branchDetails, allBranches]);
 

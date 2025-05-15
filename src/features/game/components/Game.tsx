@@ -3,7 +3,8 @@ import {
   TerminalIcon,
   PeopleIcon,
   CodeIcon,
-  GoalIcon
+  GoalIcon,
+  CodespacesIcon
 } from '@primer/octicons-react';
 import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom'; // Link não é mais usado diretamente aqui, CommandCategorySection cuida disso
@@ -12,6 +13,8 @@ import { Link } from 'react-router-dom';
 // import ChallengeBadge from './ChallengeBadge'; // Não é mais usado diretamente
 import CommandCategorySection from './CommandCategorySection';
 import { gitCommandsData } from '../data/commandsData';
+import GitChallengeExamples from '../../gitCommands/components/practiceChallenge/GitChallengeExamples';
+import GitChallengeExample from '../../gitCommands/components/practiceChallenge/GitChallengeExample';
 
 // Define author data for this component's context // Movido para commandsData.ts
 // const gameAuthors = [
@@ -47,6 +50,21 @@ const Game: React.FC = () => {
           <p className="mt-6 text-xl text-white/80">
             Complete desafios, ganhe pontos e domine os comandos Git através de exercícios práticos
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link 
+              to="/git-visualizer"
+              className="px-6 py-3 bg-white text-github-accent-emphasis font-medium rounded-lg hover:bg-opacity-90 transition-colors flex items-center gap-2"
+            >
+              <CodespacesIcon size={20} />
+              Visualizador de Comandos Git
+            </Link>
+            <Link 
+              to="/game/basic-commands"
+              className="px-6 py-3 bg-white/20 text-white font-medium rounded-lg hover:bg-white/30 transition-colors backdrop-blur-sm"
+            >
+              Ver Desafios
+            </Link>
+          </div>
           <div className="mt-8 flex justify-center gap-8">
             <div className="text-center">
               <div className="text-3xl font-bold">50+</div>
@@ -108,8 +126,22 @@ const Game: React.FC = () => {
         </div>
       </section>
 
-      {/* Video Section */}
+      {/* Exemplo simples de Diagrama Git */}
       <section className="py-16 bg-github-canvas-subtle">
+        <div className="container mx-auto px-4">
+          <GitChallengeExample />
+        </div>
+      </section>
+
+      {/* Git Challenge Examples Section */}
+      <section className="py-16 bg-github-canvas-subtle" id="git-challenge-examples">
+        <div className="container mx-auto px-4">
+          <GitChallengeExamples />
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-github-fg-default">Entenda o Game</h2>

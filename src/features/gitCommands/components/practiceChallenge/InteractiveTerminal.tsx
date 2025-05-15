@@ -27,7 +27,14 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   currentPathForHistory, // Nova prop para o histórico
 }) => {
   const [inputValue, setInputValue] = useState('');
-  const [history, setHistory] = useState<TerminalHistoryItem[]>([]);
+  const [history, setHistory] = useState<TerminalHistoryItem[]>([
+    {
+      id: Date.now() - 1000,
+      command: '',
+      output: 'Bem-vindo ao Simulador de Terminal Git!\n\nVocê ainda não tem nenhum projeto iniciado. Para começar, você pode:\n- Criar um diretório com: mkdir meu-projeto\n- Navegar até ele com: cd meu-projeto\n- Inicializar um repositório Git com: git init\n\nDigite um comando para começar:',
+      pathAtCommand: currentPathForHistory
+    }
+  ]);
   const historyContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -57,7 +64,14 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       // 'clear' is handled specially by parent to reset git states
       // but terminal history clear is local
       onProcessCommand(commandToProcess); // Notify parent to reset its state
-      setHistory([]);
+      setHistory([
+        {
+          id: Date.now(),
+          command: '',
+          output: 'Bem-vindo ao Simulador de Terminal Git!\n\nVocê ainda não tem nenhum projeto iniciado. Para começar, você pode:\n- Criar um diretório com: mkdir meu-projeto\n- Navegar até ele com: cd meu-projeto\n- Inicializar um repositório Git com: git init\n\nDigite um comando para começar:',
+          pathAtCommand: currentPathForHistory
+        }
+      ]);
       setInputValue('');
       // Focus after a very short delay to ensure DOM is updated and form is visible
       requestAnimationFrame(() => inputRef.current?.focus());
@@ -96,13 +110,15 @@ const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       <div ref={historyContainerRef} className="flex-grow overflow-y-auto p-2 space-y-1">
         {history.map(item => (
           <div key={item.id}>
-            <div className="flex">
-              <span className="text-green-400">user@gitsheet:</span>
-              {/* Usa getPathString para o histórico */}
-              <span className="text-blue-400">{getPathString(item.pathAtCommand)}</span> 
-              <span className="text-gray-300">$</span>
-              <span className="pl-2">{item.command}</span>
-            </div>
+            {item.command ? (
+              <div className="flex">
+                <span className="text-green-400">user@gitsheet:</span>
+                {/* Usa getPathString para o histórico */}
+                <span className="text-blue-400">{getPathString(item.pathAtCommand)}</span> 
+                <span className="text-gray-300">$</span>
+                <span className="pl-2">{item.command}</span>
+              </div>
+            ) : null}
             {item.output && (
               <div className="whitespace-pre-wrap text-gray-300">{item.output}</div>
             )}

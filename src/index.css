@@ -129,3 +129,71 @@
     @apply px-3 py-2 rounded-md hover:bg-github-canvas-subtle;
   }
 }
+
+/* Estilos para os diagramas Git do Mermaid */
+.mermaid-diagram svg,
+.simple-mermaid-diagram svg {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* Estilos específicos para o simulador de terminal Git */
+.simple-mermaid-diagram svg {
+  min-height: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Animações para commits e branches */
+.mermaid-diagram .commit-node:hover,
+.simple-mermaid-diagram .commit-node:hover {
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  cursor: pointer;
+}
+
+.mermaid-diagram .branch-line,
+.simple-mermaid-diagram .branch-line {
+  transition: stroke-width 0.3s ease, stroke 0.3s ease;
+}
+
+.mermaid-diagram .branch-line:hover,
+.simple-mermaid-diagram .branch-line:hover {
+  stroke-width: 3px;
+}
+
+/* Estilização específica para o diagrama do simulador Git */
+.simple-mermaid-diagram text {
+  font-family: 'Mona Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+}
+
+.simple-mermaid-diagram .commit {
+  transition: transform 0.2s ease-in-out;
+}
+
+.simple-mermaid-diagram .commit:hover {
+  transform: scale(1.1);
+}
+
+/* Melhorias visuais para temas */
+.mermaid-diagram[data-theme="dark"] {
+  background-color: #0d1117;
+  color: #c9d1d9;
+}
+
+.mermaid-diagram[data-theme="forest"] {
+  background-color: #f8f9fa;
+}
+
+/* Animação para quando aparece um novo diagrama */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mermaid-diagram,
+.simple-mermaid-diagram {
+  animation: fadeIn 0.5s ease-in-out;
+}
