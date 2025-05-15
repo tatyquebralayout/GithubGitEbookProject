@@ -73,6 +73,89 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   const [gitHubFileStructure, setGitHubFileStructure] = useState<GitHubFileStructure>({});
   const [pushedBranches, setPushedBranches] = useState<string[]>([]);
 
+  // Função auxiliar para obter todos os arquivos no repositório
+  const getFilesInRepository = useCallback((): string[] => {
+    if (!gitRepoPath) return [];
+    
+    // Coleta os arquivos staged e commits realizados
+    const result: string[] = [...stagedFiles];
+    
+    // Recursivamente percorre o sistema de arquivos para encontrar todos os arquivos
+    const collectFiles = (path: string[], parentFsLevel: FileSystemStructure) => {
+      if (!parentFsLevel) return;
+      
+      Object.entries(parentFsLevel).forEach(([name, node]) => {
+        const currentPath = [...path, name];
+        if (node.type === 'file') {
+          // Obter caminho relativo ao repositório
+          if (gitRepoPath && currentPath.join('/').startsWith(gitRepoPath.join('/'))) {
+            const relativePathParts = currentPath.slice(gitRepoPath.length);
+            const fullRelativePath = relativePathParts.filter(p => p && p !== '~').join('/');
+            if (fullRelativePath && !result.includes(fullRelativePath)) {
+              result.push(fullRelativePath);
+            }
+          }
+        } else if (node.type === 'dir' && node.content) {
+          collectFiles(currentPath, node.content);
+        }
+      });
+    };
+    
+    // Começar pelo diretório raiz do repositório
+    const repoRoot = fileSystem['~'].content;
+    if (repoRoot) {
+      collectFiles(['~'], { '~': { type: 'dir', content: repoRoot } });
+    }
+    
+    return result;
+  }, [fileSystem, gitRepoPath, stagedFiles]);
+
+  // Função para atualizar o estado do GitHub após um push
+  const updateGitHubAfterPush = useCallback((remoteName: string, branchName: string, headCommit: Commit) => {
+    // Atualizar a estrutura de arquivos no GitHub
+    const updatedFileStructure: GitHubFileStructure = { ...gitHubFileStructure };
+    
+    // Simulação simples: adicionar todos os arquivos do commit ao GitHub
+    // Em um caso real, analisaríamos o histórico de commits e mudanças
+    const filePathsInRepo = getFilesInRepository();
+    
+    filePathsInRepo.forEach(filePath => {
+      if (!updatedFileStructure[filePath]) {
+        updatedFileStructure[filePath] = {
+          name: filePath.split('/').pop() || '',
+          path: filePath,
+          type: 'file',
+          size: 0,
+          lastModified: new Date().toISOString(),
+          lastCommitId: headCommit.id,
+          lastCommitMessage: headCommit.message
+        };
+      } else {
+        updatedFileStructure[filePath] = {
+          ...updatedFileStructure[filePath],
+          lastModified: new Date().toISOString(),
+          lastCommitId: headCommit.id,
+          lastCommitMessage: headCommit.message
+        };
+      }
+    });
+    
+    setGitHubFileStructure(updatedFileStructure);
+    
+    // Atualizar timestamp do repositório
+    if (gitHubRepository) {
+      setGitHubRepository({
+        ...gitHubRepository,
+        lastUpdatedAt: new Date().toISOString()
+      });
+    }
+
+    // Se a branch não estiver na lista de branches pushed, adicione
+    if (!pushedBranches.includes(branchName)) {
+      setPushedBranches(prev => [...prev, branchName]);
+    }
+  }, [gitHubFileStructure, gitHubRepository, pushedBranches, getFilesInRepository]);
+
   // --- Funções Auxiliares --- 
   const getBranchHeadCommit = useCallback((branchName: string): Commit | undefined => {
     const directBranchCommit = commits.find(c => c.branch === branchName && c.id !== 'Initial');
@@ -251,6 +334,18 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
 
   // --- Funções de Execução de Comandos Git ---
   const executeGitInit = useCallback((): string => {
+    // Verificar se já é um repositório Git
+    if (isRepoInitialized && gitRepoPath) {
+      // Se já estiver no mesmo caminho, apenas retornar aviso
+      if (gitRepoPath.join('/') === currentPath.join('/')) {
+        return `Reinitialized existing Git repository in ${currentPath.join('/')}/.git/`;
+      }
+    }
+    
+    // Se a pasta já existe, mas não é o mesmo repo, então é uma inicialização nova
+    const existingRemotes = gitHubRemotes;
+    const existingRepo = gitHubRepository;
+    
     setGitRepoPath([...currentPath]); 
     setIsRepoInitialized(true);
     setStagedFiles([]);
@@ -260,17 +355,27 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     setAllBranches(['main']); 
     setBranchDetails(new Map([['main', { parentBranch: null, parentCommitId: null }]]));
     
-    // Reset GitHub states
-    setGitHubRepository(null);
-    setGitHubRemotes([]);
-    setGitHubPullRequests([]);
-    setGitHubIssues([]);
-    setGitHubFileStructure({});
-    setPushedBranches([]);
+    // Reset GitHub states apenas se não for uma reinicialização
+    if (!isRepoInitialized || gitRepoPath?.join('/') !== currentPath.join('/')) {
+      setGitHubRepository(null);
+      setGitHubRemotes([]);
+      setGitHubPullRequests([]);
+      setGitHubIssues([]);
+      setGitHubFileStructure({});
+      setPushedBranches([]);
+    } else {
+      // Preservar remotes e repositório se for reinicialização
+      setGitHubRemotes(existingRemotes);
+      setGitHubRepository(existingRepo);
+    }
     
     return `Initialized empty Git repository in ${currentPath.join('/')}/.git/`;
   }, [
     currentPath, 
+    isRepoInitialized,
+    gitRepoPath,
+    gitHubRemotes,
+    gitHubRepository,
     setGitRepoPath, 
     setIsRepoInitialized, 
     setStagedFiles, 
@@ -518,13 +623,22 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
         // Se quisermos simular o conteúdo dos arquivos por branch, seria mais complexo.
         return `Switched to branch '${branchToCheckout}'`;
     }
-  }, [allBranches, currentBranch, getBranchHeadCommit, setAllBranches, setBranchDetails, setCurrentBranch]);
+                  }, [allBranches, currentBranch, getBranchHeadCommit, setAllBranches, setBranchDetails, setCurrentBranch]);
 
   const executeGitPush = useCallback((args: string[]): string => {
     if (!isRepoInitialized) return 'fatal: not a git repository (or any of the parent directories): .git';
     
-    const remoteName = args[0] || 'origin';
-    const branchToPush = args[1] || currentBranch;
+    let remoteName: string;
+    let branchToPush: string;
+    
+    // Caso específico para git push -u origin main
+    if (args[0] === '-u' && args.length >= 2) {
+      remoteName = args[1];
+      branchToPush = args.length >= 3 ? args[2] : currentBranch;
+    } else {
+      remoteName = args[0] || 'origin';
+      branchToPush = args[1] || currentBranch;
+    }
 
     // Verificar se o remote existe
     const remote = gitHubRemotes.find(r => r.name === remoteName);
@@ -582,7 +696,8 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     isAncestor, 
     gitHubRemotes,
     currentBranch,
-    pushedBranches
+    pushedBranches,
+    updateGitHubAfterPush
   ]);
 
   const executeGitMerge = useCallback((args: string[]): string => {
@@ -724,89 +839,6 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     return `Already up to date.`;
   }, [isRepoInitialized, gitHubRemotes, currentBranch, pushedBranches]);
 
-  // Função para atualizar o estado do GitHub após um push
-  const updateGitHubAfterPush = useCallback((remoteName: string, branchName: string, headCommit: Commit) => {
-    // Atualizar a estrutura de arquivos no GitHub
-    const updatedFileStructure: GitHubFileStructure = { ...gitHubFileStructure };
-    
-    // Simulação simples: adicionar todos os arquivos do commit ao GitHub
-    // Em um caso real, analisaríamos o histórico de commits e mudanças
-    const filePathsInRepo = getFilesInRepository();
-    
-    filePathsInRepo.forEach(filePath => {
-      if (!updatedFileStructure[filePath]) {
-        updatedFileStructure[filePath] = {
-          name: filePath.split('/').pop() || '',
-          path: filePath,
-          type: 'file',
-          size: 0,
-          lastModified: new Date().toISOString(),
-          lastCommitId: headCommit.id,
-          lastCommitMessage: headCommit.message
-        };
-      } else {
-        updatedFileStructure[filePath] = {
-          ...updatedFileStructure[filePath],
-          lastModified: new Date().toISOString(),
-          lastCommitId: headCommit.id,
-          lastCommitMessage: headCommit.message
-        };
-      }
-    });
-    
-    setGitHubFileStructure(updatedFileStructure);
-    
-    // Atualizar timestamp do repositório
-    if (gitHubRepository) {
-      setGitHubRepository({
-        ...gitHubRepository,
-        lastUpdatedAt: new Date().toISOString()
-      });
-    }
-
-    // Se a branch não estiver na lista de branches pushed, adicione
-    if (!pushedBranches.includes(branchName)) {
-      setPushedBranches(prev => [...prev, branchName]);
-    }
-  }, [gitHubFileStructure, gitHubRepository, pushedBranches]);
-
-  // Função auxiliar para obter todos os arquivos no repositório
-  const getFilesInRepository = useCallback((): string[] => {
-    if (!gitRepoPath) return [];
-    
-    // Coleta os arquivos staged e commits realizados
-    const result: string[] = [...stagedFiles];
-    
-    // Recursivamente percorre o sistema de arquivos para encontrar todos os arquivos
-    const collectFiles = (path: string[], parentFsLevel: FileSystemStructure) => {
-      if (!parentFsLevel) return;
-      
-      Object.entries(parentFsLevel).forEach(([name, node]) => {
-        const currentPath = [...path, name];
-        if (node.type === 'file') {
-          // Obter caminho relativo ao repositório
-          if (gitRepoPath && currentPath.join('/').startsWith(gitRepoPath.join('/'))) {
-            const relativePathParts = currentPath.slice(gitRepoPath.length);
-            const fullRelativePath = relativePathParts.filter(p => p && p !== '~').join('/');
-            if (fullRelativePath && !result.includes(fullRelativePath)) {
-              result.push(fullRelativePath);
-            }
-          }
-        } else if (node.type === 'dir' && node.content) {
-          collectFiles(currentPath, node.content);
-        }
-      });
-    };
-    
-    // Começar pelo diretório raiz do repositório
-    const repoRoot = fileSystem['~'].content;
-    if (repoRoot) {
-      collectFiles(['~'], { '~': { type: 'dir', content: repoRoot } });
-    }
-    
-    return result;
-  }, [fileSystem, gitRepoPath, stagedFiles]);
-
   // Adicionar função para implementar git clone
   const executeGitClone = useCallback((args: string[]): string => {
     const repoUrl = args[0];
@@ -884,7 +916,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
         isConnected: true
       }]);
       
-      return `Cloning into '${repoName}'...\nremote: Enumerating objects: 0, done.\nremote: Counting objects: 100% (0/0), done.\nremote: Compressing objects: 100% (0/0), done.\nremote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0\nConnected to ${remoteUrl}\nRepositório inicializado em ${[...currentPath, repoName].join('/')}/.git/`;
+      return `Cloning into '${repoName}'...\nremote: Enumerating objects: 0, done.\nremote: Counting objects: 100% (0/0), done.\nremote: Compressing objects: 100% (0/0), done.\nremote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0\nConnected to ${remoteUrl}\nRepositório inicializado em ${[...currentPath, repoName].join('/')}/.git/\n\n# Você já está na pasta ${repoName}`;
     } else {
       return `fatal: unable to create directory for '${repoName}'`;
     }
@@ -949,6 +981,15 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   const processCommand = useCallback((command: string): string => {
     const trimmedCommand = command.trim();
     if (!trimmedCommand) return '';
+    
+    // Verificar se é o comando cd.. sem espaço
+    if (trimmedCommand === 'cd..') {
+      if (currentPath.length > 1) {
+        setCurrentPath(prev => prev.slice(0, -1));
+      }
+      return '';
+    }
+    
     const commandParts = trimmedCommand.split(/\s+/);
     const mainCommand = commandParts[0].toLowerCase();
     const firstArg = commandParts[1]?.toLowerCase();
@@ -960,7 +1001,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
     } else {
       return `bash: command not found: ${mainCommand}`;
     }
-  }, [handleGitCommand, handleShellCommand]);
+  }, [handleGitCommand, handleShellCommand, currentPath, setCurrentPath]);
 
   // --- Geração do Diagrama --- 
   const generateMermaidDiagramDefinition = useCallback((): string => {
