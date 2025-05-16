@@ -7,7 +7,7 @@ import {
   GitChallengeCardBody,
 } from '../../../components/ui';
 
-const DemoGitHubCommands: React.FC = () => (
+const DemoGitHubCommands = () => (
   <GitChallengeCard>
     <GitChallengeCardHeader>
       <span className="mr-2">🌐</span>

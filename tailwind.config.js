@@ -35,14 +35,14 @@ export default {
         'github-done-fg': 'var(--color-done-fg)',
         'github-done-emphasis': 'var(--color-done-emphasis)',
         'github-done-muted': 'var(--color-done-muted)',
-        'github-done-subtle': 'var(--color-done-subtle)'
+        'github-done-subtle': 'var(--color-done-subtle)',
       },
       boxShadow: {
         'github-sm': 'var(--shadow-resting-small)',
         'github-md': 'var(--shadow-floating-small)',
-        'github-lg': 'var(--shadow-floating-medium)'
-      }
-    }
+        'github-lg': 'var(--shadow-floating-medium)',
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };

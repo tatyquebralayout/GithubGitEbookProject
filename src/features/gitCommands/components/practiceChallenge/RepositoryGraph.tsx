@@ -5,7 +5,7 @@ interface RepositoryGraphProps {
   diagramDefinition: string;
 }
 
-const RepositoryGraph: React.FC<RepositoryGraphProps> = ({ diagramDefinition }) => {
+const RepositoryGraph = ({ diagramDefinition }: RepositoryGraphProps) => {
   // Estado para orientação do diagrama
   const [orientation, setOrientation] = useState<'TB' | 'BT' | 'LR'>('TB');
 

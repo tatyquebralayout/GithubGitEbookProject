@@ -6,7 +6,7 @@ import {
   GitChallengeCardBody,
 } from '../../../components/ui';
 
-const GitTips: React.FC = () => {
+const GitTips = () => {
   return (
     <div className="space-y-6">
       <GitChallengeCard>

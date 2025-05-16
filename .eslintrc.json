@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "no-aria-hidden-body": "off",
+    "jsx-a11y/aria-props": "off",
+    "jsx-a11y/aria-proptypes": "off"
+  }
+} 

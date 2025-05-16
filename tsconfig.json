@@ -9,12 +9,10 @@
       "@features/*": ["src/features/*"],
       "@pages/*": ["src/pages/*"],
       "@router/*": ["src/router/*"],
-      "@types/*": ["src/types/*"]
+      "@types/*": ["src/types/*"],
+      "@shared/*": ["src/shared/*"]
     }
   },
   "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

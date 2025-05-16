@@ -36,21 +36,13 @@ export interface GitChallengeCardFooterProps extends HTMLAttributes<HTMLDivEleme
 /**
  * Componente GitChallengeCard - Substitui a classe gh-card
  */
-const GitChallengeCard = forwardRef<HTMLDivElement, GitChallengeCardProps>(
-  ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        'overflow-hidden rounded-lg border border-github-border-default bg-github-canvas-default',
-        className
-      )}
-      {...props}
-    >
+const GitChallengeCard: React.FC<GitChallengeCardProps> = ({ children, className = '' }) => {
+  return (
+    <div className={`rounded-lg border border-gray-200 bg-white shadow-sm ${className}`}>
       {children}
     </div>
-  )
-);
-GitChallengeCard.displayName = 'GitChallengeCard';
+  );
+};
 
 /**
  * Componente GitChallengeCardHeader - Substitui a classe gh-card-header

@@ -2,7 +2,7 @@ import React from 'react';
 import { GitBranch, Github, /* Twitter, */ Linkedin, Mail, Globe, Instagram } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
 

@@ -41,7 +41,7 @@ const features = [
   },
 ];
 
-const Features: React.FC = () => {
+const Features = () => {
   return (
     <section className="bg-white py-16 md:py-24" id="features">
       <div className="container mx-auto px-4">

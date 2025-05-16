@@ -8,7 +8,7 @@ interface CommandCategorySectionProps {
   // Adicionar quaisquer outras props que a seção possa precisar, como uma descrição da categoria
 }
 
-const CommandCategorySection: React.FC<CommandCategorySectionProps> = ({ title, commands }) => {
+const CommandCategorySection = ({ title, commands }: CommandCategorySectionProps) => {
   if (!commands || commands.length === 0) {
     return null; // Ou renderizar uma mensagem de "Nenhum comando nesta categoria"
   }

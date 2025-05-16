@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, forwardRef } from 'react';
+import { HTMLAttributes, forwardRef } from 'react';
 import { cn } from '../../lib/utils';
 
 // Propriedades para o componente Card

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GitBranch, GitMerge } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const Hero: React.FC = () => {
+const Hero = () => {
   const [stats, setStats] = useState({
     commands: 0,
     categories: 0,

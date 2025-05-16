@@ -27,7 +27,7 @@ import { GitChallengeCard } from '../../../components/ui';
 //   { src: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=64&h=64&fit=crop&auto=compress,format", alt: "Autor 6" },
 // ];
 
-const Game: React.FC = () => {
+const Game = () => {
   return (
     <div className="space-y-24">
       {/* Hero Banner */}

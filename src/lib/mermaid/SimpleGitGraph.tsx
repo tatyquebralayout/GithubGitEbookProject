@@ -17,16 +17,22 @@ export interface SimpleGitGraphProps {
 }
 
 /**
- * Componente para renderização de diagramas Git simplificados com exemplos predefinidos
+ * Componente para renderização de diagramas Git simplificados usando Mermaid.
+ * Oferece exemplos predefinidos de fluxos Git comuns.
+ *
+ * @param props As propriedades do componente.
+ * @returns Um elemento JSX que renderiza o diagrama Git de exemplo através do MermaidBase.
  */
-const SimpleGitGraph: React.FC<SimpleGitGraphProps> = ({
-  id,
-  orientation = 'TB',
-  mainBranchName = 'main',
-  exampleType = 'basic',
-  className = '',
-  theme = 'default',
-}) => {
+const SimpleGitGraph = (props: SimpleGitGraphProps) => {
+  const {
+    id,
+    orientation = 'TB',
+    mainBranchName = 'main',
+    exampleType = 'basic',
+    className = '',
+    theme = 'default',
+  } = props;
+
   // Gera a definição com base no tipo de exemplo
   const definition = useMemo(() => {
     let content = '';

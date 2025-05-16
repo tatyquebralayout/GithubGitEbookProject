@@ -1,0 +1,17 @@
+:root {
+  /* Cores */
+  --color-primary: #007bff;
+  --color-secondary: #6c757d;
+  /* ... outras cores ... */
+
+  /* Espaçamentos */
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+  /* ... outros espaçamentos ... */
+
+  /* Tipografia */
+  --font-family-base: 'Arial, sans-serif';
+  --font-size-base: 16px;
+  /* ... outras definições de tipografia ... */
+} 

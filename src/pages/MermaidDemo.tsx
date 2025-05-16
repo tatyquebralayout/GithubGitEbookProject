@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MermaidBase, GitGraph, SimpleGitGraph, FlowChart } from '../lib/mermaid';
 import { GitChallengeCard, GitChallengeCardHeader, GitChallengeCardBody } from '../components/ui';
 
-const MermaidDemo: React.FC = () => {
+const MermaidDemo = () => {
   const [orientation, setOrientation] = useState<'LR' | 'TB'>('TB');
   const [theme, setTheme] = useState<'default' | 'dark' | 'forest'>('default');
 

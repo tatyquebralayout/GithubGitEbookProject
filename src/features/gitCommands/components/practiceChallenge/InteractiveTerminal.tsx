@@ -21,11 +21,11 @@ interface InteractiveTerminalProps {
   currentPathForHistory: string[]; // Para salvar no histórico
 }
 
-const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
+const InteractiveTerminal = ({
   onProcessCommand,
   currentPathString, // Nova prop para o prompt
   currentPathForHistory, // Nova prop para o histórico
-}) => {
+}: InteractiveTerminalProps) => {
   const [inputValue, setInputValue] = useState('');
   const [history, setHistory] = useState<TerminalHistoryItem[]>([
     {

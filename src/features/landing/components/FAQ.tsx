@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { faqItems } from '../../faq/data/faq-data';
+import { faqItems } from '../../faq/data/faqData';
 import type { FAQItem } from '../../faq/types/faq.types';
 
-const FAQ: React.FC = () => {
+const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleItem = (index: number) => {

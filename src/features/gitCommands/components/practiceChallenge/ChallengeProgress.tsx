@@ -7,7 +7,7 @@ interface ChallengeStep {
   status: 'completed' | 'pending' | 'current';
 }
 
-const ChallengeProgress: React.FC = () => {
+const ChallengeProgress = () => {
   // Exemplo de dados de progresso - isso virá da lógica do jogo
   const steps: ChallengeStep[] = [
     { id: 1, description: 'Inicialize o repositório', status: 'completed' },

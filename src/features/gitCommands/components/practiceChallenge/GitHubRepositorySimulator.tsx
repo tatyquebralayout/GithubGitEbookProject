@@ -29,7 +29,7 @@ interface GitHubRepositorySimulatorProps {
   createRepository?: (repoName: string, repoDescription: string, isPrivate: boolean) => void;
 }
 
-const GitHubRepositorySimulator: React.FC<GitHubRepositorySimulatorProps> = ({
+const GitHubRepositorySimulator = ({
   gitHubRepository,
   gitHubRemotes,
   gitHubFileStructure,
@@ -38,7 +38,7 @@ const GitHubRepositorySimulator: React.FC<GitHubRepositorySimulatorProps> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _currentBranch,
   createRepository,
-}) => {
+}: GitHubRepositorySimulatorProps) => {
   const [activeTab, setActiveTab] = useState<'code' | 'issues' | 'prs' | 'commits'>('code');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showRepoCreationForm, setShowRepoCreationForm] = useState(false);

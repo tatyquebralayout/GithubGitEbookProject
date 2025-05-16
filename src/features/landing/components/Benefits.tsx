@@ -1,7 +1,7 @@
 import React from 'react';
 import { Clock, Zap, BookOpen, RefreshCw, GitBranch } from 'lucide-react';
 
-const Benefits: React.FC = () => {
+const Benefits = () => {
   return (
     <section className="bg-white py-16 md:py-24" id="benefits">
       <div className="container mx-auto px-4">

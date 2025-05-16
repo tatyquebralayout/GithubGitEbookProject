@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier",
+    "stylelint-config-tailwindcss"
+  ],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "order/properties-order": [
+      [
+        "@tailwind base",
+        "@tailwind components",
+        "@tailwind utilities"
+      ],
+      { "unspecified": "bottomAlphabetical" }
+    ]
+  }
+} 

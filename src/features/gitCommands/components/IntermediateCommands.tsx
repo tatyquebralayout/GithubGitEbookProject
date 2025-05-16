@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Terminal, GitBranch, GitMerge, File, Github, Linkedin, Globe } from 'lucide-react';
 import { gitCommandsData, CommandCategory } from '../../../features/game/data/commandsData';
-import MermaidDiagram from '../../../components/common/MermaidDiagram';
+import MermaidBase from '../../../lib/mermaid/MermaidBase';
 import { CommandData } from '../../../features/game/components/CommandTableRow';
 import PracticeChallengeSection from './practiceChallenge/PracticeChallengeSection';
 import {
@@ -9,22 +9,11 @@ import {
   GitChallengeCardHeader,
   GitChallengeCardBody,
 } from '../../../components/ui';
-
-// Define a type for our author objects for better type safety
-interface AuthorProfileData {
-  src: string;
-  alt: string;
-  miniBio?: string;
-  socialLinks?: {
-    github?: string;
-    linkedin?: string;
-    website?: string;
-  };
-  dialogue?: Array<{ type: 'text' | 'image'; content?: string; src?: string; alt?: string }>;
-}
+import { AuthorProfile } from '../../../types/author.types';
+import { useAuthorDialog } from '../hooks/useAuthorDialog';
 
 // Author data for the intro section
-const intermediateCommandsIntroAuthors: AuthorProfileData[] = [
+const intermediateCommandsIntroAuthors: AuthorProfile[] = [
   {
     src: 'https://images.pexels.com/photos/3778603/pexels-photo-3778603.jpeg?w=128&h=128&fit=crop&auto=compress,format',
     alt: 'Carlos Silva - Especialista Git',
@@ -111,40 +100,21 @@ const intermediateCommandsIntroAuthors: AuthorProfileData[] = [
   },
 ];
 
-const IntermediateCommands: React.FC = () => {
+const IntermediateCommands = () => {
   // Obter apenas os comandos intermediários do gitCommandsData
   const intermediateCommands =
     gitCommandsData.find(
       (category: CommandCategory) => category.title === 'Comandos Intermediários'
     )?.commands || [];
 
-  const [selectedAuthor, setSelectedAuthor] = useState<AuthorProfileData | null>(
-    intermediateCommandsIntroAuthors.find((author) => author.alt.includes('Carlos Silva')) ||
-      intermediateCommandsIntroAuthors[0] ||
-      null
-  );
-  const [currentDialogStep, setCurrentDialogStep] = useState(0);
-
-  const handleAuthorSelect = (author: AuthorProfileData): void => {
-    setSelectedAuthor(author);
-    setCurrentDialogStep(0);
-  };
-
-  const handleNextStep = (): void => {
-    if (
-      selectedAuthor &&
-      selectedAuthor.dialogue &&
-      currentDialogStep < selectedAuthor.dialogue.length - 1
-    ) {
-      setCurrentDialogStep((prev) => prev + 1);
-    }
-  };
-
-  const handlePrevStep = (): void => {
-    if (currentDialogStep > 0) {
-      setCurrentDialogStep((prev) => prev - 1);
-    }
-  };
+  // Usar o hook centralizado para seleção de autor e navegação de diálogo
+  const {
+    selectedAuthor,
+    currentStep: currentDialogStep,
+    selectAuthor: handleAuthorSelect,
+    nextStep: handleNextStep,
+    prevStep: handlePrevStep,
+  } = useAuthorDialog(intermediateCommandsIntroAuthors, 'Carlos Silva');
 
   return (
     <div className="space-y-24">
@@ -237,7 +207,7 @@ const IntermediateCommands: React.FC = () => {
                         {/* Coluna do diagrama */}
                         <div className="rounded-lg bg-gray-50 p-2 md:w-2/3">
                           {command.mermaidChart ? (
-                            <MermaidDiagram chart={command.mermaidChart} diagramId={diagramId} />
+                            <MermaidBase id={diagramId} definition={command.mermaidChart} />
                           ) : (
                             <div className="flex h-24 items-center justify-center text-gray-400">
                               <File className="mr-2" /> Visualização não disponível

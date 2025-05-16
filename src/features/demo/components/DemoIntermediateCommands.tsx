@@ -7,7 +7,7 @@ import {
   GitChallengeCardBody,
 } from '../../../components/ui';
 
-const DemoIntermediateCommands: React.FC = () => (
+const DemoIntermediateCommands = () => (
   <GitChallengeCard>
     <GitChallengeCardHeader>
       <span className="mr-2">🔄</span>

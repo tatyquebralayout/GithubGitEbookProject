@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GitBranch, Menu, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isGameMenuOpen, setIsGameMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -61,13 +61,18 @@ const Navbar: React.FC = () => {
 
   // Dynamically sets link class based on scroll and homepage status
   const linkClass =
-    isScrolled || !isHome ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200';
+    isScrolled || !isHome
+      ? 'text-gray-700 hover:text-blue-600'
+      : 'text-gray-700 hover:text-blue-600';
+
+  // Ajuste na cor base da navbar para o estado transparente
+  const navBaseTextColor = isScrolled || !isHome ? 'text-gray-700' : 'text-gray-700';
+  const navIconColor = isScrolled || !isHome ? 'text-blue-600' : 'text-blue-600'; // Ícone sempre azul ou cinza
+  const navTitleColor = isScrolled || !isHome ? 'text-gray-900' : 'text-gray-900';
 
   return (
     <nav
-      className={`fixed z-50 w-full transition-all duration-300 ${
-        isScrolled || !isHome ? 'bg-white py-2 shadow-md' : 'bg-transparent py-4'
-      }`}
+      className={`fixed z-50 w-full transition-all duration-300 ${navBaseTextColor} ${isScrolled || !isHome ? 'bg-white py-2 shadow-md' : 'bg-transparent py-4'}`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link
@@ -75,15 +80,8 @@ const Navbar: React.FC = () => {
           className="flex items-center"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <GitBranch
-            className={`h-8 w-8 ${isScrolled || !isHome ? 'text-blue-600' : 'text-white'}`}
-          />
-          {/* Brand name - kept in English */}
-          <span
-            className={`ml-2 text-xl font-bold ${isScrolled || !isHome ? 'text-gray-900' : 'text-white'}`}
-          >
-            GitSheet
-          </span>
+          <GitBranch className={`h-8 w-8 ${navIconColor}`} />
+          <span className={`ml-2 text-xl font-bold ${navTitleColor}`}>GitSheet</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -215,7 +213,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden ${isScrolled || !isHome ? 'text-gray-700 focus:ring-gray-500' : 'text-white focus:ring-gray-300'} focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-offset-white' : 'focus:ring-offset-gray-900'}`}
+          className={`md:hidden ${navBaseTextColor} focus:outline-none focus:ring-2 focus:ring-offset-2 ${isScrolled || !isHome ? 'focus:ring-gray-500 focus:ring-offset-white' : 'focus:ring-gray-300 focus:ring-offset-gray-900'}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

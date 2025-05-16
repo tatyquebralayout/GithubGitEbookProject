@@ -14,7 +14,7 @@ const __dirname = dirname(__filename);
 
 export default [
   {
-    ignores: ['dist/**/', 'eslint-js.d.ts']
+    ignores: ['dist/**/', 'eslint-js.d.ts'],
   },
   js.configs.recommended,
   prettierConfig,
@@ -25,7 +25,7 @@ export default [
       parserOptions: {
         project: ['./tsconfig.app.json', './tsconfig.node.json'],
         tsconfigRootDir: __dirname,
-        ecmaVersion: 2020
+        ecmaVersion: 2020,
       },
       globals: {
         // Browser globals
@@ -42,50 +42,50 @@ export default [
         __dirname: 'readonly',
         __filename: 'readonly',
         module: 'readonly',
-        require: 'readonly'
-      }
+        require: 'readonly',
+      },
     },
     plugins: {
       '@typescript-eslint': tseslint,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'unused-imports': unusedImports,
-      'prettier': prettier
+      prettier: prettier,
     },
     rules: {
       // Regras do TypeScript
       'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': ['error', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        ignoreRestSiblings: true
-      }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
       '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/ban-types': 'warn',
       '@typescript-eslint/no-empty-function': 'warn',
-      
+
       // Regras de imports não utilizados
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
-        { 
-          vars: 'all', 
-          varsIgnorePattern: '^_', 
-          args: 'after-used', 
-          argsIgnorePattern: '^_' 
-        }
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
       ],
-      
+
       // Regras React
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true }
-      ],
-      
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
       // Regras Prettier
-      'prettier/prettier': 'error'
-    }
-  }
+      'prettier/prettier': 'error',
+    },
+  },
 ];

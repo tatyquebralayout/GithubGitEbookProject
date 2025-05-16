@@ -1,7 +1,7 @@
 import React from 'react';
 import { Book, Users, Award, BookOpen } from 'lucide-react';
 
-const Ebook: React.FC = () => {
+const Ebook = () => {
   return (
     <section className="bg-gray-50 py-16 md:py-24" id="ebook">
       <div className="container mx-auto px-4">

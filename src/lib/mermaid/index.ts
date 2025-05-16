@@ -1,3 +1,9 @@
+/**
+ * @module lib/mermaid
+ * @description Este módulo fornece componentes React para renderizar diferentes tipos de diagramas utilizando a biblioteca Mermaid.
+ * Inclui um componente base (`MermaidBase`) e componentes especializados para Grafos Git (`GitGraph`, `SimpleGitGraph`) e Fluxogramas (`FlowChart`).
+ */
+
 // Componentes para diagramas Mermaid
 export { default as MermaidBase } from './MermaidBase';
 export { default as GitGraph } from './GitGraph';

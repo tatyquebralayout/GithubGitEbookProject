@@ -17,17 +17,14 @@ export interface MermaidBaseProps {
 }
 
 /**
- * Componente base para renderização de diagramas Mermaid
- * Serve como fundação para todos os tipos específicos de diagramas
+ * Componente base para renderização de diagramas Mermaid.
+ * Serve como fundação para todos os tipos específicos de diagramas.
+ *
+ * @param props As propriedades do componente.
+ * @returns Um elemento JSX que renderiza o diagrama Mermaid.
  */
-const MermaidBase: React.FC<MermaidBaseProps> = ({
-  id,
-  definition,
-  theme = 'default',
-  className = '',
-  onRender,
-  onError,
-}) => {
+const MermaidBase = (props: MermaidBaseProps) => {
+  const { id, definition, theme = 'default', className = '', onRender, onError } = props;
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Sanitiza o ID para evitar problemas de renderização

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github, /* Twitter, */ Mail, Globe, Instagram, Linkedin } from 'lucide-react';
 
-const Challenges: React.FC = () => {
+const Challenges = () => {
   return (
     <section className="bg-white py-16 md:py-24" id="challenges">
       <div className="container mx-auto px-4">

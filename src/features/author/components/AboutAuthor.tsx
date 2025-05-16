@@ -12,8 +12,23 @@ import {
   Code,
   Target,
 } from 'lucide-react';
+import AuthorProfile from '../../../components/common/AuthorProfile';
 
-const AboutAuthor: React.FC = () => {
+export interface AboutAuthorProps {
+  name: string;
+  role: string;
+  avatarUrl: string;
+  description: string;
+  socialLinks: {
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+    email?: string;
+    website?: string;
+  };
+}
+
+const AboutAuthor: React.FC<AboutAuthorProps> = ({ name, role, avatarUrl, description, socialLinks }) => {
   return (
     <div className="space-y-24">
       {/* Hero Section */}
@@ -28,15 +43,13 @@ const AboutAuthor: React.FC = () => {
         </div>
 
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center text-white">
-          <img
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=256&h=256&fit=crop&auto=compress,format"
-            alt="Tatiana Barros"
-            className="mx-auto mb-6 h-32 w-32 rounded-full border-4 border-white"
+          <AuthorProfile
+            name={name}
+            role={role}
+            avatarUrl={avatarUrl}
+            description={description}
+            socialLinks={socialLinks}
           />
-          <h1 className="text-4xl font-bold leading-tight md:text-5xl">Tatiana Barros</h1>
-          <p className="mt-4 text-xl text-white/80">
-            Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.
-          </p>
           <div className="mt-8 flex justify-center space-x-4">
             <a
               href="#"

@@ -1,72 +1,42 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Badge, { BadgeProps } from './Badge';
+import { Link } from 'react-router-dom';
+import { cn } from '../../lib/utils';
 
-export interface ChallengeBadgeProps extends Omit<BadgeProps, 'onClick'> {
-  /** Tipo do desafio */
-  type: 'beginner' | 'intermediate' | 'advanced' | 'github' | 'pro' | string;
-  /** Texto a ser exibido no badge */
+export interface ChallengeBadgeProps {
+  type: string;
   text: string;
-  /** Caminho específico para navegação (opcional) */
   targetPath?: string;
-  /** Função de click personalizada (opcional) */
-  onClick?: () => void;
+  className?: string;
 }
 
-/**
- * Componente ChallengeBadge que utiliza o Badge padronizado com navegação integrada
- */
-const ChallengeBadge: React.FC<ChallengeBadgeProps> = ({
-  type,
-  text,
-  targetPath,
-  onClick,
-  ...props
-}) => {
-  const navigate = useNavigate();
-
-  // Mapeamento de tipos para variantes do Badge
-  const typeToVariant: Record<string, BadgeProps['variant']> = {
-    beginner: 'success',
-    intermediate: 'warning',
-    advanced: 'danger',
-    github: 'primary',
-    pro: 'info',
+const ChallengeBadge = ({ type, text, targetPath, className }: ChallengeBadgeProps) => {
+  // Mapear tipo para cor
+  const colorMap: Record<string, string> = {
+    beginner: 'bg-green-100 text-green-800',
+    intermediate: 'bg-yellow-100 text-yellow-800',
+    advanced: 'bg-red-100 text-red-800',
+    github: 'bg-purple-100 text-purple-800',
+    pro: 'bg-blue-100 text-blue-800',
+    // Adicionar outros tipos conforme necessário
   };
 
-  // Mapeamento de tipos para caminhos padrão
-  const defaultPaths: Record<string, string> = {
-    beginner: '/game/basic-commands',
-    intermediate: '/game/intermediate-commands',
-    advanced: '/game/advanced-commands',
-    github: '/game/github-commands',
-  };
-
-  // Determinar variante
-  const variant = typeToVariant[type] || 'default';
-
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    } else {
-      const path = targetPath || defaultPaths[type];
-      if (path) {
-        navigate(path);
-      }
-    }
-  };
-
-  return (
-    <Badge
-      variant={variant}
-      rounded
-      className="cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95"
-      onClick={handleClick}
-      {...props}
-    >
-      {text}
-    </Badge>
+  const badgeClass = cn(
+    'inline-flex items-center px-2 py-1 text-xs font-medium rounded',
+    colorMap[type] || 'bg-gray-100 text-gray-800',
+    className
   );
+
+  // Se tiver um caminho alvo, renderiza como link
+  if (targetPath) {
+    return (
+      <Link to={targetPath} className={badgeClass}>
+        {text}
+      </Link>
+    );
+  }
+
+  // Senão, renderiza como span
+  return <span className={badgeClass}>{text}</span>;
 };
 
 export default ChallengeBadge;

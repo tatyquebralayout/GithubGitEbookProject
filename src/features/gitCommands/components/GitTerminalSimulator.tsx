@@ -4,7 +4,7 @@ import RepositoryGraph from './practiceChallenge/RepositoryGraph';
 import GitHubRepositorySimulator from './practiceChallenge/GitHubRepositorySimulator';
 import { useGitPracticeChallenge } from '../hooks/useGitPracticeChallenge';
 
-const GitTerminalSimulator: React.FC = () => {
+const GitTerminalSimulator = () => {
   const {
     diagramDefinition,
     processCommand,

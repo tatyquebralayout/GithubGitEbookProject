@@ -17,14 +17,14 @@ interface GitChallengeVisualizerProps {
   hints?: string[];
 }
 
-const GitChallengeVisualizer: React.FC<GitChallengeVisualizerProps> = ({
+const GitChallengeVisualizer = ({
   title,
   description,
   difficulty,
   initialDiagram,
   goalDiagram,
   hints = [],
-}) => {
+}: GitChallengeVisualizerProps) => {
   const [activeTab, setActiveTab] = useState<'initial' | 'goal'>('initial');
   const [currentTheme, setCurrentTheme] = useState<'default' | 'dark' | 'forest'>('default');
   const [showHints, setShowHints] = useState(false);

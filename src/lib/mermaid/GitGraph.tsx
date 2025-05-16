@@ -23,17 +23,23 @@ export interface GitGraphProps extends Omit<MermaidBaseProps, 'definition'> {
 }
 
 /**
- * Componente para renderização de diagramas Git usando Mermaid
+ * Componente para renderização de diagramas Git usando Mermaid.
+ * Ele abstrai a construção da definição do diagrama a partir de um conteúdo simplificado.
+ *
+ * @param props As propriedades do componente.
+ * @returns Um elemento JSX que renderiza o diagrama Git através do MermaidBase.
  */
-const GitGraph: React.FC<GitGraphProps> = ({
-  id,
-  orientation = 'LR',
-  parallelCommits = false,
-  mainBranchName = 'main',
-  content,
-  customColors: _customColors,
-  ...restProps
-}) => {
+const GitGraph = (props: GitGraphProps) => {
+  const {
+    id,
+    orientation = 'LR',
+    parallelCommits = false,
+    mainBranchName = 'main',
+    content,
+    customColors: _customColors, // Renomeado para evitar conflito de nome, mas não usado diretamente aqui
+    ...restProps
+  } = props;
+
   // Constrói a definição completa do diagrama Git
   const definition = useMemo(() => {
     // Configuração do diagrama
@@ -59,7 +65,11 @@ const GitGraph: React.FC<GitGraphProps> = ({
 };
 
 /**
- * Formata o conteúdo do diagrama Git para garantir sintaxe correta
+ * Formata o conteúdo do diagrama Git para garantir sintaxe correta para o Mermaid.
+ * Processa comandos como commit, branch, checkout e merge.
+ *
+ * @param content A string de conteúdo simplificado do diagrama Git.
+ * @returns Uma string formatada com a definição do diagrama Git para o Mermaid.
  */
 function formatGitGraphContent(content: string): string {
   // Dividir a entrada em linhas

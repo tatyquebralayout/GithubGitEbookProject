@@ -3,11 +3,44 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { fileURLToPath } from 'node:url';
+import viteImagemin from 'vite-plugin-imagemin';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteImagemin({
+      gifsicle: {
+        optimizationLevel: 7,
+        interlaced: false,
+      },
+      optipng: {
+        optimizationLevel: 7,
+      },
+      mozjpeg: {
+        quality: 75, // Ajustado para melhor qualidade
+      },
+      pngquant: {
+        quality: [0.8, 0.9],
+        speed: 4,
+      },
+      svgo: {
+        plugins: [
+          {
+            name: 'removeViewBox',
+          },
+          {
+            name: 'removeEmptyAttrs',
+            active: false,
+          },
+        ],
+      },
+      webp: {
+        quality: 75,
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -16,6 +49,7 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, './src/pages'),
       '@router': path.resolve(__dirname, './src/router'),
       '@types': path.resolve(__dirname, './src/types'),
+      '@shared': path.resolve(__dirname, './src/shared'),
     },
   },
   test: {

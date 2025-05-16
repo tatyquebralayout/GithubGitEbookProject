@@ -1,22 +1,11 @@
-import React, { useEffect } from 'react';
-import Navbar from '../../components/layout/Navbar';
-import Footer from '../../components/layout/Footer';
-import AboutAuthor from './components/AboutAuthor';
+import React from 'react';
+import AppLayout from '../../components/layout/AppLayout';
+import AboutAuthorContainer from './components/AboutAuthorContainer';
 
-const AboutAuthorPage: React.FC = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <div className="pt-20">
-        <AboutAuthor />
-      </div>
-      <Footer />
-    </div>
-  );
-};
+const AboutAuthorPage: React.FC = () => (
+  <AppLayout>
+    <AboutAuthorContainer />
+  </AppLayout>
+);
 
 export default AboutAuthorPage;

@@ -21,6 +21,6 @@ const demoAuthors = [
   },
 ];
 
-const AuthorProfilesDemo: React.FC = () => <AvatarGroup avatars={demoAuthors} size="md" bordered />;
+const AuthorProfilesDemo = () => <AvatarGroup avatars={demoAuthors} size="md" bordered />;
 
 export default AuthorProfilesDemo;

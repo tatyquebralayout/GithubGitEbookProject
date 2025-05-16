@@ -9,7 +9,7 @@ import { useGitPracticeChallenge } from '../../hooks/useGitPracticeChallenge';
 //   '~': { type: 'dir', content: {} }
 // };
 
-const PracticeChallengeSection: React.FC = () => {
+const PracticeChallengeSection = () => {
   const { diagramDefinition, processCommand, currentPathDisplay, currentPathArray } =
     useGitPracticeChallenge();
 

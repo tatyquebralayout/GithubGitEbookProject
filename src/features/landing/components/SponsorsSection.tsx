@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SponsorsSection: React.FC = () => {
+const SponsorsSection = () => {
   return (
     <section className="bg-white py-16 md:py-24" id="sponsors">
       <div className="container mx-auto px-4">

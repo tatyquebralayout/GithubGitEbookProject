@@ -15,7 +15,7 @@ const tabs = ['Comandos Básicos', 'Comandos Intermediários', 'Comandos GitHub'
 // GitHubCommands was moved to ./DemoGitHubCommands.tsx
 // GitTips was moved to ./DemoGitTips.tsx
 
-const Demo: React.FC = () => {
+const Demo = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const renderTabContent = () => {

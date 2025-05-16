@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   GitChallengeCard,
   GitChallengeCardHeader,
@@ -7,7 +6,7 @@ import {
 import AuthorProfilesDemo from './AuthorProfilesDemo';
 import ChallengeBadgeDemo from './ChallengeBadgeDemo';
 
-const DemoGitTips: React.FC = () => (
+const DemoGitTips = () => (
   <GitChallengeCard>
     <GitChallengeCardHeader icon="💡" title="Dicas e Truques do Git" />
     <GitChallengeCardBody>

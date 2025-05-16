@@ -1,3 +1,5 @@
+@import './styles/tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,53 +9,53 @@
     --color-canvas-default: #ffffff;
     --color-canvas-subtle: #f6f8fa;
     --color-canvas-inset: #f6f8fa;
-    
+
     --color-border-default: #d0d7de;
     --color-border-muted: #d8dee4;
-    
+
     --color-fg-default: #24292f;
     --color-fg-muted: #57606a;
     --color-fg-subtle: #6e7781;
-    
+
     --color-accent-fg: #0969da;
     --color-accent-emphasis: #0969da;
     --color-accent-muted: #54aeff;
     --color-accent-subtle: #ddf4ff;
-    
+
     --color-success-fg: #1a7f37;
     --color-success-emphasis: #2da44e;
     --color-success-muted: #4ac26b;
     --color-success-subtle: #dafbe1;
-    
+
     --color-attention-fg: #9a6700;
     --color-attention-emphasis: #bf8700;
     --color-attention-muted: #d4a72c;
     --color-attention-subtle: #fff8c5;
-    
+
     --color-severe-fg: #bc4c00;
     --color-severe-emphasis: #bc4c00;
     --color-severe-muted: #fb8f44;
     --color-severe-subtle: #fff1e5;
-    
+
     --color-danger-fg: #cf222e;
     --color-danger-emphasis: #cf222e;
     --color-danger-muted: #ff818a;
     --color-danger-subtle: #ffebe9;
-    
+
     --color-done-fg: #8250df;
     --color-done-emphasis: #8250df;
     --color-done-muted: #c297ff;
     --color-done-subtle: #fbefff;
-    
-    --shadow-resting-small: 0 1px 0 rgba(27,31,36,0.04);
-    --shadow-floating-small: 0 3px 6px rgba(140,149,159,0.15);
-    --shadow-floating-medium: 0 8px 24px rgba(140,149,159,0.2);
+
+    --shadow-resting-small: 0 1px 0 rgba(27, 31, 36, 0.04);
+    --shadow-floating-small: 0 3px 6px rgba(140, 149, 159, 0.15);
+    --shadow-floating-medium: 0 8px 24px rgba(140, 149, 159, 0.2);
   }
 }
 
 @layer components {
   .gh-section {
-    @apply py-16 md:py-24 bg-github-canvas-subtle;
+    @apply bg-github-canvas-subtle py-16 md:py-24;
   }
 
   .gh-container {
@@ -61,15 +63,15 @@
   }
 
   .gh-header {
-    @apply text-center max-w-3xl mx-auto mb-12;
+    @apply mx-auto mb-12 max-w-3xl text-center;
   }
 
   .gh-badge-primary {
-    @apply bg-github-accent-subtle text-github-accent-fg text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide;
+    @apply rounded-full bg-github-accent-subtle px-3 py-1 text-xs font-semibold uppercase tracking-wide text-github-accent-fg;
   }
 
   .gh-title {
-    @apply mt-4 text-3xl md:text-4xl font-bold text-github-fg-default;
+    @apply mt-4 text-3xl font-bold text-github-fg-default md:text-4xl;
   }
 
   .gh-description {
@@ -77,11 +79,11 @@
   }
 
   .gh-tabs {
-    @apply flex flex-wrap justify-center mb-8 max-w-4xl mx-auto;
+    @apply mx-auto mb-8 flex max-w-4xl flex-wrap justify-center;
   }
 
   .gh-tab {
-    @apply px-5 py-2 mx-1 mb-2 rounded-md transition-colors bg-github-canvas-default text-github-fg-default hover:bg-github-canvas-subtle;
+    @apply mx-1 mb-2 rounded-md bg-github-canvas-default px-5 py-2 text-github-fg-default transition-colors hover:bg-github-canvas-subtle;
   }
 
   .gh-tab-active {
@@ -89,16 +91,16 @@
   }
 
   .gh-content {
-    @apply max-w-6xl mx-auto;
+    @apply mx-auto max-w-6xl;
   }
 
   .gh-card {
-    @apply bg-github-canvas-default rounded-lg border border-github-border-default;
-    @apply shadow-github-sm hover:shadow-github-md transition-shadow;
+    @apply rounded-lg border border-github-border-default bg-github-canvas-default;
+    @apply shadow-github-sm transition-shadow hover:shadow-github-md;
   }
 
   .gh-card-header {
-    @apply bg-github-canvas-subtle text-github-fg-default py-3 px-4 flex items-center;
+    @apply flex items-center bg-github-canvas-subtle px-4 py-3 text-github-fg-default;
     @apply border-b border-github-border-muted;
   }
 
@@ -111,22 +113,22 @@
   }
 
   .gh-table th {
-    @apply py-3 px-4 text-left bg-github-canvas-subtle;
-    @apply text-github-fg-default font-medium border-b border-github-border-muted;
+    @apply bg-github-canvas-subtle px-4 py-3 text-left;
+    @apply border-b border-github-border-muted font-medium text-github-fg-default;
   }
 
   .gh-table td {
-    @apply py-3 px-4 border-b border-github-border-muted;
+    @apply border-b border-github-border-muted px-4 py-3;
   }
 
   .gh-badge {
-    @apply text-xs font-medium px-2.5 py-0.5 rounded;
+    @apply rounded px-2.5 py-0.5 text-xs font-medium;
     @apply inline-flex items-center justify-center;
   }
 
   .gh-nav-link {
-    @apply text-github-fg-default hover:text-github-accent-fg transition-colors;
-    @apply px-3 py-2 rounded-md hover:bg-github-canvas-subtle;
+    @apply text-github-fg-default transition-colors hover:text-github-accent-fg;
+    @apply rounded-md px-3 py-2 hover:bg-github-canvas-subtle;
   }
 }
 
@@ -155,7 +157,9 @@
 
 .mermaid-diagram .branch-line,
 .simple-mermaid-diagram .branch-line {
-  transition: stroke-width 0.3s ease, stroke 0.3s ease;
+  transition:
+    stroke-width 0.3s ease,
+    stroke 0.3s ease;
 }
 
 .mermaid-diagram .branch-line:hover,
@@ -165,7 +169,14 @@
 
 /* Estilização específica para o diagrama do simulador Git */
 .simple-mermaid-diagram text {
-  font-family: 'Mona Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Mona Sans',
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   font-size: 12px;
 }
 
@@ -178,19 +189,25 @@
 }
 
 /* Melhorias visuais para temas */
-.mermaid-diagram[data-theme="dark"] {
+.mermaid-diagram[data-theme='dark'] {
   background-color: #0d1117;
   color: #c9d1d9;
 }
 
-.mermaid-diagram[data-theme="forest"] {
+.mermaid-diagram[data-theme='forest'] {
   background-color: #f8f9fa;
 }
 
 /* Animação para quando aparece um novo diagrama */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mermaid-diagram,

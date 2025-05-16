@@ -9,7 +9,7 @@ import {
   Badge,
 } from '../../../components/ui';
 
-const BasicCommands: React.FC = () => {
+const BasicCommands = () => {
   // Obter apenas os comandos básicos do gitCommandsData
   const basicCommands =
     gitCommandsData.find((category) => category.title === 'Comandos Básicos')?.commands || [];

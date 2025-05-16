@@ -9,9 +9,9 @@ import {
   CardBody,
   CardFooter,
 } from '../components/ui';
-import { GitCommit, GitBranch, GitMerge, AlertCircle, Check, X } from 'lucide-react';
+import { GitCommit, GitBranch, GitMerge, CircleAlert, CircleCheck, X } from 'lucide-react';
 
-const UIDemo: React.FC = () => {
+const UIDemo = () => {
   return (
     <div className="container mx-auto py-12">
       <h1 className="mb-10 text-center text-3xl font-bold">Biblioteca de Componentes UI</h1>
@@ -62,7 +62,7 @@ const UIDemo: React.FC = () => {
             <div className="flex flex-wrap gap-4">
               <Button leftIcon={<GitCommit size={16} />}>Commit</Button>
               <Button rightIcon={<GitBranch size={16} />}>Branch</Button>
-              <Button leftIcon={<GitMerge size={16} />} rightIcon={<Check size={16} />}>
+              <Button leftIcon={<GitMerge size={16} />} rightIcon={<CircleCheck size={16} />}>
                 Merge
               </Button>
             </div>
@@ -115,13 +115,13 @@ const UIDemo: React.FC = () => {
           <div>
             <h3 className="mb-4 text-lg font-medium">Com Ícones</h3>
             <div className="flex flex-wrap gap-4">
-              <Badge variant="success" icon={<Check size={12} />}>
+              <Badge variant="success" icon={<CircleCheck size={12} />}>
                 Success
               </Badge>
               <Badge variant="danger" icon={<X size={12} />}>
                 Error
               </Badge>
-              <Badge variant="warning" icon={<AlertCircle size={12} />}>
+              <Badge variant="warning" icon={<CircleAlert size={12} />}>
                 Warning
               </Badge>
             </div>

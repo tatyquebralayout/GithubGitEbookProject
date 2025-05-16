@@ -12,7 +12,7 @@ import {
   Zap,
 } from 'lucide-react';
 
-const EbookContent: React.FC = () => {
+const EbookContent = () => {
   return (
     <div className="space-y-24">
       {/* Hero Section */}

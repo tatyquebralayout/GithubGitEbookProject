@@ -38,12 +38,12 @@ interface MermaidGitGraphProps {
   className?: string;
 }
 
-const MermaidGitGraph: React.FC<MermaidGitGraphProps> = ({
+const MermaidGitGraph = ({
   id,
   definition,
   config = { theme: 'default', orientation: 'LR' },
   className = '',
-}) => {
+}: MermaidGitGraphProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Função para formatar corretamente a definição do gitGraph
@@ -247,28 +247,19 @@ const MermaidGitGraph: React.FC<MermaidGitGraphProps> = ({
         } catch (error: any) {
           console.error('Erro ao renderizar o diagrama Mermaid:', error);
           if (containerRef.current) {
-            containerRef.current.innerHTML = `
-              <div class="text-red-500 p-4">
-                Erro ao renderizar o diagrama: ${error.message || 'Erro desconhecido'}
-                <pre class="mt-2 text-xs bg-gray-100 p-2 rounded">${error.str || ''}</pre>
-              </div>
-            `;
+            containerRef.current.innerHTML = `<pre class="text-red-500">Erro ao renderizar o diagrama: ${error.message || 'Detalhes indisponíveis'}\nDefinição Fornecida (Formatada):\n${formatGitGraphDefinition(definition)}</pre>`;
           }
         }
       };
 
       renderDiagram();
     }
-  }, [id, definition, config]);
+  }, [id, definition, config]); // Dependências do useEffect
 
   return (
-    <div
-      ref={containerRef}
-      className={`mermaid-diagram overflow-x-auto rounded-lg bg-github-canvas-subtle p-4 ${className}`}
-      aria-label="Diagrama Git mostrando fluxo de branches e commits"
-      data-testid={`mermaid-diagram-${id}`}
-      data-theme={config.theme}
-    />
+    <div ref={containerRef} className={`mermaid-git-graph ${className}`}>
+      {/* O diagrama Mermaid será renderizado aqui */}
+    </div>
   );
 };
 

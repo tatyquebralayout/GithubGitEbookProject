@@ -1,4 +1,5 @@
 import { CommandData } from '../components/CommandTableRow';
+import { commandDiagrams } from './commandDiagrams';
 
 // Define um tipo para autores que corresponde ao requisito do AvatarGroup
 type Author = {
@@ -45,18 +46,18 @@ export const gitCommandsData: CommandCategory[] = [
     commands: [
       {
         name: 'git init',
-        mermaidChart: 'graph TD; A("git init") --> B(".git directory");',
+        mermaidChart: commandDiagrams['git init'],
         description: 'Inicializa um novo repositório Git.',
         chapterLink: '/game/basic-commands#init',
         chapterText: 'Cap. 1: Setup',
         authors: gameAuthors,
         difficultyType: 'beginner',
         difficultyText: 'Iniciante',
-        targetPath: '/git-comandos-basicos', // Exemplo, ajustar conforme necessário para o desafio específico
+        targetPath: '/git-comandos-basicos',
       },
       {
         name: 'git clone [url]',
-        mermaidChart: 'graph TD; A("git clone URL") --> B("Local Copy");',
+        mermaidChart: commandDiagrams['git clone [url]'],
         description: 'Clona um repositório existente.',
         chapterLink: '/game/basic-commands#clone',
         chapterText: 'Cap. 1: Setup',
@@ -66,7 +67,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git add [file]',
-        mermaidChart: 'graph TD; WD["Working Dir"] -- git add file --> SA["Staging Area"];',
+        mermaidChart: commandDiagrams['git add [file]'],
         description: 'Adiciona arquivos ao staging area.',
         chapterLink: '/game/basic-commands#add',
         chapterText: 'Cap. 2: Mudanças',
@@ -76,7 +77,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git commit -m "[message]"',
-        mermaidChart: 'graph TD; SA["Staging Area"] -- "git commit" --> LR["Local Repo"];',
+        mermaidChart: commandDiagrams['git commit -m "[message]"'],
         description: 'Salva as mudanças no repositório.',
         chapterLink: '/game/basic-commands#commit',
         chapterText: 'Cap. 2: Mudanças',
@@ -86,8 +87,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git status',
-        mermaidChart:
-          'graph TD; C("git status") --> WS["Working Dir State"]; C --> SS["Staging Area State"];',
+        mermaidChart: commandDiagrams['git status'],
         description: 'Mostra o estado das mudanças.',
         chapterLink: '/game/basic-commands#status',
         chapterText: 'Cap. 2: Mudanças',
@@ -102,6 +102,7 @@ export const gitCommandsData: CommandCategory[] = [
     commands: [
       {
         name: 'git branch',
+        mermaidChart: commandDiagrams['git branch'],
         description: 'Lista todos os branches.',
         chapterLink: '/game/intermediate-commands#branch',
         chapterText: 'Cap. 3: Branches',
@@ -111,6 +112,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git branch [name]',
+        mermaidChart: commandDiagrams['git branch [name]'],
         description: 'Cria um novo branch.',
         chapterLink: '/game/intermediate-commands#branch-new',
         chapterText: 'Cap. 3: Branches',
@@ -120,6 +122,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git checkout [name]',
+        mermaidChart: commandDiagrams['git checkout [name]'],
         description: 'Muda para um branch existente.',
         chapterLink: '/game/intermediate-commands#checkout',
         chapterText: 'Cap. 3: Branches',
@@ -129,6 +132,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git merge [branch]',
+        mermaidChart: commandDiagrams['git merge [branch]'],
         description: 'Combina branches.',
         chapterLink: '/game/intermediate-commands#merge',
         chapterText: 'Cap. 4: Merging',
@@ -138,6 +142,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git pull',
+        mermaidChart: commandDiagrams['git pull'],
         description: 'Atualiza o repositório local.',
         chapterLink: '/game/intermediate-commands#pull',
         chapterText: 'Cap. 5: Remotos',
@@ -147,6 +152,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git push',
+        mermaidChart: commandDiagrams['git push'],
         description: 'Envia mudanças para o remoto.',
         chapterLink: '/game/intermediate-commands#push',
         chapterText: 'Cap. 5: Remotos',
@@ -161,6 +167,7 @@ export const gitCommandsData: CommandCategory[] = [
     commands: [
       {
         name: 'git rebase [branch]',
+        mermaidChart: commandDiagrams['git rebase [branch]'],
         description: 'Reaplica commits sobre outro branch.',
         chapterLink: '/game/advanced-commands#rebase',
         chapterText: 'Cap. 6: Rebase',
@@ -170,6 +177,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git stash',
+        mermaidChart: commandDiagrams['git stash'],
         description: 'Salva mudanças temporariamente.',
         chapterLink: '/game/advanced-commands#stash',
         chapterText: 'Cap. 7: Stash',
@@ -179,6 +187,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git cherry-pick [commit]',
+        mermaidChart: commandDiagrams['git cherry-pick [commit]'],
         description: 'Aplica um commit específico.',
         chapterLink: '/game/advanced-commands#cherry-pick',
         chapterText: 'Cap. 8: Cherry-pick',
@@ -188,6 +197,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git log',
+        mermaidChart: commandDiagrams['git log'],
         description: 'Visualiza histórico de commits.',
         chapterLink: '/game/advanced-commands#log',
         chapterText: 'Cap. 9: Histórico',
@@ -197,6 +207,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git reset [file]',
+        mermaidChart: commandDiagrams['git reset [file]'],
         description: 'Remove arquivos do staging.',
         chapterLink: '/game/advanced-commands#reset',
         chapterText: 'Cap. 10: Reset',
@@ -206,6 +217,7 @@ export const gitCommandsData: CommandCategory[] = [
       },
       {
         name: 'git tag [name]',
+        mermaidChart: commandDiagrams['git tag [name]'],
         description: 'Marca um ponto no histórico.',
         chapterLink: '/game/advanced-commands#tag',
         chapterText: 'Cap. 11: Tags',

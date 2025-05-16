@@ -30,3 +30,5 @@ export type {
   GitChallengeCardBodyProps,
   GitChallengeCardFooterProps,
 } from './GitChallengeCard';
+
+export { default as AuthorProfileCard } from './AuthorProfileCard';

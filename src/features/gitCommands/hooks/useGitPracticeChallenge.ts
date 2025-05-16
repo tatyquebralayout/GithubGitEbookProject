@@ -9,6 +9,7 @@ import {
   GitHubIssue,
   GitHubFileStructure,
 } from '../components/practiceChallenge/practiceChallengeTypes';
+import { useSimulatedFileSystem } from './useSimulatedFileSystem';
 
 // TODO: Considerar se initialFileSystem deve ser definido aqui ou passado como argumento.
 const initialFileSystem: FileSystemStructure = {
@@ -57,13 +58,23 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
   );
   const [remoteOrigin, setRemoteOrigin] = useState<{ [branchName: string]: string | null }>({});
 
-  // File System
-  const [fileSystem, setFileSystem] = useState<FileSystemStructure>(
-    JSON.parse(JSON.stringify(initialFileSystem)) // Deep copy
-  );
-  const [currentPath, setCurrentPath] = useState<string[]>(['~']);
-  const [gitRepoPath, setGitRepoPath] = useState<string[] | null>(null);
-  const [workingDirectoryFiles, setWorkingDirectoryFiles] = useState<string[]>([]);
+  // File System (agora via sub-hook)
+  const {
+    fileSystem,
+    setFileSystem,
+    currentPath,
+    setCurrentPath,
+    gitRepoPath,
+    setGitRepoPath,
+    workingDirectoryFiles,
+    setWorkingDirectoryFiles,
+    createDirectory,
+    navigateTo,
+    createFile,
+    deleteFile,
+    readFile,
+    writeFile,
+  } = useSimulatedFileSystem(initialFileSystem);
 
   // GitHub simulado
   const [gitHubRepository, setGitHubRepository] = useState<GitHubRepository | null>(null);
@@ -221,30 +232,7 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
       if (mainCommand === 'mkdir') {
         if (commandParts.length > 1) {
           const dirName = commandParts.slice(1).join(' ');
-          let effectiveFsLevel = fileSystem['~'].content;
-          if (currentPath.length > 1) {
-            for (const part of currentPath.slice(1)) {
-              if (
-                effectiveFsLevel &&
-                effectiveFsLevel[part] &&
-                effectiveFsLevel[part].type === 'dir'
-              ) {
-                effectiveFsLevel = effectiveFsLevel[part].content!;
-              } else {
-                return `mkdir: cannot create directory '${dirName}': No such file or directory in path`;
-              }
-            }
-          }
-          if (!effectiveFsLevel)
-            return `mkdir: cannot create directory '${dirName}': Invalid current path`;
-
-          if (!effectiveFsLevel[dirName]) {
-            effectiveFsLevel[dirName] = { type: 'dir', content: {} };
-            setFileSystem((prevFs) => ({ ...prevFs }));
-            return '';
-          } else {
-            return `mkdir: cannot create directory '${dirName}': File exists`;
-          }
+          return createDirectory(dirName);
         } else {
           return 'mkdir: missing operand';
         }
@@ -254,69 +242,10 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
         const arg1 = commandParts[1];
         if (commandParts.length > 1 && arg1 !== undefined) {
           const targetDir = commandParts.slice(1).join(' ');
-          if (targetDir === '..') {
-            if (currentPath.length > 1) {
-              setCurrentPath((prev) => prev.slice(0, -1));
-            }
-            return '';
-          } else if (targetDir === '~' || targetDir === '~/') {
-            setCurrentPath(['~']);
-            return '';
-          }
-
-          const isAbsolutePath = targetDir.startsWith('~/');
-          let pathSegmentsToNavigate: string[];
-          let baseFsLevelForTraversal: FileSystemStructure['~']['content'];
-          let newPathAttempt: string[];
-
-          if (isAbsolutePath) {
-            newPathAttempt = ['~'];
-            baseFsLevelForTraversal = fileSystem['~'].content;
-            pathSegmentsToNavigate = targetDir
-              .substring(targetDir.startsWith('~/') ? 2 : 1)
-              .split('/')
-              .filter((p) => p);
-          } else {
-            newPathAttempt = [...currentPath];
-            let tempFs = fileSystem['~'].content;
-            if (currentPath.length > 1) {
-              for (const part of currentPath.slice(1)) {
-                if (tempFs && tempFs[part] && tempFs[part].type === 'dir') {
-                  tempFs = tempFs[part].content!;
-                } else {
-                  return `cd: ${targetDir}: No such file or directory`;
-                }
-              }
-            }
-            baseFsLevelForTraversal = tempFs!;
-            pathSegmentsToNavigate = targetDir.split('/').filter((p) => p);
-          }
-
-          if (!baseFsLevelForTraversal)
-            return `cd: ${targetDir}: No such file or directory (base path issue)`;
-
-          let currentTraversalLevel = baseFsLevelForTraversal;
-          for (const segment of pathSegmentsToNavigate) {
-            if (currentTraversalLevel[segment] && currentTraversalLevel[segment].type === 'dir') {
-              currentTraversalLevel = currentTraversalLevel[segment].content!;
-              newPathAttempt.push(segment);
-            } else {
-              return `cd: ${targetDir
-                .split('/')
-                .slice(
-                  0,
-                  pathSegmentsToNavigate.indexOf(segment) +
-                    (isAbsolutePath ? 1 : newPathAttempt.length - 1)
-                )
-                .join('/')}/${segment}: No such file or directory`;
-            }
-          }
-          setCurrentPath(newPathAttempt);
-          return '';
+          return navigateTo(targetDir);
         } else if (arg1 === undefined) {
           // cd para home
-          setCurrentPath(['~']);
-          return '';
+          return navigateTo('~');
         } else {
           // cd com argumento mas não válido acima
           return `cd: ${arg1}: No such file or directory`;
@@ -326,48 +255,42 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
       if (mainCommand === 'touch') {
         if (commandParts.length > 1) {
           const fileName = commandParts.slice(1).join(' ');
-          let effectiveFsLevel = fileSystem['~'].content;
-          if (currentPath.length > 1) {
-            for (const part of currentPath.slice(1)) {
-              if (
-                effectiveFsLevel &&
-                effectiveFsLevel[part] &&
-                effectiveFsLevel[part].type === 'dir'
-              ) {
-                effectiveFsLevel = effectiveFsLevel[part].content!;
-              } else {
-                return `touch: cannot touch '${fileName}': No such file or directory in path`;
-              }
-            }
-          }
-          if (!effectiveFsLevel) return `touch: cannot touch '${fileName}': Invalid current path`;
-
-          if (!effectiveFsLevel[fileName]) {
-            effectiveFsLevel[fileName] = { type: 'file' };
-            setFileSystem((prevFs) => ({ ...prevFs }));
-
-            if (gitRepoPath && currentPath.join('/').startsWith(gitRepoPath.join('/'))) {
-              const relativePathParts = currentPath.slice(gitRepoPath.length);
-              const fullRelativePath = [...relativePathParts, fileName]
-                .filter((p) => p && p !== '~')
-                .join('/');
-              if (
-                fullRelativePath &&
-                !workingDirectoryFiles.includes(fullRelativePath) &&
-                !stagedFiles.includes(fullRelativePath)
-              ) {
-                setWorkingDirectoryFiles((prev) => [...prev, fullRelativePath]);
-              }
-            }
-            return '';
-          } else {
-            // touch on existing file updates timestamp, for simulation, no-op is fine
-            return '';
-          }
+          return createFile(currentPath, fileName);
         } else {
           return 'touch: missing file operand';
         }
       }
+
+      if (mainCommand === 'rm') {
+        if (commandParts.length > 1) {
+          const fileName = commandParts.slice(1).join(' ');
+          return deleteFile(currentPath, fileName);
+        } else {
+          return 'rm: missing file operand';
+        }
+      }
+
+      if (mainCommand === 'cat') {
+        if (commandParts.length > 1) {
+          const fileName = commandParts.slice(1).join(' ');
+          return readFile(currentPath, fileName);
+        } else {
+          return 'cat: missing file operand';
+        }
+      }
+
+      // echo "conteúdo" > arquivo.txt
+      if (mainCommand === 'echo' && commandParts.includes('>')) {
+        const gtIndex = commandParts.indexOf('>');
+        if (gtIndex > 1 && commandParts.length > gtIndex + 1) {
+          const content = commandParts.slice(1, gtIndex).join(' ').replace(/^"|"$/g, '');
+          const fileName = commandParts[gtIndex + 1];
+          return writeFile(currentPath, fileName, content);
+        } else {
+          return 'echo: missing file operand or content';
+        }
+      }
+
       // Se nenhum comando shell corresponder, será tratado por processCommand como "command not found"
       // Não deveria chegar aqui se mainCommand está na lista de shell commands tratados por processCommand
       return `INTERNAL_ERROR_SHELL_NOT_FOUND: ${mainCommand}`; // Should be caught by processCommand if no specific shell command is found
@@ -389,6 +312,12 @@ export const useGitPracticeChallenge = (): GitPracticeChallengeAPI => {
       setCurrentPath,
       setGitRepoPath,
       setRemoteOrigin,
+      createDirectory,
+      navigateTo,
+      createFile,
+      deleteFile,
+      readFile,
+      writeFile,
     ]
   );
 
