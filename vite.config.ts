@@ -3,7 +3,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { fileURLToPath } from 'node:url';
-import viteImagemin from 'vite-plugin-imagemin';
+// import viteImagemin from 'vite-plugin-imagemin'; // Comentado
+import viteImageminCjs from 'vite-plugin-imagemin';
+
+const viteImagemin = (viteImageminCjs as any).default || viteImageminCjs;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

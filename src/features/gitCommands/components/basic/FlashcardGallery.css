@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Removido font-family global para não sobrescrever o do projeto, será aplicado especificamente */
+}
+
+/* Estilos específicos para a galeria de flashcards */
+.flashcard-gallery-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #262626; O background da seção BasicCommands.tsx será mantido (bg-gray-50) */
+  min-height: 60vh; /* Ajustado para não ocupar a tela inteira */
+  overflow: hidden;
+  width: 100%; /* Garantir que ocupe a largura da seção pai */
+}
+
+.flashcard-gallery-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  width: min(900px, 95%); /* Ajustado para ter uma pequena margem */
+  box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.66) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+  padding: 20px; /* Adicionado padding interno */
+  font-family: "Comfortaa", cursive; /* Aplicado aqui */
+}
+
+.flashcard-gallery-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 450px;
+  padding: 0 20px; /* Ajustado padding */
+  text-align: justify;
+  color: #374151; /* Cor de texto para fundo claro (Tailwind gray-700) */
+}
+
+.flashcard-gallery-info p {
+  /* color: #fff;  A cor será herdada de .flashcard-gallery-info */
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.flashcard-movie-night { /* Renomeado para ser mais genérico ou específico para o contexto */
+  /* Exemplo: background: linear-gradient(225deg, #10B981 0%, #059669 50%, #047857 100%); */
+  /* Este estilo pode ser adaptado para o tema do Git */
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #059669; /* Tailwind green-600 */
+}
+
+.flashcard-btn {
+  display: block;
+  padding: 10px 40px;
+  margin: 10px auto;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  outline: none;
+  text-decoration: none;
+  color: #059669; /* Tailwind green-600 */
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  font-family: "Comfortaa", cursive;
+}
+
+.flashcard-btn:hover {
+  animation: gelatine 0.5s 1;
+}
+
+@keyframes gelatine {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
+
+/* SWIPER STYLES ADAPTED */
+.flashcard-swiper-container {
+  width: 280px; /* Aumentado um pouco para melhor visualização do conteúdo Git */
+  height: 480px; /* Aumentado um pouco */
+  padding: 40px 0; /* Reduzido padding vertical */
+}
+
+.flashcard-swiper-slide {
+  position: relative;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  user-select: none;
+  background-color: #4B5563; /* Tailwind gray-600 como base para o card */
+  color: #F9FAFB; /* Tailwind gray-50 para texto no card */
+  display: flex;
+  flex-direction: column; /* Para alinhar título e conteúdo */
+  justify-content: center; /* Centralizar conteúdo no card */
+  align-items: center; /* Centralizar conteúdo no card */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.flashcard-swiper-slide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px; /* Para arredondar a imagem também */
+  opacity: 0.1; /* Imagem de fundo suave, se usada */
+}
+
+.flashcard-img-position {
+  object-position: 50% 0%;
+}
+
+/* Overlay não será usado da mesma forma, o conteúdo será direto no slide */
+/* .flashcard-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #0f2027, transparent, transparent);
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+.flashcard-slide-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  padding: 7px 18px;
+  margin: 10px;
+  border-radius: 20px;
+  letter-spacing: 1px; /* Reduzido letter-spacing */
+  font-size: 0.75rem; /* Reduzido font-size */
+  font-weight: 600; /* Ajustado font-weight */
+  font-family: "Poppins", sans-serif; /* Usar Poppins para o tag */
+  background: rgba(255, 255, 255, 0.15); /* Aumentada opacidade do fundo */
+  box-shadow: inset 1px -1px 10px rgba(214, 214, 214, 0.15),
+    inset -2px 2px 2px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px); /* Reduzido blur */
+}
+
+.flashcard-slide-title {
+  font-family: "Poppins", sans-serif; /* Usar Poppins para o título do comando */
+  font-size: 1.25rem; /* Aumentado para título do comando */
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #F3F4F6; /* Tailwind gray-100 */
+}
+
+.flashcard-slide-description {
+  font-family: "Comfortaa", cursive;
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 1.4;
+  color: #D1D5DB; /* Tailwind gray-300 */
+  max-height: 200px; /* Limitar altura da descrição */
+  overflow-y: auto; /* Permitir scroll se necessário */
+}
+
+
+/* ANIMATED BACKGROUND CIRCLES */
+.flashcard-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1; /* Para ficar atrás do conteúdo da galeria */
+}
+
+.flashcard-circles li {
+  position: absolute;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  width: 20px; 
+  height: 20px;
+  animation: flashcard-animate-circles 25s linear infinite;
+  bottom: -150px;
+  /* color: #10B981; Removido - cor será definida no JSX */
+}
+
+/* Removidas as cores específicas dos nth-child, pois serão definidas no JSX */
+.flashcard-circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.flashcard-circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.flashcard-circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.flashcard-circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.flashcard-circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+.flashcard-circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+.flashcard-circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+.flashcard-circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+.flashcard-circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+.flashcard-circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+/* Adicionar estilos para os novos li (11 a 20) se quisermos tamanhos e posições diferentes para eles também */
+/* Por enquanto, eles usarão os tamanhos padrão e posições aleatórias da animação */
+
+@keyframes flashcard-animate-circles {
+  0% {
+    transform: translateY(0) rotate(0deg); /* Mantendo a rotação por enquanto */
+    opacity: 0.7;
+    /* border-radius: 0; Não se aplica mais diretamente ao li com SVG */
+  }
+
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    /* border-radius: 50%; Não se aplica mais diretamente ao li com SVG */
+  }
+}
+
+/* Media query para responsividade */
+@media (max-width: 750px) {
+  .flashcard-gallery-content {
+     flex-direction: column-reverse; /* Reordenar para telas menores */
+  }
+  
+  .flashcard-btn {
+    margin: 10px auto 30px; /* Ajustar margem do botão */
+  }
+
+  .flashcard-swiper-container {
+    width: 260px; /* Levemente menor em telas pequenas */
+    height: 450px;
+  }
+} 
