@@ -1,5 +1,6 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import { lazy } from 'react';
+import AppLayout from '../components/layout/AppLayout';
 
 // Lazy imports para melhorar performance
 const LandingPage = lazy(() => import('../features/landing/LandingPage'));
@@ -16,43 +17,24 @@ const GitAdvancedCommandsPage = lazy(
 );
 const GitHubCommandsPage = lazy(() => import('../features/gitCommands/GitHubCommandsPage'));
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <LandingPage />,
-  },
-  {
-    path: '/guest-author',
-    element: <GuestAuthorPage />,
-  },
-  {
-    path: '/game',
-    element: <GamePage />,
-  },
-  {
-    path: '/game/basic-commands',
-    element: <GitBasicCommandsPage />,
-  },
-  {
-    path: '/game/intermediate-commands',
-    element: <GitIntermediateCommandsPage />,
-  },
-  {
-    path: '/game/advanced-commands',
-    element: <GitAdvancedCommandsPage />,
-  },
-  {
-    path: '/game/github-commands',
-    element: <GitHubCommandsPage />,
-  },
-  {
-    path: '/about-author',
-    element: <AboutAuthorPage />,
-  },
-  {
-    path: '/ebook',
-    element: <EbookPage />,
-  },
-]);
+// HomePage não existe, usando LandingPage como index.
+// const HomePage = lazy(() => import('../pages/HomePage'));
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<AppLayout />}>
+      <Route index element={<LandingPage />} />
+      <Route path="git-comandos-basicos" element={<GitBasicCommandsPage />} />
+      <Route path="github-comandos" element={<GitHubCommandsPage />} />
+      <Route path="game" element={<GamePage />} />
+      <Route path="guest-author" element={<GuestAuthorPage />} />
+      <Route path="game/basic-commands" element={<GitBasicCommandsPage />} />
+      <Route path="game/intermediate-commands" element={<GitIntermediateCommandsPage />} />
+      <Route path="game/advanced-commands" element={<GitAdvancedCommandsPage />} />
+      <Route path="about-author" element={<AboutAuthorPage />} />
+      <Route path="ebook" element={<EbookPage />} />
+    </Route>
+  )
+);
 
 export default router;

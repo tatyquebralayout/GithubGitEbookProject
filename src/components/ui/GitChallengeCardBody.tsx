@@ -5,12 +5,11 @@ interface GitChallengeCardBodyProps {
   className?: string;
 }
 
-const GitChallengeCardBody: React.FC<GitChallengeCardBodyProps> = ({ children, className = '' }) => {
-  return (
-    <div className={`p-4 ${className}`}>
-      {children}
-    </div>
-  );
+const GitChallengeCardBody: React.FC<GitChallengeCardBodyProps> = ({
+  children,
+  className = '',
+}) => {
+  return <div className={`p-4 ${className}`}>{children}</div>;
 };
 
-export default GitChallengeCardBody; 
+export default GitChallengeCardBody;

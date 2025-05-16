@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 interface AppLayoutProps {
-  children: React.ReactNode;
   className?: string;
 }
 
-const AppLayout = ({ children, className = '' }: AppLayoutProps) => {
+const AppLayout = ({ className = '' }: AppLayoutProps) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -15,7 +15,9 @@ const AppLayout = ({ children, className = '' }: AppLayoutProps) => {
   return (
     <div className={`min-h-screen bg-gray-50 ${className}`}>
       <Navbar />
-      <div className="pt-20">{children}</div>
+      <div className="pt-20">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

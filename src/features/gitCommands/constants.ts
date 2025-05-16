@@ -1,1 +1,1 @@
-// Constantes da feature GitCommands 
+// Constantes da feature GitCommands

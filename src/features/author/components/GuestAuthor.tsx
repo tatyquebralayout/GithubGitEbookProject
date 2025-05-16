@@ -43,8 +43,8 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
           <h2 className="gh-title">Por Que Ser um Autor Convidado no GitSheet?</h2>
           <p className="gh-description">
             Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. Donec gravida
-            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa
-            as pessoas mais interessantis.
+            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa as
+            pessoas mais interessantis.
           </p>
         </div>
 
@@ -58,8 +58,8 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
             </h3>
             <p className="text-github-fg-muted">
               Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. Donec gravida
-              turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss
-              deixa as pessoas mais interessantis.
+              turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa
+              as pessoas mais interessantis.
             </p>
           </GitChallengeCard>
 
@@ -72,8 +72,8 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
             </h3>
             <p className="text-github-fg-muted">
               Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. Donec gravida
-              turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss
-              deixa as pessoas mais interessantis.
+              turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa
+              as pessoas mais interessantis.
             </p>
           </GitChallengeCard>
 
@@ -86,8 +86,8 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
             </h3>
             <p className="text-github-fg-muted">
               Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. Donec gravida
-              turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss
-              deixa as pessoas mais interessantis.
+              turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa
+              as pessoas mais interessantis.
             </p>
           </GitChallengeCard>
         </div>
@@ -102,8 +102,8 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
           <h2 className="gh-title">O Que Oferecemos aos Nossos Autores</h2>
           <p className="gh-description">
             Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. Donec gravida
-            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa
-            as pessoas mais interessantis.
+            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa as
+            pessoas mais interessantis.
           </p>
         </div>
 
@@ -178,9 +178,7 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
             </div>
 
             <div>
-              <h3 className="mb-4 text-xl font-semibold text-github-fg-default">
-                O Que Esperamos
-              </h3>
+              <h3 className="mb-4 text-xl font-semibold text-github-fg-default">O Que Esperamos</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <div className="mt-1 rounded-full bg-github-success-subtle p-1">
@@ -320,8 +318,8 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
           <h2 className="gh-title">Faça Parte da Nossa Missão de Educar</h2>
           <p className="gh-description">
             Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. Donec gravida
-            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa
-            as pessoas mais interessantis.
+            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa as
+            pessoas mais interessantis.
           </p>
         </div>
 
@@ -331,8 +329,8 @@ const GuestAuthor: React.FC<GuestAuthorProps> = ({ email, onEmailChange, onSubmi
           </h3>
           <p className="mb-6 text-github-fg-muted">
             Manduma pindureta quium dia nois paga. Pellentesque nec nulla ligula. Donec gravida
-            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa
-            as pessoas mais interessantis.
+            turpis a vulputate ultricies. Vide electram sadipscing et per. Suco de cevadiss deixa as
+            pessoas mais interessantis.
           </p>
           <form onSubmit={onSubmit} className="space-y-6">
             <div>

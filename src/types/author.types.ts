@@ -17,4 +17,4 @@ export interface AuthorProfile {
   miniBio?: string;
   socialLinks?: SocialLinks;
   dialogue?: DialogueStep[];
-} 
+}

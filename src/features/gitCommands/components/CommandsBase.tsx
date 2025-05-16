@@ -265,7 +265,8 @@ const CommandsBase = ({
                                   key={idx}
                                   className="w-full rounded-lg bg-slate-700 px-4 py-2 text-left text-white transition-colors hover:bg-slate-600"
                                   onClick={() => {
-                                    const correctAnswer = selectedAuthor.dialogue?.[currentDialogStep]?.correctAnswer;
+                                    const correctAnswer =
+                                      selectedAuthor.dialogue?.[currentDialogStep]?.correctAnswer;
 
                                     if (correctAnswer !== undefined && idx === correctAnswer) {
                                       handleNextStep();

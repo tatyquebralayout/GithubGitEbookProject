@@ -38,4 +38,4 @@ const AuthorProfileCard: React.FC<AuthorProfileCardProps> = ({
   );
 };
 
-export default AuthorProfileCard; 
+export default AuthorProfileCard;

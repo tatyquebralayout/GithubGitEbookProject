@@ -1,5 +1,10 @@
 import React from 'react';
-import { GitChallengeCard, GitChallengeCardHeader, GitChallengeCardBody, GitChallengeCardFooter } from './GitChallengeCard';
+import {
+  GitChallengeCard,
+  GitChallengeCardHeader,
+  GitChallengeCardBody,
+  GitChallengeCardFooter,
+} from './GitChallengeCard';
 
 export interface GitChallengeProps {
   title: string;
@@ -38,12 +43,10 @@ const GitChallenge: React.FC<GitChallengeProps> = ({
           {children}
         </GitChallengeCardBody>
       )}
-      {!description && children && (
-        <GitChallengeCardBody>{children}</GitChallengeCardBody>
-      )}
+      {!description && children && <GitChallengeCardBody>{children}</GitChallengeCardBody>}
       {footer && <GitChallengeCardFooter>{footer}</GitChallengeCardFooter>}
     </GitChallengeCard>
   );
 };
 
-export default GitChallenge; 
+export default GitChallenge;

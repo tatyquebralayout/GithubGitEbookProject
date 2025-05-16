@@ -1,11 +1,12 @@
 import React from 'react';
-import AppLayout from '../../components/layout/AppLayout';
-import GitHubCommands from './components/GitHubCommands';
+import GithubCommands from './components/github/GithubCommands';
 
-const GitHubCommandsPage: React.FC = () => (
-  <AppLayout>
-    <GitHubCommands />
-  </AppLayout>
-);
+const GithubCommandsPage: React.FC = () => {
+  return (
+    <div className="page-container">
+      <GithubCommands />
+    </div>
+  );
+};
 
-export default GitHubCommandsPage;
+export default GithubCommandsPage;

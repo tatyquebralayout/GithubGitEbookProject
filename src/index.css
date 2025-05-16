@@ -198,7 +198,8 @@
 }
 
 .mermaid-diagram .branch-label text,
-.mermaid-diagram .branch-label tspan { /* Target text/tspan dentro de .branch-label */ 
+.mermaid-diagram .branch-label tspan {
+  /* Target text/tspan dentro de .branch-label */
   font-size: 1.2em !important; /* Aumento relativo de 20-30% dependendo do tamanho herdado */
   /* Se o branch-label já for 16px, 1.2em seria ~19px. Se for menor, o aumento será proporcional */
 }

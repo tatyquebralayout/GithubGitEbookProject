@@ -22,4 +22,4 @@ export interface AuthorProfile {
   miniBio?: string;
   socialLinks?: Partial<Record<SocialLinkKey, string>>;
   dialogue?: AuthorDialogue[];
-} 
+}

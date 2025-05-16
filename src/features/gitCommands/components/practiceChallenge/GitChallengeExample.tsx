@@ -10,14 +10,18 @@ const splitCommandsIntoColumns = (commands: string): string[] => {
   let currentColumn: string[] = [];
 
   for (const line of lines) {
-    if (line.startsWith('# ') && currentColumn.length > 0 && currentColumn.some(l => l.trim() !== '')) {
+    if (
+      line.startsWith('# ') &&
+      currentColumn.length > 0 &&
+      currentColumn.some((l) => l.trim() !== '')
+    ) {
       columns.push(currentColumn.join('\n'));
       currentColumn = [line];
     } else {
       currentColumn.push(line);
     }
   }
-  if (currentColumn.length > 0 && currentColumn.some(l => l.trim() !== '')) {
+  if (currentColumn.length > 0 && currentColumn.some((l) => l.trim() !== '')) {
     columns.push(currentColumn.join('\n'));
   }
   return columns;
@@ -26,7 +30,7 @@ const splitCommandsIntoColumns = (commands: string): string[] => {
 const highlightGitCommands = (text: string): string => {
   return text
     .split('\n')
-    .map(line => {
+    .map((line) => {
       // Regex para encontrar "git" seguido por um ou mais caracteres de palavra (o comando em si)
       // e, opcionalmente, outro caractere de palavra (ex: 'remote add').
       // Isso garante que apenas o comando principal seja negritado.

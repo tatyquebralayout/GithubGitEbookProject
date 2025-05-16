@@ -4,7 +4,7 @@ import type { CommandData } from '@/features/game/components/CommandTableRow';
 import SwiperCore from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCards, Mousewheel, Navigation } from 'swiper/modules';
-import { GitBranch, GitCommit, GitMerge, Github, Check, Copy } from 'lucide-react';
+import { GitBranch, GitCommit, GitMerge, Github } from 'lucide-react';
 import Badge from '@/components/ui/Badge';
 import GitOfficialLogo from '@/components/icons/GitOfficialLogo';
 import 'swiper/css';
@@ -166,11 +166,13 @@ const BasicCommands: React.FC = () => {
           ) : (
             <div className="flex w-full flex-col items-center">
               {activeMasterSubject && (
-                <h3 className="mb-6 text-2xl font-bold uppercase tracking-wider text-gray-700">
-                  {activeMasterSubject}
-                </h3>
+                <div className="sticky top-[75px] z-10 w-full bg-gray-50 py-4 text-center shadow-md">
+                  <h3 className="text-2xl font-bold uppercase tracking-wider text-gray-700">
+                    {activeMasterSubject}
+                  </h3>
+                </div>
               )}
-              <div className="flashcard-swiper-container w-full max-w-md">
+              <div className="flashcard-swiper-container mt-6 w-full max-w-md">
                 <Swiper
                   effect={'cards'}
                   grabCursor={true}
@@ -277,7 +279,7 @@ const BasicCommands: React.FC = () => {
                             title="Copiar comando"
                             className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md bg-gray-700 p-1.5 text-gray-400 transition-colors hover:bg-gray-600 hover:text-green-400"
                           >
-                            {copiedCommand === cmdText ? <Check size={16} /> : <Copy size={16} />}
+                            {copiedCommand === cmdText ? 'Copiado!' : 'Copiar'}
                           </button>
                         </li>
                       ))}

@@ -7,12 +7,8 @@
   "plugins": ["stylelint-order"],
   "rules": {
     "order/properties-order": [
-      [
-        "@tailwind base",
-        "@tailwind components",
-        "@tailwind utilities"
-      ],
+      ["@tailwind base", "@tailwind components", "@tailwind utilities"],
       { "unspecified": "bottomAlphabetical" }
     ]
   }
-} 
+}

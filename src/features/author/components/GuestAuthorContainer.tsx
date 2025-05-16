@@ -13,13 +13,7 @@ const GuestAuthorContainer: React.FC = () => {
     window.location.href = `mailto:ebookgitadventure@gmail.com?subject=Quero Participar&body=Olá, gostaria de participar como autor convidado.%0D%0A%0D%0AEmail para contato: ${email}`;
   };
 
-  return (
-    <GuestAuthor
-      email={email}
-      onEmailChange={handleEmailChange}
-      onSubmit={handleSubmit}
-    />
-  );
+  return <GuestAuthor email={email} onEmailChange={handleEmailChange} onSubmit={handleSubmit} />;
 };
 
-export default GuestAuthorContainer; 
+export default GuestAuthorContainer;

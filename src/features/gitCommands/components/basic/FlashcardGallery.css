@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 *,
 *::before,
@@ -27,19 +27,17 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.28) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 100%);
   backdrop-filter: blur(30px);
   border-radius: 20px;
   width: min(900px, 95%); /* Ajustado para ter uma pequena margem */
-  box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
-    0 1px 0 0 rgba(255, 255, 255, 0.66) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.66) inset,
+    0 4px 16px rgba(0, 0, 0, 0.12);
   z-index: 10;
   padding: 20px; /* Adicionado padding interno */
-  font-family: "Comfortaa", cursive; /* Aplicado aqui */
+  font-family: 'Comfortaa', cursive; /* Aplicado aqui */
 }
 
 .flashcard-gallery-info {
@@ -61,7 +59,8 @@
   line-height: 1.5;
 }
 
-.flashcard-movie-night { /* Renomeado para ser mais genérico ou específico para o contexto */
+.flashcard-movie-night {
+  /* Renomeado para ser mais genérico ou específico para o contexto */
   /* Exemplo: background: linear-gradient(225deg, #10B981 0%, #059669 50%, #047857 100%); */
   /* Este estilo pode ser adaptado para o tema do Git */
   padding: 0.1em 0.3em;
@@ -84,7 +83,7 @@
   box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  font-family: "Comfortaa", cursive;
+  font-family: 'Comfortaa', cursive;
 }
 
 .flashcard-btn:hover {
@@ -122,8 +121,8 @@
   /* background-color: #A78BFA; <- Esta linha estava comentada, o que pode ser a causa. */
   /* Vamos definir uma cor de fundo padrão aqui se nenhuma outra classe de tema for aplicada. */
   /* No entanto, as classes de tema específicas devem sobrescrever isso. */
-  background-color: #4A5568; /* Um cinza escuro (Tailwind gray-700) como fallback */
-  color: #F9FAFB; /* Texto claro (Tailwind gray-50) para o fallback */
+  background-color: #4a5568; /* Um cinza escuro (Tailwind gray-700) como fallback */
+  color: #f9fafb; /* Texto claro (Tailwind gray-50) para o fallback */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -169,38 +168,39 @@
   letter-spacing: 1px; /* Reduzido letter-spacing */
   font-size: 0.75rem; /* Reduzido font-size */
   font-weight: 600; /* Ajustado font-weight */
-  font-family: "Poppins", sans-serif; /* Usar Poppins para o tag */
+  font-family: 'Poppins', sans-serif; /* Usar Poppins para o tag */
   background: rgba(255, 255, 255, 0.15); /* Aumentada opacidade do fundo */
-  box-shadow: inset 1px -1px 10px rgba(214, 214, 214, 0.15),
+  box-shadow:
+    inset 1px -1px 10px rgba(214, 214, 214, 0.15),
     inset -2px 2px 2px rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px); /* Reduzido blur */
 }
 
 .flashcard-slide-title {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
-  color: #F3F4F6; 
+  color: #f3f4f6;
   width: 100%; /* Garantir que o título ocupe a largura disponível para quebra de palavra funcionar */
   overflow-wrap: break-word; /* Para quebrar palavras/comandos longos */
   word-break: break-all; /* Alternativa mais agressiva se necessário */
 }
 
 .flashcard-slide-description {
-  font-family: "Comfortaa", cursive;
+  font-family: 'Comfortaa', cursive;
   font-size: 0.9rem;
   text-align: center;
   line-height: 1.4;
-  color: #D1D5DB; /* Tailwind gray-300 */
+  color: #d1d5db; /* Tailwind gray-300 */
   max-height: 200px; /* Limitar altura da descrição */
   overflow-y: auto; /* Permitir scroll se necessário */
 }
 
 .flashcard-slide-description_short {
-  font-family: "Comfortaa", cursive;
+  font-family: 'Comfortaa', cursive;
   text-align: center;
-  color: #D1D5DB; 
-  flex-grow: 1; 
-  overflow-y: auto; 
+  color: #d1d5db;
+  flex-grow: 1;
+  overflow-y: auto;
   max-height: 100px; /* Aumentado um pouco o max-height da descrição */
   width: 100%; /* Garantir que ocupe a largura */
   overflow-wrap: break-word; /* Aplicado aqui também por segurança */
@@ -231,18 +231,18 @@
   /* Estilos já aplicados via Tailwind no JSX: mx-auto mt-6 max-w-md rounded-lg bg-white/50 p-4 shadow-md backdrop-blur-sm */
   /* Podemos adicionar mais aqui se necessário, ou ajustar os do Tailwind */
   text-align: left; /* Alinhar texto à esquerda por padrão */
-  border-top: 2px solid #10B981; /* Uma borda superior para destacar */
+  border-top: 2px solid #10b981; /* Uma borda superior para destacar */
   margin-top: 25px; /* Aumentar margem superior */
 }
 
 .flashcard-layman-explanation h3 {
   /* Estilos já aplicados via Tailwind no JSX: mb-2 text-lg font-semibold text-gray-700 */
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .flashcard-layman-explanation p {
   /* Estilos já aplicados via Tailwind no JSX: text-sm text-gray-600 */
-  font-family: "Comfortaa", cursive;
+  font-family: 'Comfortaa', cursive;
   line-height: 1.6;
 }
 
@@ -259,11 +259,11 @@
 
 .flashcard-circles li {
   position: absolute;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   list-style: none;
-  width: 20px; 
+  width: 20px;
   height: 20px;
   animation: flashcard-animate-circles 25s linear infinite;
   bottom: -150px;
@@ -271,16 +271,71 @@
 }
 
 /* Removidas as cores específicas dos nth-child, pois serão definidas no JSX */
-.flashcard-circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-.flashcard-circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-.flashcard-circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-.flashcard-circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-.flashcard-circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-.flashcard-circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
-.flashcard-circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
-.flashcard-circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
-.flashcard-circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
-.flashcard-circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+.flashcard-circles li:nth-child(1) {
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
+}
+.flashcard-circles li:nth-child(2) {
+  left: 10%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 2s;
+  animation-duration: 12s;
+}
+.flashcard-circles li:nth-child(3) {
+  left: 70%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 4s;
+}
+.flashcard-circles li:nth-child(4) {
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+  animation-duration: 18s;
+}
+.flashcard-circles li:nth-child(5) {
+  left: 65%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 0s;
+}
+.flashcard-circles li:nth-child(6) {
+  left: 75%;
+  width: 110px;
+  height: 110px;
+  animation-delay: 3s;
+}
+.flashcard-circles li:nth-child(7) {
+  left: 35%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 7s;
+}
+.flashcard-circles li:nth-child(8) {
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  animation-delay: 15s;
+  animation-duration: 45s;
+}
+.flashcard-circles li:nth-child(9) {
+  left: 20%;
+  width: 15px;
+  height: 15px;
+  animation-delay: 2s;
+  animation-duration: 35s;
+}
+.flashcard-circles li:nth-child(10) {
+  left: 85%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 0s;
+  animation-duration: 11s;
+}
 /* Adicionar estilos para os novos li (11 a 20) se quisermos tamanhos e posições diferentes para eles também */
 /* Por enquanto, eles usarão os tamanhos padrão e posições aleatórias da animação */
 
@@ -301,9 +356,9 @@
 /* Media query para responsividade */
 @media (max-width: 750px) {
   .flashcard-gallery-content {
-     flex-direction: column-reverse; /* Reordenar para telas menores */
+    flex-direction: column-reverse; /* Reordenar para telas menores */
   }
-  
+
   .flashcard-btn {
     margin: 10px auto 30px; /* Ajustar margem do botão */
   }
@@ -316,12 +371,12 @@
 
 /* Estilo para cards do Ciclo de Vida Básico (fundo amarelo) */
 .flashcard-swiper-slide-basic-lifecycle {
-  background-color: #FCD34D; /* Tailwind yellow-400 */
-  color: #1F2937; /* Tailwind gray-800 para texto em fundo claro */
+  background-color: #fcd34d; /* Tailwind yellow-400 */
+  color: #1f2937; /* Tailwind gray-800 para texto em fundo claro */
 }
 
 .flashcard-swiper-slide-basic-lifecycle .flashcard-slide-title {
-  color: #1F2937; /* Garante cor escura para o título no fundo amarelo */
+  color: #1f2937; /* Garante cor escura para o título no fundo amarelo */
 }
 
 .flashcard-swiper-slide-basic-lifecycle .flashcard-slide-description_short {
@@ -330,24 +385,24 @@
 
 /* Estilo para cards de Branches e Merging (fundo azul) */
 .flashcard-swiper-slide-branches-merging {
-  background-color: #3B82F6; /* Tailwind blue-500 */
-  color: #F9FAFB; /* Tailwind gray-50 para texto em fundo escuro */
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  color: #f9fafb; /* Tailwind gray-50 para texto em fundo escuro */
 }
 
 /* Estilo para cards de Explorando o Histórico (fundo verde) */
 .flashcard-swiper-slide-exploring-history {
-  background-color: #10B981; /* Tailwind green-500 */
-  color: #F9FAFB; /* Tailwind gray-50 para texto em fundo escuro */
+  background-color: #10b981; /* Tailwind green-500 */
+  color: #f9fafb; /* Tailwind gray-50 para texto em fundo escuro */
 }
 
 /* Adicionando estilo para a categoria de Configuração e Inicialização */
 .flashcard-swiper-slide-config-init {
-  background-color: #2D3748; /* Um cinza mais escuro (Tailwind gray-800) */
-  color: #E2E8F0; /* Um texto cinza claro (Tailwind gray-300) */
+  background-color: #2d3748; /* Um cinza mais escuro (Tailwind gray-800) */
+  color: #e2e8f0; /* Um texto cinza claro (Tailwind gray-300) */
 }
 
 /* Estilo para o tema default que foi adicionado no JSX como fallback */
 .flashcard-swiper-slide-default-theme {
-  background-color: #4A5568; /* Cinza escuro (Tailwind gray-700) */
-  color: #F9FAFB; /* Texto claro (Tailwind gray-50) */
-} 
+  background-color: #4a5568; /* Cinza escuro (Tailwind gray-700) */
+  color: #f9fafb; /* Texto claro (Tailwind gray-50) */
+}

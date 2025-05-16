@@ -40,4 +40,4 @@ declare module 'lucide-react' {
   export const Target: Icon;
   export const Calendar: Icon;
   export const Instagram: Icon;
-} 
+}
