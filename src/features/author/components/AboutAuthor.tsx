@@ -12,7 +12,8 @@ import {
   Code,
   Target,
 } from 'lucide-react';
-import AuthorProfile from '../../../components/common/AuthorProfile';
+import AuthorProfileCard from '../../../components/ui/AuthorProfileCard';
+import { AuthorProfile as AuthorProfileType } from '../../../types/author.types';
 
 export interface AboutAuthorProps {
   name: string;
@@ -28,7 +29,20 @@ export interface AboutAuthorProps {
   };
 }
 
-const AboutAuthor: React.FC<AboutAuthorProps> = ({ name, role, avatarUrl, description, socialLinks }) => {
+const AboutAuthor: React.FC<AboutAuthorProps> = ({
+  name,
+  role,
+  avatarUrl,
+  description,
+  socialLinks,
+}) => {
+  const authorData: AuthorProfileType = {
+    src: avatarUrl,
+    alt: `${name} - ${role}`,
+    miniBio: description,
+    socialLinks: socialLinks,
+  };
+
   return (
     <div className="space-y-24">
       {/* Hero Section */}
@@ -43,13 +57,9 @@ const AboutAuthor: React.FC<AboutAuthorProps> = ({ name, role, avatarUrl, descri
         </div>
 
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center text-white">
-          <AuthorProfile
-            name={name}
-            role={role}
-            avatarUrl={avatarUrl}
-            description={description}
-            socialLinks={socialLinks}
-          />
+          <div className="mb-8 scale-125 transform">
+            <AuthorProfileCard author={authorData} />
+          </div>
           <div className="mt-8 flex justify-center space-x-4">
             <a
               href="#"

@@ -1,18 +1,34 @@
-import React from 'react';
-import { gitCommandsData } from '../../../game/data/commandsData';
+import React, { useState } from 'react';
+import { gitCommandsData } from '@/features/game/data/commandsData';
+import type { CommandData } from '@/features/game/components/CommandTableRow';
 import SwiperCore from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCards, Mousewheel } from 'swiper/modules';
-import { Github, GitBranch, GitCommit, GitMerge } from 'lucide-react';
+import { EffectCards, Mousewheel, Navigation } from 'swiper/modules';
+import { GitBranch, GitCommit, GitMerge, Github, Check, Copy } from 'lucide-react';
+import Badge from '@/components/ui/Badge';
+import GitOfficialLogo from '@/components/icons/GitOfficialLogo';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import './FlashcardGallery.css';
 
-SwiperCore.use([EffectCards, Mousewheel]);
+SwiperCore.use([EffectCards, Mousewheel, Navigation]);
+
+// Readicionando a interface CommandWithLaymanExplanation
+interface CommandWithLaymanExplanation extends CommandData {
+  laymanExplanation?: string;
+  commandsTextList?: string[];
+  mermaidChart?: string; // Mantendo caso seja usado no futuro, mesmo que não agora
+}
 
 const BasicCommands: React.FC = () => {
+  const [galleryStarted, setGalleryStarted] = useState(false);
+  const [activeCommandExplanation, setActiveCommandExplanation] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
+  const [activeMasterSubject, setActiveMasterSubject] = useState('');
+
   const basicCommandsCategory = gitCommandsData.find(
-    (category) => category.title === 'Comandos Básicos'
+    (category) => category.title === 'Primeiros Passos'
   );
 
   if (!basicCommandsCategory || !basicCommandsCategory.commands) {
@@ -23,15 +39,74 @@ const BasicCommands: React.FC = () => {
     );
   }
 
-  const commands = basicCommandsCategory.commands;
+  const beginnerCommands = basicCommandsCategory.commands.filter(
+    (cmd) => cmd.difficultyType === 'beginner'
+  );
 
-  // Cores para os ícones
+  const commands: CommandWithLaymanExplanation[] = beginnerCommands.map((cmd) => ({
+    ...cmd,
+    laymanExplanation:
+      (cmd as CommandWithLaymanExplanation).laymanExplanation ||
+      `Explicação detalhada para leigos sobre '${cmd.name}' estará aqui.`,
+    commandsTextList: (cmd as CommandWithLaymanExplanation).commandsTextList || [],
+    mermaidChart: cmd.mermaidChart, // Acessando a propriedade da interface base CommandData
+  }));
+
   const iconColors = {
-    github: '#6e5494', // Roxo GitHub
-    gitBranch: '#f05033', // Laranja Git
-    gitCommit: '#0366d6', // Azul GitHub (para variação)
-    gitMerge: '#10B981', // Verde (pode ser ajustado)
+    github: '#6e5494',
+    gitBranch: '#f05033',
+    gitCommit: '#0366d6',
+    gitMerge: '#10B981',
   };
+
+  const getMasterSubject = (commandName: string): string => {
+    if (['git config', 'git init', 'git clone'].includes(commandName)) {
+      return 'CONFIGURAÇÃO E INICIALIZAÇÃO';
+    } else if (
+      ['git status', 'git add', 'git commit', 'git push', 'git pull', 'git log'].includes(
+        commandName
+      )
+    ) {
+      return 'CICLO DE VIDA BÁSICO';
+    } else if (['git branch', 'git checkout', 'git merge'].includes(commandName)) {
+      return 'BRANCHES E MERGING';
+    } else {
+      return ''; // Default or unknown subject
+    }
+  };
+
+  const handleStartGallery = () => {
+    setGalleryStarted(true);
+    if (commands.length > 0) {
+      const firstCommand = commands[0];
+      setActiveCommandExplanation(firstCommand.laymanExplanation || '');
+      setActiveIndex(0);
+      setActiveMasterSubject(getMasterSubject(firstCommand.name));
+    }
+  };
+
+  const handleSlideChange = (swiperInstance: SwiperCore) => {
+    const currentCommand = commands[swiperInstance.realIndex];
+    if (currentCommand) {
+      setActiveCommandExplanation(currentCommand.laymanExplanation || '');
+      setActiveIndex(swiperInstance.realIndex);
+      setActiveMasterSubject(getMasterSubject(currentCommand.name));
+    }
+  };
+
+  const handleCopyCommand = (commandText: string) => {
+    navigator.clipboard
+      .writeText(commandText)
+      .then(() => {
+        setCopiedCommand(commandText);
+        setTimeout(() => setCopiedCommand(null), 2000);
+      })
+      .catch((err) => {
+        console.error('Falha ao copiar comando: ', err);
+      });
+  };
+
+  const currentActiveCommand = commands[activeIndex];
 
   return (
     <div className="space-y-12">
@@ -73,42 +148,150 @@ const BasicCommands: React.FC = () => {
       </section>
 
       <section className="flashcard-gallery-section bg-gray-50 py-12">
-        <div className="flashcard-gallery-content">
-          <div className="flashcard-gallery-info">
-            <h2 className="mb-4 text-2xl font-bold text-gray-700">
-              Aprenda com Flashcards!
-            </h2>
-            <p>
-              Navegue pelos cards para aprender e revisar os comandos básicos do Git de forma interativa.
-              Cada card apresenta um comando essencial com sua descrição.
-            </p>
-          </div>
-          <div className="flashcard-swiper-container">
-            <Swiper
-              effect={'cards'}
-              grabCursor={true}
-              initialSlide={2}
-              mousewheel={true}
-              loop={true}
-              modules={[EffectCards, Mousewheel]}
-              className="h-full w-full"
-            >
-              {commands.map((command, index) => (
-                <SwiperSlide key={index} className="flashcard-swiper-slide">
-                  <div className="flashcard-slide-tag">{command.difficultyText || 'Básico'}</div>
-                  <h2 className="flashcard-slide-title">{command.name}</h2>
-                  <p className="flashcard-slide-description">{command.description}</p>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
+        <div className="flashcard-gallery-content container mx-auto px-4">
+          {!galleryStarted ? (
+            <div className="flashcard-gallery-info text-center">
+              <h2 className="mb-4 text-2xl font-bold text-gray-700">Aprenda com Flashcards!</h2>
+              <p className="mb-6 text-gray-600">
+                Navegue pelos cards para aprender e revisar os comandos básicos do Git de forma
+                interativa. Cada card apresenta um comando essencial com sua descrição.
+              </p>
+              <button
+                onClick={handleStartGallery}
+                className="flashcard-btn rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700"
+              >
+                Começar
+              </button>
+            </div>
+          ) : (
+            <div className="flex w-full flex-col items-center">
+              {activeMasterSubject && (
+                <h3 className="mb-6 text-2xl font-bold uppercase tracking-wider text-gray-700">
+                  {activeMasterSubject}
+                </h3>
+              )}
+              <div className="flashcard-swiper-container w-full max-w-md">
+                <Swiper
+                  effect={'cards'}
+                  grabCursor={true}
+                  initialSlide={0}
+                  mousewheel={true}
+                  loop={commands.length > 3}
+                  modules={[EffectCards, Mousewheel, Navigation]}
+                  className="h-[450px] w-full"
+                  navigation={{
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                  }}
+                  onSlideChange={handleSlideChange}
+                  onSwiper={(swiper) => {
+                    if (commands.length > 0) {
+                      const initialCommand = commands[swiper.realIndex];
+                      setActiveCommandExplanation(initialCommand.laymanExplanation || '');
+                      setActiveIndex(swiper.realIndex);
+                      setActiveMasterSubject(getMasterSubject(initialCommand.name));
+                    }
+                  }}
+                >
+                  {commands.map((command) => {
+                    const masterSubject = getMasterSubject(command.name);
+                    let slideBaseClass =
+                      'flashcard-swiper-slide relative flex flex-col justify-center items-center';
+                    let textColorClass = 'text-white';
+
+                    if (masterSubject === 'CONFIGURAÇÃO E INICIALIZAÇÃO') {
+                      slideBaseClass += ' flashcard-swiper-slide-config-init';
+                      textColorClass = 'text-white';
+                    } else if (masterSubject === 'CICLO DE VIDA BÁSICO') {
+                      slideBaseClass += ' flashcard-swiper-slide-basic-lifecycle';
+                      textColorClass = 'text-gray-800';
+                    } else if (masterSubject === 'BRANCHES E MERGING') {
+                      slideBaseClass += ' flashcard-swiper-slide-branches-merging';
+                      textColorClass = 'text-white';
+                    } else {
+                      slideBaseClass += ' flashcard-swiper-slide-default-theme';
+                      textColorClass = 'text-white';
+                    }
+
+                    return (
+                      <SwiperSlide
+                        key={command.name}
+                        className={`${slideBaseClass} ${textColorClass}`}
+                      >
+                        <div className="absolute right-3 top-3 z-10 md:right-4 md:top-4">
+                          <Badge
+                            variant={command.difficultyType === 'beginner' ? 'success' : 'primary'}
+                            size="sm"
+                            className="font-bold"
+                          >
+                            {command.difficultyText}
+                          </Badge>
+                        </div>
+
+                        <div className="flex h-full w-full flex-col items-center justify-center px-8 text-center md:px-10">
+                          <GitOfficialLogo size={32} className="mb-3 rounded bg-gray-800 p-1" />
+                          <h2
+                            className={`flashcard-slide-title mb-2 text-xl font-bold leading-tight md:text-2xl ${textColorClass}`}
+                          >
+                            {command.name}
+                          </h2>
+                          <p
+                            className={`flashcard-slide-description_short text-xs leading-relaxed opacity-90 md:text-sm ${textColorClass}`}
+                          >
+                            {command.description}
+                          </p>
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })}
+                  <div className="swiper-button-prev !text-green-500 hover:!text-green-700"></div>
+                  <div className="swiper-button-next !text-green-500 hover:!text-green-700"></div>
+                </Swiper>
+              </div>
+
+              {currentActiveCommand && (
+                <div className="explanation-section mt-8 w-full max-w-2xl rounded-lg bg-white p-6 text-center shadow-xl">
+                  <div className="flex items-center justify-center">
+                    <GitOfficialLogo size={32} className="mr-3 rounded bg-gray-800 p-1" />
+                    <h4 className="text-xl font-semibold text-gray-800">Explicação Detalhada:</h4>
+                  </div>
+                  <p className="mt-3 text-gray-600">{activeCommandExplanation}</p>
+                </div>
+              )}
+
+              {currentActiveCommand &&
+                currentActiveCommand.commandsTextList &&
+                currentActiveCommand.commandsTextList.length > 0 && (
+                  <div className="command-examples-section mt-6 w-full max-w-2xl rounded-lg bg-gray-100 p-6 shadow-lg">
+                    <h4 className="mb-3 text-center text-lg font-semibold text-gray-700">
+                      Exemplo de Comando:
+                    </h4>
+                    <ul className="space-y-2">
+                      {currentActiveCommand.commandsTextList.map((cmdText, index) => (
+                        <li key={index} className="relative rounded-md bg-gray-800 p-3 shadow">
+                          <code className="font-mono text-sm text-green-400 md:text-base">
+                            {cmdText}
+                          </code>
+                          <button
+                            onClick={() => handleCopyCommand(cmdText)}
+                            title="Copiar comando"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md bg-gray-700 p-1.5 text-gray-400 transition-colors hover:bg-gray-600 hover:text-green-400"
+                          >
+                            {copiedCommand === cmdText ? <Check size={16} /> : <Copy size={16} />}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+            </div>
+          )}
         </div>
-        <ul className="flashcard-circles">
-          {[...Array(20)].map((_, i) => {
+        <ul className="flashcard-circles absolute inset-0 z-[-1] overflow-hidden">
+          {[...Array(15)].map((_, i) => {
             const iconType = i % 4;
             let IconComponent;
             let iconColor;
-
             switch (iconType) {
               case 0:
                 IconComponent = Github;
@@ -122,14 +305,23 @@ const BasicCommands: React.FC = () => {
                 IconComponent = GitCommit;
                 iconColor = iconColors.gitCommit;
                 break;
-              default: // case 3
+              default:
                 IconComponent = GitMerge;
                 iconColor = iconColors.gitMerge;
                 break;
             }
-
+            const size = Math.random() * (60 - 20) + 20;
+            const styles: React.CSSProperties = {
+              position: 'absolute',
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              opacity: Math.random() * (0.7 - 0.1) + 0.1,
+              width: `${size}px`,
+              height: `${size}px`,
+              transform: 'translate(-50%, -50%)',
+            };
             return (
-              <li key={i}>
+              <li key={i} style={styles}>
                 <IconComponent className="h-full w-full" color={iconColor} />
               </li>
             );

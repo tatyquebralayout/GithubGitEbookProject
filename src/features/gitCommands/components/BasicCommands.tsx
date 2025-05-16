@@ -6,8 +6,10 @@ import {
   GitChallengeCard,
   GitChallengeCardHeader,
   GitChallengeCardBody,
+  GitChallengeCardFooter,
   Badge,
 } from '../../../components/ui';
+import FlippableConfigCard from './basic/FlippableConfigCard';
 
 const BasicCommands = () => {
   // Obter apenas os comandos básicos do gitCommandsData
@@ -56,65 +58,70 @@ const BasicCommands = () => {
         </div>
       </section>
 
-      {/* Lista de Comandos */}
-      <div className="space-y-6">
-        <GitChallengeCard>
-          <GitChallengeCardHeader>
-            <Terminal className="mr-2 h-5 w-5 text-github-fg-default" />
-            <span className="text-sm font-medium">Comandos Básicos do Git</span>
-          </GitChallengeCardHeader>
-          <GitChallengeCardBody className="space-y-6">
-            {basicCommands.map((command, index) => {
-              // Gerar um ID único para cada diagrama
-              const diagramId = `basic-command-${index}-${command.name.replace(/[\s[\]]/g, '-')}`;
+      {/* Lista de Comandos em Grid de Cards */}
+      <div className="container mx-auto px-4">
+        <div className="mb-10 text-center">
+          <Terminal className="mx-auto mb-2 h-8 w-8 text-github-fg-default" />
+          <h2 className="text-2xl font-semibold text-github-fg-default">
+            Comandos Básicos do Git em Detalhe
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {basicCommands.map((command, index) => {
+            const diagramId = `basic-command-${index}-${command.name.replace(/[\s[\]]/g, '-')}`;
+            const isGitInit = command.name === 'git init';
+            const isConfigCard = command.name === 'Configuração Inicial';
 
+            if (isConfigCard) {
               return (
-                <div
-                  key={index}
-                  className="mb-4 border-b border-gray-200 pb-4 last:mb-0 last:border-0 last:pb-0"
-                >
-                  <div className="flex flex-col gap-4 md:flex-row md:items-start">
-                    {/* Coluna do comando */}
-                    <div className="flex items-start space-x-4 md:w-1/3">
-                      <GitCommit className="mt-1 h-5 w-5 flex-shrink-0 text-github-fg-default" />
-                      <div>
-                        <h3 className="font-medium text-github-fg-default">{command.name}</h3>
-                        <p className="text-sm text-github-fg-muted">{command.description}</p>
-                        <div className="mt-2">
-                          <Badge variant="success" rounded size="sm">
-                            {command.difficultyText}
-                          </Badge>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Coluna do diagrama */}
-                    <div className="rounded-lg bg-gray-50 p-2 md:w-2/3">
-                      {command.mermaidChart ? (
-                        <MermaidBase id={diagramId} definition={command.mermaidChart} />
-                      ) : (
-                        <div className="flex h-24 items-center justify-center text-gray-400">
-                          <File className="mr-2" /> Visualização não disponível
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Link para detalhes */}
-                  <div className="mt-3 text-right">
-                    <a
-                      href={command.chapterLink}
-                      className="inline-flex items-center text-xs text-blue-600 hover:text-blue-800 hover:underline"
-                    >
-                      <GitMerge className="mr-1 h-3 w-3" />
-                      {command.chapterText}
-                    </a>
-                  </div>
-                </div>
+                <FlippableConfigCard key={command.name} command={command} className="h-full" />
               );
-            })}
-          </GitChallengeCardBody>
-        </GitChallengeCard>
+            }
+
+            return (
+              <GitChallengeCard key={index} className="flex h-full flex-col">
+                <GitChallengeCardHeader className="flex flex-shrink-0 items-center bg-gray-100 p-3">
+                  <GitCommit className="mr-2 h-4 w-4 flex-shrink-0 text-github-fg-default" />
+                  <h3 className="flex-grow text-sm font-semibold text-github-fg-default">
+                    {command.name}
+                  </h3>
+                  <Badge variant="success" rounded size="sm">
+                    {command.difficultyText}
+                  </Badge>
+                </GitChallengeCardHeader>
+                <GitChallengeCardBody className="flex-grow space-y-2 overflow-y-auto p-3">
+                  <p className="flex-shrink-0 text-xs text-github-fg-muted">
+                    {command.description}
+                  </p>
+                  <div
+                    className={`flex flex-grow items-center justify-center rounded-lg bg-gray-100 p-2 ${
+                      isGitInit
+                        ? 'git-init-diagram-container mx-auto h-[100px] w-[100px] flex-shrink-0 overflow-hidden'
+                        : 'h-auto w-full'
+                    }`}
+                  >
+                    {command.mermaidChart ? (
+                      <MermaidBase id={diagramId} definition={command.mermaidChart} />
+                    ) : (
+                      <div className="flex h-[100px] items-center justify-center text-xs text-gray-400">
+                        <File className="mr-1 h-3 w-3" /> Visualização não disponível
+                      </div>
+                    )}
+                  </div>
+                </GitChallengeCardBody>
+                <GitChallengeCardFooter className="mt-auto flex-shrink-0 border-t border-gray-200 p-2 pt-2 text-right">
+                  <a
+                    href={command.chapterLink}
+                    className="inline-flex items-center text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                  >
+                    <GitMerge className="mr-1 h-3 w-3" />
+                    {command.chapterText}
+                  </a>
+                </GitChallengeCardFooter>
+              </GitChallengeCard>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

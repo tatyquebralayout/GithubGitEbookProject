@@ -142,7 +142,7 @@ const GitChallengeVisualizer = ({
           </div>
         </div>
 
-        <div className="min-h-[400px] overflow-hidden rounded-lg border border-github-border-default">
+        <div className="mx-auto min-h-[400px] max-w-md overflow-hidden rounded-lg border border-github-border-default">
           {activeTab === 'initial' ? (
             <GitGraph
               id={`initial-${title.replace(/\s+/g, '-').toLowerCase()}`}

@@ -130,6 +130,17 @@
     @apply text-github-fg-default transition-colors hover:text-github-accent-fg;
     @apply rounded-md px-3 py-2 hover:bg-github-canvas-subtle;
   }
+
+  .text-vertical-rl {
+    writing-mode: vertical-rl;
+    text-orientation: mixed; /* ou 'upright' ou 'sideways' dependendo do efeito desejado */
+    /* pode ser necessário ajustar o white-space ou overflow dependendo do conteúdo */
+  }
+
+  .text-vertical-lr {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
 }
 
 /* Estilos para os diagramas Git do Mermaid */
@@ -180,6 +191,18 @@
   font-size: 12px;
 }
 
+/* Aumentar fonte de labels de commit e branch nos diagramas Mermaid */
+.mermaid-diagram .commit-label,
+.mermaid-diagram .commit-id {
+  font-size: 13px !important; /* Aumento de 30% sobre 10px */
+}
+
+.mermaid-diagram .branch-label text,
+.mermaid-diagram .branch-label tspan { /* Target text/tspan dentro de .branch-label */ 
+  font-size: 1.2em !important; /* Aumento relativo de 20-30% dependendo do tamanho herdado */
+  /* Se o branch-label já for 16px, 1.2em seria ~19px. Se for menor, o aumento será proporcional */
+}
+
 .simple-mermaid-diagram .commit {
   transition: transform 0.2s ease-in-out;
 }
@@ -213,4 +236,11 @@
 .mermaid-diagram,
 .simple-mermaid-diagram {
   animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilos para forçar o tamanho do diagrama git init na página de comandos básicos */
+.git-init-diagram-container svg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain; /* Garante que o conteúdo escale e caiba, mantendo a proporção */
 }

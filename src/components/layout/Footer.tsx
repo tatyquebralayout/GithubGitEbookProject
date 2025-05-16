@@ -32,12 +32,12 @@ const Footer = () => {
           <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
             <img
               src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=256&h=256&fit=crop&auto=compress,format"
-              alt="Julia Santos"
+              alt="Tatiana Barros"
               className="h-32 w-32 rounded-full border-4 border-blue-500 object-cover"
               loading="lazy"
             />
             <div className="text-center md:text-left">
-              <h3 className="mb-2 text-2xl font-bold">Julia Santos</h3>
+              <h3 className="mb-2 text-2xl font-bold">Tatiana Barros</h3>
               <p className="mb-4 text-blue-400">Desenvolvedora Full Stack & Educadora Tech</p>
               <p className="mb-6 max-w-2xl text-gray-400">
                 Com mais de 10 anos de experiência em desenvolvimento de software, dedico minha
@@ -48,42 +48,42 @@ const Footer = () => {
               <div className="flex justify-center space-x-4 md:justify-start">
                 <a
                   href="#"
-                  aria-label="GitHub de Julia Santos"
+                  aria-label="GitHub de Tatiana Barros"
                   className="rounded-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                   <Github className="h-5 w-5" />
                 </a>
                 <a
                   href="#"
-                  aria-label="X (anteriormente Twitter) de Julia Santos"
+                  aria-label="X (anteriormente Twitter) de Tatiana Barros"
                   className="rounded-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                   <span className="flex h-5 w-5 items-center justify-center font-bold">X</span>
                 </a>
                 <a
                   href="#"
-                  aria-label="LinkedIn de Julia Santos"
+                  aria-label="LinkedIn de Tatiana Barros"
                   className="rounded-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
                 <a
                   href="#"
-                  aria-label="Instagram de Julia Santos"
+                  aria-label="Instagram de Tatiana Barros"
                   className="rounded-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
                   href="#"
-                  aria-label="E-mail de Julia Santos"
+                  aria-label="E-mail de Tatiana Barros"
                   className="rounded-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                   <Mail className="h-5 w-5" />
                 </a>
                 <a
                   href="#"
-                  aria-label="Website de Julia Santos"
+                  aria-label="Website de Tatiana Barros"
                   className="rounded-sm text-gray-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
                 >
                   <Globe className="h-5 w-5" />

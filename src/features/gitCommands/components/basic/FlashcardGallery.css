@@ -109,9 +109,9 @@
 
 /* SWIPER STYLES ADAPTED */
 .flashcard-swiper-container {
-  width: 280px; /* Aumentado um pouco para melhor visualização do conteúdo Git */
-  height: 480px; /* Aumentado um pouco */
-  padding: 40px 0; /* Reduzido padding vertical */
+  width: 320px; /* Aumentado de 280px para 320px */
+  height: 480px; /* Mantido por enquanto, pode ser ajustado se necessário */
+  padding: 20px 0; /* Ajustado padding vertical para dar mais espaço se a altura for um problema */
 }
 
 .flashcard-swiper-slide {
@@ -119,14 +119,18 @@
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   user-select: none;
-  background-color: #4B5563; /* Tailwind gray-600 como base para o card */
-  color: #F9FAFB; /* Tailwind gray-50 para texto no card */
+  /* background-color: #A78BFA; <- Esta linha estava comentada, o que pode ser a causa. */
+  /* Vamos definir uma cor de fundo padrão aqui se nenhuma outra classe de tema for aplicada. */
+  /* No entanto, as classes de tema específicas devem sobrescrever isso. */
+  background-color: #4A5568; /* Um cinza escuro (Tailwind gray-700) como fallback */
+  color: #F9FAFB; /* Texto claro (Tailwind gray-50) para o fallback */
   display: flex;
-  flex-direction: column; /* Para alinhar título e conteúdo */
-  justify-content: center; /* Centralizar conteúdo no card */
-  align-items: center; /* Centralizar conteúdo no card */
-  padding: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .flashcard-swiper-slide img {
@@ -173,12 +177,12 @@
 }
 
 .flashcard-slide-title {
-  font-family: "Poppins", sans-serif; /* Usar Poppins para o título do comando */
-  font-size: 1.25rem; /* Aumentado para título do comando */
-  font-weight: 600;
+  font-family: "Poppins", sans-serif;
   text-align: center;
-  margin-bottom: 10px;
-  color: #F3F4F6; /* Tailwind gray-100 */
+  color: #F3F4F6; 
+  width: 100%; /* Garantir que o título ocupe a largura disponível para quebra de palavra funcionar */
+  overflow-wrap: break-word; /* Para quebrar palavras/comandos longos */
+  word-break: break-all; /* Alternativa mais agressiva se necessário */
 }
 
 .flashcard-slide-description {
@@ -191,6 +195,56 @@
   overflow-y: auto; /* Permitir scroll se necessário */
 }
 
+.flashcard-slide-description_short {
+  font-family: "Comfortaa", cursive;
+  text-align: center;
+  color: #D1D5DB; 
+  flex-grow: 1; 
+  overflow-y: auto; 
+  max-height: 100px; /* Aumentado um pouco o max-height da descrição */
+  width: 100%; /* Garantir que ocupe a largura */
+  overflow-wrap: break-word; /* Aplicado aqui também por segurança */
+}
+
+.flashcard-slide-diagram-container {
+  width: calc(100% - 16px); /* Largura total menos padding */
+  max-height: 160px; /* Ajuste a altura máxima conforme necessário */
+  overflow: hidden;
+  margin: 10px auto 0; /* Margem superior, centralizado, sem margem inferior */
+  border-radius: 6px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.08); /* Fundo sutil para o container do diagrama */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flashcard-slide-diagram-container .mermaid-diagram svg {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  max-height: 144px; /* Altura máxima do SVG (container padding 2*8px) */
+}
+
+/* Estilos para a área de explicação para leigos */
+.flashcard-layman-explanation {
+  /* Estilos já aplicados via Tailwind no JSX: mx-auto mt-6 max-w-md rounded-lg bg-white/50 p-4 shadow-md backdrop-blur-sm */
+  /* Podemos adicionar mais aqui se necessário, ou ajustar os do Tailwind */
+  text-align: left; /* Alinhar texto à esquerda por padrão */
+  border-top: 2px solid #10B981; /* Uma borda superior para destacar */
+  margin-top: 25px; /* Aumentar margem superior */
+}
+
+.flashcard-layman-explanation h3 {
+  /* Estilos já aplicados via Tailwind no JSX: mb-2 text-lg font-semibold text-gray-700 */
+  font-family: "Poppins", sans-serif;
+}
+
+.flashcard-layman-explanation p {
+  /* Estilos já aplicados via Tailwind no JSX: text-sm text-gray-600 */
+  font-family: "Comfortaa", cursive;
+  line-height: 1.6;
+}
 
 /* ANIMATED BACKGROUND CIRCLES */
 .flashcard-circles {
@@ -258,4 +312,42 @@
     width: 260px; /* Levemente menor em telas pequenas */
     height: 450px;
   }
+}
+
+/* Estilo para cards do Ciclo de Vida Básico (fundo amarelo) */
+.flashcard-swiper-slide-basic-lifecycle {
+  background-color: #FCD34D; /* Tailwind yellow-400 */
+  color: #1F2937; /* Tailwind gray-800 para texto em fundo claro */
+}
+
+.flashcard-swiper-slide-basic-lifecycle .flashcard-slide-title {
+  color: #1F2937; /* Garante cor escura para o título no fundo amarelo */
+}
+
+.flashcard-swiper-slide-basic-lifecycle .flashcard-slide-description_short {
+  color: #374151; /* Um cinza um pouco mais claro para a descrição curta, se necessário, ou manter o gray-800 */
+}
+
+/* Estilo para cards de Branches e Merging (fundo azul) */
+.flashcard-swiper-slide-branches-merging {
+  background-color: #3B82F6; /* Tailwind blue-500 */
+  color: #F9FAFB; /* Tailwind gray-50 para texto em fundo escuro */
+}
+
+/* Estilo para cards de Explorando o Histórico (fundo verde) */
+.flashcard-swiper-slide-exploring-history {
+  background-color: #10B981; /* Tailwind green-500 */
+  color: #F9FAFB; /* Tailwind gray-50 para texto em fundo escuro */
+}
+
+/* Adicionando estilo para a categoria de Configuração e Inicialização */
+.flashcard-swiper-slide-config-init {
+  background-color: #2D3748; /* Um cinza mais escuro (Tailwind gray-800) */
+  color: #E2E8F0; /* Um texto cinza claro (Tailwind gray-300) */
+}
+
+/* Estilo para o tema default que foi adicionado no JSX como fallback */
+.flashcard-swiper-slide-default-theme {
+  background-color: #4A5568; /* Cinza escuro (Tailwind gray-700) */
+  color: #F9FAFB; /* Texto claro (Tailwind gray-50) */
 } 
